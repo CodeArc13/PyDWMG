@@ -1,0 +1,16 @@
+Reconstructing DWMG in Python.
+
+1.  The core of DWMG is its log parser, and this was the first part coded on VB.
+	-Work out how to read log files from EQ in python, and how to detect when they change.
+	-Work out how to use regex to trigger events/code based on logfile output.
+
+
+2.  The UI should be the next task as this is needed to actually see data on maps.
+	-Decide on a good gfx library to use that works with the UI lib and is more modern than GDI+ and preferably not PyGame.
+	-Manual map changing(Leave automatic until much later)
+
+2a. Although the UI is important we need math and offset data for plotting onto maps on the UI.
+	-Rather than going through text files like the original DWMG we will go straight to SQL database storage for all persisnt and semi-persistant data
+
+
+When re-implementing a feature think if it is somthing that is too advanced for the current stage of development (e.g auto map switching too soon)
