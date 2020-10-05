@@ -1,5 +1,7 @@
 # log parser basics 101
 # get log file location and... read it.
+from pathlib import Path
+from time import sleep
 
 
 def reverse_readline(filename, buffer_size=1024):
@@ -36,21 +38,53 @@ def reverse_readline(filename, buffer_size=1024):
             yield first_line
 
 
+def get_logsize(filename):
+    return Path(filename).stat().st_size
+
+
 # basic Al Gore's rhythm
+""" 'real time' reading (With an adjustable sleep variable!)
+    Get the current log file size upon opening
+    Periodically check file size to see if it has increased 
+    (if time period is fast enough we wont have to worry about reading multiple
+     lines from the log as there will only ever be one new line(this should see how
+     fast the reverse_readline method can go in the case of a lot of spam to the log :p))
+        IF the file has increased in size:
+            Read the last line from the log and print it
+            Update current file size
+            Sleep for a bit
+
+"""
+
 
 # D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt
 
 
 def main():
-    with open("D:\\Games\\EQLite\\Logs\\eqlog_Cleri_P1999Green.txt", "r") as f:
-        # read_data = f.read()
-        # ?set last read length to be the very end of the log
-        for line in f:
-            print(line, end="")
+    log = "D:\\Games\\EQLite\\Logs\\eqlog_Cleri_P1999Green.txt"
+    # print(next(reverse_readline(log)))  # print the last line
+    current_size = get_logsize(log)
+    last_readline = ""
+    while True:  # make escapable!
+        if current_size != get_logsize(log):
+            last_readline = next(reverse_readline(log))
+            print(last_readline)
+            current_size = get_logsize(log)
+        # sleep here
+        sleep(0.1)
+        """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
+            0.1 caught 125 out of 125 spammed /locs """
 
-        # f.closed #not needed for with block
-        print(f.tell())
-    pass
+    # i = 0
+    # for line in reverse_readline(log):
+    #     if i >= 10:
+    #         break
+    #     else:
+    #         print(line, end="\n")
+    #         i += 1
+
+    #     # f.closed #not needed for with block
+    #      """print(f.tell())
 
 
 if __name__ == "__main__":
