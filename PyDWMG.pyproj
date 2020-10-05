@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>PyDWMG</Name>
     <RootNamespace>PyDWMG</RootNamespace>
+    <LaunchProvider>Django launcher</LaunchProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
