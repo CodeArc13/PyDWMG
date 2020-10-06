@@ -2,6 +2,23 @@
 # get log file location and... read it.
 from pathlib import Path
 from time import sleep
+import re
+
+
+""" New mission for you! We need a new def that works like this reverse one 
+with the buffering and starting towards the end but needs to save its last read location 
+and then use that as a starting location for the next read.
+The reason for this is so we can get lines from the last location in forward order,
+not reverse like we currently have, and the reason for this is so we can increase the sleep time 
+on the main loop without starting to miss log updates.
+(This maybe overkill, as it works fine with a 0.1 second pause using next() with the current reverse def
+ although I have not tested it with lots of log spam like in EC, 
+ but this is the same sleep time as the full VB code, and that has worked on multiple computers.)
+
+The current reverse one will be perfect for initialising characters and map switching, so that the data is 
+instantly displayed.
+
+"""
 
 
 def reverse_readline(filename, buffer_size=1024):
@@ -49,26 +66,51 @@ def get_logsize(filename):
     (if time period is fast enough we wont have to worry about reading multiple
      lines from the log as there will only ever be one new line(this should see how
      fast the reverse_readline method can go in the case of a lot of spam to the log :p))
-        IF the file has increased in size:
+        IF the file has i ncreased in size:
             Read the last line from the log and print it
             Update current file size
-            Sleep for a bit
-
+        Sleep for a bit
 """
-
-
+# [Thu Feb 14 12:36:32 2013] Your Location is 4027.73, -2795.26, -56.74
+# Old Regex("^(\D{4}\s\D{3}\s\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}] Your Location is)")
+# is the new slicing Regex faster than this?
 # D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt
 
 
 def main():
     log = "D:\\Games\\EQLite\\Logs\\eqlog_Cleri_P1999Green.txt"
+    pattern = re.compile("Your Location is")
     # print(next(reverse_readline(log)))  # print the last line
     current_size = get_logsize(log)
-    last_readline = ""
+    # last_readline = ""
     while True:  # make escapable!
         if current_size != get_logsize(log):
             last_readline = next(reverse_readline(log))
-            print(last_readline)
+            if pattern.fullmatch(last_readline, 27, 43):
+                print(last_readline)
+
+            """ broken multi-line read code (see long comment up top) """
+            # last_loc = ""
+            # while True:  # make escapable!
+            #     if current_size != get_logsize(log):
+            #         readback_limit = 10  # prevents too much looping through spam
+            #         line_num = 0
+            #         for line in reverse_readline(log):
+            #             # ?Loop and break till we find the last loc(multiline read)
+
+            #             if line_num <= readback_limit:
+            #                 if line == last_loc:  # break if same line found
+            #                     break
+            #                 elif (
+            #                     pattern.fullmatch(line, 27, 43) and line != last_loc
+            #                 ):  # at position of 'You Location is', is this faster/easier?
+            #                     print(line, end="\n")
+            #                     last_loc = line
+            #                     # break  # if there is any pattern match then break
+            #                 line_num += 1
+            #             else:
+            #                 break
+
             current_size = get_logsize(log)
         # sleep here
         sleep(0.1)

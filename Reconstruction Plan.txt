@@ -1,7 +1,7 @@
 Reconstructing DWMG in Python.
 
 1.  The core of DWMG is its log parser, and this was the first part coded on VB.
-	-Work out how to read log files from EQ in python, and how to detect when they change.
+	-Work out how to read log files from EQ in python, and how to detect when they change. DONE
 	-Work out how to use regex to trigger events/code based on logfile output.
 
 
