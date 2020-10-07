@@ -1,34 +1,20 @@
 # log parser basics 101
 # get log file location and... read it.
-from pathlib import Path
-from time import sleep
 import re
+from time import sleep
+from pathlib import Path
 
 
-""" New mission for you! We need a new def that works like this reverse one 
-with the buffering and starting towards the end but needs to save its last read location 
-and then use that as a starting location for the next read.
-The reason for this is so we can get lines from the last location in forward order,
-not reverse like we currently have, and the reason for this is so we can increase the sleep time 
-on the main loop without starting to miss log updates.
-(This maybe overkill, as it works fine with a 0.1 second pause using next() with the current reverse def
- although I have not tested it with lots of log spam like in EC, 
- but this is the same sleep time as the full VB code, and that has worked on multiple computers.)
-
-The current reverse one will be perfect for initialising characters and map switching, so that the data is 
-instantly displayed.
-
-"""
-
-
-def reverse_readline(filename, buffer_size=1024):
+def reverse_readline(filename, skip=None, buffer_size=1024):
     """A generator that returns the lines of a file in reverse order"""
     SEEK_FILE_END = 2  # seek "whence" value for end of stream
 
     with open(filename) as fd:
         first_line = None
         offset = 0
-        file_size = bytes_remaining = fd.seek(0, SEEK_FILE_END)
+        file_size = buffer_size = fd.seek(0, SEEK_FILE_END)
+        if skip is not None:
+            bytes_remaining = buffer_size = file_size - skip
         while bytes_remaining > 0:
             offset = min(file_size, offset + buffer_size)
             fd.seek(file_size - offset)
@@ -78,16 +64,50 @@ def get_logsize(filename):
 
 
 def main():
-    log = "D:\\Games\\EQLite\\Logs\\eqlog_Cleri_P1999Green.txt"
-    pattern = re.compile("Your Location is")
-    # print(next(reverse_readline(log)))  # print the last line
-    current_size = get_logsize(log)
-    # last_readline = ""
+    log = "D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"
+    log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
+    zone_pattern = re.compile(r"^.*You have entered ([\w\s']+)\.$")
+    loc_pattern = re.compile(
+        r"^.*Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+    )
+    previous_log_size = 0
+    current_loc = previous_loc = None
     while True:  # make escapable!
-        if current_size != get_logsize(log):
-            last_readline = next(reverse_readline(log))
-            if pattern.fullmatch(last_readline, 27, 43):
-                print(last_readline)
+        new_log_size = get_logsize(log)
+        if new_log_size != previous_log_size:
+            loc1 = loc2 = new_zone = None
+            #            file_offset = new_log_size - previous_log_size
+            for line in reverse_readline(log, skip=previous_log_size):
+                try:
+                    new_zone = zone_pattern.findall(line)[0]
+                    current_loc = previous_loc = None
+                    print(f"Zone: {new_zone}")
+                    break
+                except IndexError:
+                    if loc1 is None or loc2 is None:
+                        try:
+                            x, y, z = loc_pattern.findall(line)[0]
+                            if loc1 is None:
+                                loc1 = (x, y, z)
+                            else:
+                                loc2 = (x, y, z)
+                        except IndexError:
+                            pass
+            if loc2 is not None:
+                # two locs, set current and previous:
+                current_loc = loc1
+                previous_loc = loc2
+                print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
+            elif loc1 is not None:
+                # only one loc, save current as previous and set new current:
+                previous_loc = current_loc
+                current_loc = loc1
+                print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
+            previous_log_size = new_log_size
+
+            # last_readline = next(reverse_readline(log))
+            # if pattern.fullmatch(last_readline, 27, 43):
+            #     print(last_readline)
 
             """ broken multi-line read code (see long comment up top) """
             # last_loc = ""
@@ -111,7 +131,7 @@ def main():
             #             else:
             #                 break
 
-            current_size = get_logsize(log)
+            # current_size = get_logsize(log)
         # sleep here
         sleep(0.1)
         """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
