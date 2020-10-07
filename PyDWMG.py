@@ -1,8 +1,17 @@
 # log parser basics 101
 # get log file location and... read it.
 import re
-from time import sleep
+import sys
+import time
+import numpy
+import PySimpleGUI as sg  # our current GUI packge, using for its apparent abilities to be transparent and be borderless
 from pathlib import Path
+
+TRANSPARENCY = 0.4  # how transparent the window looks. 0 = invisible, 1 = normal window
+
+POLL_FREQUENCY = 100  # how often to update graphs in milliseconds
+
+# colors = ("#23a0a0", "#56d856", "#be45be", "#5681d8", "#d34545", "#BE7C29")
 
 
 def reverse_readline(filename, skip=None, buffer_size=1024):
@@ -63,16 +72,59 @@ def get_logsize(filename):
 # D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt
 
 
-def main():
-    log = "D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"
-    log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
+def main(location):
+    # def Txt(text, **kwargs):
+    #     return sg.Text(text, font=("Helvetica 8"), **kwargs)
+
+    sg.theme("Black")
+    sg.set_options(element_padding=(0, 0), margins=(1, 1), border_width=0)
+
+    # Red X graphic
+    red_x = "R0lGODlhEAAQAPeQAIsAAI0AAI4AAI8AAJIAAJUAAJQCApkAAJoAAJ4AAJkJCaAAAKYAAKcAAKcCAKcDA6cGAKgAAKsAAKsCAKwAAK0AAK8AAK4CAK8DAqUJAKULAKwLALAAALEAALIAALMAALMDALQAALUAALYAALcEALoAALsAALsCALwAAL8AALkJAL4NAL8NAKoTAKwbAbEQALMVAL0QAL0RAKsREaodHbkQELMsALg2ALk3ALs+ALE2FbgpKbA1Nbc1Nb44N8AAAMIWAMsvAMUgDMcxAKVABb9NBbVJErFYEq1iMrtoMr5kP8BKAMFLAMxKANBBANFCANJFANFEB9JKAMFcANFZANZcANpfAMJUEMZVEc5hAM5pAMluBdRsANR8AM9YOrdERMpIQs1UVMR5WNt8X8VgYMdlZcxtYtx4YNF/btp9eraNf9qXXNCCZsyLeNSLd8SSecySf82kd9qqc9uBgdyBgd+EhN6JgtSIiNuJieGHhOGLg+GKhOKamty1ste4sNO+ueenp+inp+HHrebGrefKuOPTzejWzera1O7b1vLb2/bl4vTu7fbw7ffx7vnz8f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAJAALAAAAAAQABAAAAjUACEJHEiwYEEABniQKfNFgQCDkATQwAMokEU+PQgUFDAjjR09e/LUmUNnh8aBCcCgUeRmzBkzie6EeQBAoAAMXuA8ciRGCaJHfXzUMCAQgYooWN48anTokR8dQk4sELggBhQrU9Q8evSHiJQgLCIIfMDCSZUjhbYuQkLFCRAMAiOQGGLE0CNBcZYmaRIDLqQFGF60eTRoSxc5jwjhACFWIAgMLtgUocJFy5orL0IQRHAiQgsbRZYswbEhBIiCCH6EiJAhAwQMKU5DjHCi9gnZEHMTDAgAOw=="
+    layout = [
+        [
+            sg.Button(
+                image_data=red_x,
+                button_color=("black", "black"),
+                key="Exit",
+                tooltip="Closes window",
+            ),
+        ],
+        [sg.Text("Zone", key="zone", size=(30, 1))],
+        [sg.Text("Current Loc", key="current_loc", size=(30, 1))],
+        [sg.Text("Previous Loc", key="previous_loc", size=(30, 1))],
+    ]
+
+    # Create Window
+    window = sg.Window(
+        "PyDWMG",
+        layout,
+        keep_on_top=True,
+        auto_size_buttons=False,
+        grab_anywhere=True,
+        no_titlebar=True,
+        default_button_element_size=(12, 1),
+        return_keyboard_events=True,
+        alpha_channel=TRANSPARENCY,
+        use_default_focus=False,
+        finalize=True,
+        location=location,
+    )
+
+    log = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+    # log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
     zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
     loc_pattern = re.compile(
         r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
     )
     previous_log_size = 0
     current_loc = previous_loc = None
-    while True:  # make escapable!
+    # main loop
+    while True:
+        event, values = window.read(timeout=POLL_FREQUENCY)  # loop throttle control
+        if event in (sg.WIN_CLOSED, "Exit"):
+            break
+
         new_log_size = get_logsize(log)
         if new_log_size != previous_log_size:
             loc1 = loc2 = new_zone = None
@@ -81,6 +133,9 @@ def main():
                 try:
                     new_zone = zone_pattern.findall(line)[0]
                     current_loc = previous_loc = None
+                    window.element("current_loc").Update("no loc")
+                    window.element("previous_loc").Update("no loc")
+                    window.element("zone").Update(new_zone)
                     print(f"Zone: {new_zone}")
                     break
                 except IndexError:
@@ -97,44 +152,50 @@ def main():
                 # two locs, set current and previous:
                 current_loc = loc1
                 previous_loc = loc2
+                window.element("current_loc").Update(current_loc)
+                window.element("previous_loc").Update(previous_loc)
                 print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
+
             elif loc1 is not None:
                 # only one loc, save current as previous and set new current:
                 previous_loc = current_loc
                 current_loc = loc1
+                window.element("current_loc").Update(current_loc)
+                window.element("previous_loc").Update(previous_loc)
                 print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
+
             previous_log_size = new_log_size
+    window.close()
+    # last_readline = next(reverse_readline(log))
+    # if pattern.fullmatch(last_readline, 27, 43):
+    #     print(last_readline)
 
-            # last_readline = next(reverse_readline(log))
-            # if pattern.fullmatch(last_readline, 27, 43):
-            #     print(last_readline)
+    """ broken multi-line read code (see long comment up top) """
+    # last_loc = ""
+    # while True:  # make escapable!
+    #     if current_size != get_logsize(log):
+    #         readback_limit = 10  # prevents too much looping through spam
+    #         line_num = 0
+    #         for line in reverse_readline(log):
+    #             # ?Loop and break till we find the last loc(multiline read)
 
-            """ broken multi-line read code (see long comment up top) """
-            # last_loc = ""
-            # while True:  # make escapable!
-            #     if current_size != get_logsize(log):
-            #         readback_limit = 10  # prevents too much looping through spam
-            #         line_num = 0
-            #         for line in reverse_readline(log):
-            #             # ?Loop and break till we find the last loc(multiline read)
+    #             if line_num <= readback_limit:
+    #                 if line == last_loc:  # break if same line found
+    #                     break
+    #                 elif (
+    #                     pattern.fullmatch(line, 27, 43) and line != last_loc
+    #                 ):  # at position of 'You Location is', is this faster/easier?
+    #                     print(line, end="\n")
+    #                     last_loc = line
+    #                     # break  # if there is any pattern match then break
+    #                 line_num += 1
+    #             else:
+    #                 break
 
-            #             if line_num <= readback_limit:
-            #                 if line == last_loc:  # break if same line found
-            #                     break
-            #                 elif (
-            #                     pattern.fullmatch(line, 27, 43) and line != last_loc
-            #                 ):  # at position of 'You Location is', is this faster/easier?
-            #                     print(line, end="\n")
-            #                     last_loc = line
-            #                     # break  # if there is any pattern match then break
-            #                 line_num += 1
-            #             else:
-            #                 break
-
-            # current_size = get_logsize(log)
-        # sleep here
-        sleep(0.1)
-        """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
+    # current_size = get_logsize(log)
+    # sleep here
+    # sleep(0.1) # being controlled from gui poll timer
+    """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
             0.1 caught 125 out of 125 spammed /locs """
 
     # i = 0
@@ -150,4 +211,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # when invoking this program, if a location is set on the command line, then the window will be created there. Use x,y with no ( )
+    if len(sys.argv) > 1:
+        location = sys.argv[1].split(",")
+        location = (int(location[0]), int(location[1]))
+    else:
+        location = (None, None)
+    main(location)
