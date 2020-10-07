@@ -66,9 +66,9 @@ def get_logsize(filename):
 def main():
     log = "D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"
     log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
-    zone_pattern = re.compile(r"^.*You have entered ([\w\s']+)\.$")
+    zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
     loc_pattern = re.compile(
-        r"^.*Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+        r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
     )
     previous_log_size = 0
     current_loc = previous_loc = None
