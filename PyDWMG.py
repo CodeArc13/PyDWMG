@@ -1,11 +1,11 @@
-# log parser basics 101
-# get log file location and... read it.
+import io
 import re
 import sys
 import time
 import numpy
 import PySimpleGUI as sg  # our current GUI packge, using for its apparent abilities to be transparent and be borderless
 from pathlib import Path
+from PIL import Image, ImageTk
 
 TRANSPARENCY = 0.4  # how transparent the window looks. 0 = invisible, 1 = normal window
 
@@ -54,18 +54,31 @@ def get_logsize(filename):
     return Path(filename).stat().st_size
 
 
-# basic Al Gore's rhythm
-""" 'real time' reading (With an adjustable sleep variable!)
-    Get the current log file size upon opening
-    Periodically check file size to see if it has increased 
-    (if time period is fast enough we wont have to worry about reading multiple
-     lines from the log as there will only ever be one new line(this should see how
-     fast the reverse_readline method can go in the case of a lot of spam to the log :p))
-        IF the file has i ncreased in size:
-            Read the last line from the log and print it
-            Update current file size
-        Sleep for a bit
-"""
+def update_window(wnd, elem_key, value):  # I think this is what you mean by decoupling
+    wnd.element(elem_key).Update(value)
+
+
+def mouse_over(wnd, e):  # takes window and event
+    if e == "Enter":
+        print(e)
+        wnd.alpha_channel = 1  # make opaque
+    if e == "Leave":
+        print(e)
+        wnd.alpha_channel = TRANSPARENCY  # this will be changed for a variable
+
+
+def get_img_data(f, maxsize=(1200, 850), first=False):
+    """Generate image data using PIL"""
+    img = Image.open(f)
+    img.thumbnail(maxsize)
+    if first:  # tkinter is inactive the first time
+        bio = io.BytesIO()
+        img.save(bio, format="PNG")
+        del img
+        return bio.getvalue()
+    return ImageTk.PhotoImage(img)
+
+
 # [Thu Feb 14 12:36:32 2013] Your Location is 4027.73, -2795.26, -56.74
 # Old Regex("^(\D{4}\s\D{3}\s\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}] Your Location is)")
 # is the new slicing Regex faster than this?
@@ -73,14 +86,35 @@ def get_logsize(filename):
 
 
 def main(location):
-    # def Txt(text, **kwargs):
+    # def Txt(text, **kwargs): # somones elses code, might be good
     #     return sg.Text(text, font=("Helvetica 8"), **kwargs)
+
+    map_filename = "Qeynoshills.jpg"
+
+    log = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+    # log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
+    zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
+    loc_pattern = re.compile(
+        r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+    )
+    previous_log_size = 0
+    current_loc = previous_loc = None
 
     sg.theme("Black")
     sg.set_options(element_padding=(0, 0), margins=(1, 1), border_width=0)
 
     # Red X graphic
     red_x = "R0lGODlhEAAQAPeQAIsAAI0AAI4AAI8AAJIAAJUAAJQCApkAAJoAAJ4AAJkJCaAAAKYAAKcAAKcCAKcDA6cGAKgAAKsAAKsCAKwAAK0AAK8AAK4CAK8DAqUJAKULAKwLALAAALEAALIAALMAALMDALQAALUAALYAALcEALoAALsAALsCALwAAL8AALkJAL4NAL8NAKoTAKwbAbEQALMVAL0QAL0RAKsREaodHbkQELMsALg2ALk3ALs+ALE2FbgpKbA1Nbc1Nb44N8AAAMIWAMsvAMUgDMcxAKVABb9NBbVJErFYEq1iMrtoMr5kP8BKAMFLAMxKANBBANFCANJFANFEB9JKAMFcANFZANZcANpfAMJUEMZVEc5hAM5pAMluBdRsANR8AM9YOrdERMpIQs1UVMR5WNt8X8VgYMdlZcxtYtx4YNF/btp9eraNf9qXXNCCZsyLeNSLd8SSecySf82kd9qqc9uBgdyBgd+EhN6JgtSIiNuJieGHhOGLg+GKhOKamty1ste4sNO+ueenp+inp+HHrebGrefKuOPTzejWzera1O7b1vLb2/bl4vTu7fbw7ffx7vnz8f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAJAALAAAAAAQABAAAAjUACEJHEiwYEEABniQKfNFgQCDkATQwAMokEU+PQgUFDAjjR09e/LUmUNnh8aBCcCgUeRmzBkzie6EeQBAoAAMXuA8ciRGCaJHfXzUMCAQgYooWN48anTokR8dQk4sELggBhQrU9Q8evSHiJQgLCIIfMDCSZUjhbYuQkLFCRAMAiOQGGLE0CNBcZYmaRIDLqQFGF60eTRoSxc5jwjhACFWIAgMLtgUocJFy5orL0IQRHAiQgsbRZYswbEhBIiCCH6EiJAhAwQMKU5DjHCi9gnZEHMTDAgAOw=="
+
+    # map_elem = sg.Image(data=get_img_data(map_filename, first=True))
+    map_elem = sg.Graph(
+        canvas_size=(400, 400),
+        graph_bottom_left=(0, 0),
+        graph_top_right=(400, 400),
+        background_color="black",
+        key="map_graph",
+    )
+
     layout = [
         [
             sg.Button(
@@ -93,6 +127,7 @@ def main(location):
         [sg.Text("Zone", key="zone", size=(30, 1))],
         [sg.Text("Current Loc", key="current_loc", size=(30, 1))],
         [sg.Text("Previous Loc", key="previous_loc", size=(30, 1))],
+        [map_elem],
     ]
 
     # Create Window
@@ -102,7 +137,7 @@ def main(location):
         keep_on_top=True,
         auto_size_buttons=False,
         grab_anywhere=True,
-        no_titlebar=True,
+        no_titlebar=False,
         default_button_element_size=(12, 1),
         return_keyboard_events=True,
         alpha_channel=TRANSPARENCY,
@@ -111,17 +146,19 @@ def main(location):
         location=location,
     )
 
-    log = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
-    # log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
-    zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
-    loc_pattern = re.compile(
-        r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
-    )
-    previous_log_size = 0
-    current_loc = previous_loc = None
+    map_graph = window.Element("map_graph")
+
+    window.bind("<Enter>", "Enter")
+    window.bind("<Leave>", "Leave")
+
+    map_graph.DrawImage(filename=map_filename, location=(0, 400))
+    map_graph.DrawRectangle((200, 200), (250, 300), line_color="red")
+
     # main loop
     while True:
-        event, values = window.read(timeout=POLL_FREQUENCY)  # loop throttle control
+        event, values = window.read(
+            timeout=POLL_FREQUENCY
+        )  # loop throttle control, tested and seems to run code in while loop at the desired interval
         if event in (sg.WIN_CLOSED, "Exit"):
             break
 
@@ -133,9 +170,9 @@ def main(location):
                 try:
                     new_zone = zone_pattern.findall(line)[0]
                     current_loc = previous_loc = None
-                    window.element("current_loc").Update("no loc")
-                    window.element("previous_loc").Update("no loc")
-                    window.element("zone").Update(new_zone)
+                    update_window(window, "zone", new_zone)
+                    update_window(window, "current_loc", "no loc")
+                    update_window(window, "previous_loc", "no loc")
                     print(f"Zone: {new_zone}")
                     break
                 except IndexError:
@@ -152,62 +189,28 @@ def main(location):
                 # two locs, set current and previous:
                 current_loc = loc1
                 previous_loc = loc2
-                window.element("current_loc").Update(current_loc)
-                window.element("previous_loc").Update(previous_loc)
+                update_window(window, "current_loc", current_loc)
+                update_window(window, "previous_loc", previous_loc)
                 print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
 
             elif loc1 is not None:
                 # only one loc, save current as previous and set new current:
                 previous_loc = current_loc
                 current_loc = loc1
-                window.element("current_loc").Update(current_loc)
-                window.element("previous_loc").Update(previous_loc)
+                update_window(window, "current_loc", current_loc)
+                update_window(window, "previous_loc", previous_loc)
                 print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
 
             previous_log_size = new_log_size
+
+        # mouse over here
+        mouse_over(window, event)
     window.close()
-    # last_readline = next(reverse_readline(log))
-    # if pattern.fullmatch(last_readline, 27, 43):
-    #     print(last_readline)
 
-    """ broken multi-line read code (see long comment up top) """
-    # last_loc = ""
-    # while True:  # make escapable!
-    #     if current_size != get_logsize(log):
-    #         readback_limit = 10  # prevents too much looping through spam
-    #         line_num = 0
-    #         for line in reverse_readline(log):
-    #             # ?Loop and break till we find the last loc(multiline read)
-
-    #             if line_num <= readback_limit:
-    #                 if line == last_loc:  # break if same line found
-    #                     break
-    #                 elif (
-    #                     pattern.fullmatch(line, 27, 43) and line != last_loc
-    #                 ):  # at position of 'You Location is', is this faster/easier?
-    #                     print(line, end="\n")
-    #                     last_loc = line
-    #                     # break  # if there is any pattern match then break
-    #                 line_num += 1
-    #             else:
-    #                 break
-
-    # current_size = get_logsize(log)
     # sleep here
     # sleep(0.1) # being controlled from gui poll timer
     """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
             0.1 caught 125 out of 125 spammed /locs """
-
-    # i = 0
-    # for line in reverse_readline(log):
-    #     if i >= 10:
-    #         break
-    #     else:
-    #         print(line, end="\n")
-    #         i += 1
-
-    #     # f.closed #not needed for with block
-    #      """print(f.tell())
 
 
 if __name__ == "__main__":
