@@ -3,5 +3,19 @@
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
     "php.validate.executablePath": "",
-    "activestate.promptRuntimeCreation": false
+    "activestate.promptRuntimeCreation": false,
+    "cSpell.ignoreWords": [
+        "cleri",
+        "dwmg",
+        "eqlog",
+        "eqlog cleri p green",
+        "eqlog mezr p green",
+        "green",
+        "helvetica",
+        "mezr",
+        "p",
+        "py",
+        "py dwmg",
+        "qeynoshills"
+    ]
 }

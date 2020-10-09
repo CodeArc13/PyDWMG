@@ -3,9 +3,10 @@ import re
 import sys
 import time
 import numpy
-import PySimpleGUI as sg  # our current GUI packge, using for its apparent abilities to be transparent and be borderless
+import PySimpleGUI as sg  # our current GUI package, using for its apparent abilities to be transparent and be borderless
 from pathlib import Path
-from PIL import Image, ImageTk
+
+# from PIL import Image, ImageTk
 
 TRANSPARENCY = 0.4  # how transparent the window looks. 0 = invisible, 1 = normal window
 
@@ -58,7 +59,19 @@ def update_window(wnd, elem_key, value):  # I think this is what you mean by dec
     wnd.element(elem_key).Update(value)
 
 
+def draw(elem, filename, pos):  # A list of items to draw will be added
+    """so what I am thinking is this should be called every loop and
+    redraw the entire map with position icons etc, that should enable
+    animation"""
+    elem.DrawImage(filename=filename, location=(0, 400))
+    # map_elem.update()
+    elem.DrawRectangle((pos[0], pos[1]), (pos[0] + 50, pos[1] + 100), line_color="red")
+    elem.update()  # may not be needed
+
+
 def mouse_over(wnd, e):  # takes window and event
+    """Still needs work, gui is triggering too many enter and leave events causing
+    transparency to flicker, not checked but might have issues in linux too"""
     if e == "Enter":
         print(e)
         wnd.alpha_channel = 1  # make opaque
@@ -67,16 +80,16 @@ def mouse_over(wnd, e):  # takes window and event
         wnd.alpha_channel = TRANSPARENCY  # this will be changed for a variable
 
 
-def get_img_data(f, maxsize=(1200, 850), first=False):
-    """Generate image data using PIL"""
-    img = Image.open(f)
-    img.thumbnail(maxsize)
-    if first:  # tkinter is inactive the first time
-        bio = io.BytesIO()
-        img.save(bio, format="PNG")
-        del img
-        return bio.getvalue()
-    return ImageTk.PhotoImage(img)
+# def get_img_data(f, maxsize=(1200, 850), first=False):
+#     """Generate image data using PIL"""
+#     img = Image.open(f)
+#     img.thumbnail(maxsize)
+#     if first:  # tkinter is inactive the first time
+#         bio = io.BytesIO()
+#         img.save(bio, format="PNG")
+#         del img
+#         return bio.getvalue()
+#     return ImageTk.PhotoImage(img)
 
 
 # [Thu Feb 14 12:36:32 2013] Your Location is 4027.73, -2795.26, -56.74
@@ -89,7 +102,7 @@ def main(location):
     # def Txt(text, **kwargs): # somones elses code, might be good
     #     return sg.Text(text, font=("Helvetica 8"), **kwargs)
 
-    map_filename = "Qeynoshills.jpg"
+    map_filename = "Qeynoshills.png"
 
     log = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
     # log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
@@ -106,7 +119,7 @@ def main(location):
     # Red X graphic
     red_x = "R0lGODlhEAAQAPeQAIsAAI0AAI4AAI8AAJIAAJUAAJQCApkAAJoAAJ4AAJkJCaAAAKYAAKcAAKcCAKcDA6cGAKgAAKsAAKsCAKwAAK0AAK8AAK4CAK8DAqUJAKULAKwLALAAALEAALIAALMAALMDALQAALUAALYAALcEALoAALsAALsCALwAAL8AALkJAL4NAL8NAKoTAKwbAbEQALMVAL0QAL0RAKsREaodHbkQELMsALg2ALk3ALs+ALE2FbgpKbA1Nbc1Nb44N8AAAMIWAMsvAMUgDMcxAKVABb9NBbVJErFYEq1iMrtoMr5kP8BKAMFLAMxKANBBANFCANJFANFEB9JKAMFcANFZANZcANpfAMJUEMZVEc5hAM5pAMluBdRsANR8AM9YOrdERMpIQs1UVMR5WNt8X8VgYMdlZcxtYtx4YNF/btp9eraNf9qXXNCCZsyLeNSLd8SSecySf82kd9qqc9uBgdyBgd+EhN6JgtSIiNuJieGHhOGLg+GKhOKamty1ste4sNO+ueenp+inp+HHrebGrefKuOPTzejWzera1O7b1vLb2/bl4vTu7fbw7ffx7vnz8f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAJAALAAAAAAQABAAAAjUACEJHEiwYEEABniQKfNFgQCDkATQwAMokEU+PQgUFDAjjR09e/LUmUNnh8aBCcCgUeRmzBkzie6EeQBAoAAMXuA8ciRGCaJHfXzUMCAQgYooWN48anTokR8dQk4sELggBhQrU9Q8evSHiJQgLCIIfMDCSZUjhbYuQkLFCRAMAiOQGGLE0CNBcZYmaRIDLqQFGF60eTRoSxc5jwjhACFWIAgMLtgUocJFy5orL0IQRHAiQgsbRZYswbEhBIiCCH6EiJAhAwQMKU5DjHCi9gnZEHMTDAgAOw=="
 
-    # map_elem = sg.Image(data=get_img_data(map_filename, first=True))
+    # map_img = sg.Image(filename=map_filename, size=(400, 400))
     map_elem = sg.Graph(
         canvas_size=(400, 400),
         graph_bottom_left=(0, 0),
@@ -136,8 +149,8 @@ def main(location):
         layout,
         keep_on_top=True,
         auto_size_buttons=False,
-        grab_anywhere=True,
-        no_titlebar=False,
+        grab_anywhere=False,  # off for linux compatability
+        no_titlebar=False,  # off for linux compatability
         default_button_element_size=(12, 1),
         return_keyboard_events=True,
         alpha_channel=TRANSPARENCY,
@@ -146,14 +159,12 @@ def main(location):
         location=location,
     )
 
-    map_graph = window.Element("map_graph")
-
     window.bind("<Enter>", "Enter")
     window.bind("<Leave>", "Leave")
 
-    map_graph.DrawImage(filename=map_filename, location=(0, 400))
-    map_graph.DrawRectangle((200, 200), (250, 300), line_color="red")
-
+    map_elem.set_size(size=(800, 800))
+    # draw(map_elem, map_filename)
+    i = 0
     # main loop
     while True:
         event, values = window.read(
@@ -165,7 +176,7 @@ def main(location):
         new_log_size = get_logsize(log)
         if new_log_size != previous_log_size:
             loc1 = loc2 = new_zone = None
-            #            file_offset = new_log_size - previous_log_size
+            # file_offset = new_log_size - previous_log_size
             for line in reverse_readline(log, skip=previous_log_size):
                 try:
                     new_zone = zone_pattern.findall(line)[0]
@@ -204,7 +215,13 @@ def main(location):
             previous_log_size = new_log_size
 
         # mouse over here
-        mouse_over(window, event)
+        # mouse_over(window, event) # disabled due to event issues that can be coded out
+
+        draw(map_elem, map_filename, (i, 100))
+        if i > 20:
+            i = 0
+        else:
+            i += 1
     window.close()
 
     # sleep here
