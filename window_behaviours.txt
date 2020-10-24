@@ -1,0 +1,21 @@
+PyDWMG Window behaviour on windows and opensuse linux, both must act in the same way
+
+Main Controller Window + Map Window + Tray Icon + Task Bar Item and Alt/Tab
+
+Main Controller window exists to allow registration in window manager for taskbar and alt/tab item
+    while allowing frameless map window to be unregistered (bypass X11) and draggable off screen in linux
+Main Controller window will be always on bottom or somehow hidden as it will have no actual function
+
+Close main window from its self or taskbar = close/minimise main window and map to tray
+Close map window from its self or taskbar = close/minimise main window and map to tray
+Close tray icon = exit completely
+
+Alt/Tabbing restores windows
+Clicking taskbar item restores windows
+Clicking tray icon restores windows
+(may need to save window geometry on minimise/close for these)
+
+Minimise map window = minimise map and main window to tray
+Minimise main window = minimise map and main window to tray
+
+Map window must be resizable and draggable with no frame.  Transparent black and always on top must be adjustable settings
