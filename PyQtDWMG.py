@@ -23,17 +23,10 @@ import time
 
 
 class WorkerSignals(QObject):
-    """
-    Defines the signals available from a running worker thread.
+    """ Defines the signals available from a running worker thread."""
 
-    Supported signals are:
-
-    result
-        object data returned from processing, anything
-
-    """
-
-    result = pyqtSignal(object)
+    zone = pyqtSignal(str)
+    loc = pyqtSignal(tuple)
 
 
 class ParentSignals(QObject):
@@ -94,11 +87,15 @@ class EQLogParser(QRunnable):
                     time.sleep(0.1)  # Sleep briefly
                     continue
                 try:
-                    x, y, z = loc_pattern.findall(line)[0]
-                    # print(f"x: {x} y: {y} z: {z}") # Log loc to console
-                    self.signals.result.emit(f"x: {x} y: {y} z: {z}")
+                    new_zone = zone_pattern.findall(line)[0]
+                    self.signals.zone.emit(new_zone)
                 except IndexError:
-                    pass
+                    try:
+                        x, y, z = loc_pattern.findall(line)[0]
+                        # print(f"x: {x} y: {y} z: {z}") # Log loc to console
+                        self.signals.loc.emit((x, y, z))
+                    except IndexError:
+                        pass
 
 
 class MainWindow(QMainWindow):
@@ -107,15 +104,23 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
 
-        self.l = QLabel("Start")
-        b = QPushButton("Quit")
-        b.pressed.connect(self.quit_app)
-        self.t = QPushButton("Terminate Log Parser")
-        self.t.pressed.connect(self.terminate_logparser)
+        label_main = QLabel("Dude, Where's My Guildies???\n")
+        label_zone = QLabel("Zone:")
+        self.label_currentzone = QLabel("")
+        label_loc = QLabel("Location:")
+        self.label_currentloc = QLabel("")
+        button_quit = QPushButton("Quit")
+        button_quit.pressed.connect(self.quit_app)
+        self.button_terminatelogger = QPushButton("Terminate Log Parser")
+        self.button_terminatelogger.pressed.connect(self.terminate_logparser)
 
-        layout.addWidget(self.l)
-        layout.addWidget(b)
-        layout.addWidget(self.t)
+        layout.addWidget(label_main)
+        layout.addWidget(label_zone)
+        layout.addWidget(self.label_currentzone)
+        layout.addWidget(label_loc)
+        layout.addWidget(self.label_currentloc)
+        layout.addWidget(button_quit)
+        layout.addWidget(self.button_terminatelogger)
 
         w = QWidget()
         w.setLayout(layout)
@@ -131,17 +136,24 @@ class MainWindow(QMainWindow):
 
         self.start_workers()
 
-    def update_label(self, text):
-        self.l.setText(text)
+    def update_zone(self, zone_text):
+        self.current_zone = zone_text
+        self.label_currentzone.setText(zone_text)
+
+    def update_loc(self, loc_tuple):
+        self.current_loc = loc_tuple
+        x, y, z = loc_tuple
+        self.label_currentloc.setText(f"({x}, {y}, {z})")
 
     def terminate_logparser(self):
+        self.button_terminatelogger.setDisabled(True)
         self.logparser_control.terminate.emit()
-        self.t.setDisabled(True)
 
     def start_workers(self):
         self.logparser_control = ParentSignals()
         self.worker_logfile = EQLogParser(self.logparser_control)
-        self.worker_logfile.signals.result.connect(self.update_label)
+        self.worker_logfile.signals.zone.connect(self.update_zone)
+        self.worker_logfile.signals.loc.connect(self.update_loc)
         self.threadpool.start(self.worker_logfile)
 
     def quit_app(self):
