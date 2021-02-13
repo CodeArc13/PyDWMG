@@ -1,220 +1,171 @@
-# log parser basics 101
-# get log file location and... read it.
 import re
 import sys
 import time
-import numpy
-import PySimpleGUI as sg  # our current GUI packge, using for its apparent abilities to be transparent and be borderless
-from pathlib import Path
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QPushButton,
+    QMainWindow,
+    QVBoxLayout,
+    QLabel,
+)
 
-TRANSPARENCY = 0.4  # how transparent the window looks. 0 = invisible, 1 = normal window
-
-POLL_FREQUENCY = 100  # how often to update graphs in milliseconds
-
-# colors = ("#23a0a0", "#56d856", "#be45be", "#5681d8", "#d34545", "#BE7C29")
-
-
-def reverse_readline(filename, skip=None, buffer_size=1024):
-    """A generator that returns the lines of a file in reverse order"""
-    SEEK_FILE_END = 2  # seek "whence" value for end of stream
-
-    with open(filename) as fd:
-        first_line = None
-        offset = 0
-        file_size = buffer_size = fd.seek(0, SEEK_FILE_END)
-        if skip is not None:
-            bytes_remaining = buffer_size = file_size - skip
-        while bytes_remaining > 0:
-            offset = min(file_size, offset + buffer_size)
-            fd.seek(file_size - offset)
-            read_buffer = fd.read(min(bytes_remaining, buffer_size))
-            bytes_remaining -= buffer_size
-            lines = read_buffer.split("\n")
-            if first_line is not None:
-                """The first line of the buffer is probably not a complete
-                line, so store it and add it to the end of the next buffer.
-                Unless there is already a newline at the end of the buffer,
-                then just yield it because it is a complete line.
-                """
-                if read_buffer[-1] != "\n":
-                    lines[-1] += first_line
-                else:
-                    yield first_line
-            first_line = lines[0]
-            for line_num in range(len(lines) - 1, 0, -1):
-                if lines[line_num]:
-                    yield lines[line_num]
-
-        if first_line is not None:
-            """Current first_line is never yielded in the while loop """
-            yield first_line
+from PyQt5.QtCore import (
+    QObject,
+    QRunnable,
+    QThreadPool,
+    QTimer,
+    pyqtSlot,
+    pyqtSignal,
+)
 
 
-def get_logsize(filename):
-    return Path(filename).stat().st_size
+class WorkerSignals(QObject):
+    """ Defines the signals available from a running worker thread."""
+
+    zone = pyqtSignal(str)
+    loc = pyqtSignal(tuple)
 
 
-# basic Al Gore's rhythm
-""" 'real time' reading (With an adjustable sleep variable!)
-    Get the current log file size upon opening
-    Periodically check file size to see if it has increased 
-    (if time period is fast enough we wont have to worry about reading multiple
-     lines from the log as there will only ever be one new line(this should see how
-     fast the reverse_readline method can go in the case of a lot of spam to the log :p))
-        IF the file has i ncreased in size:
-            Read the last line from the log and print it
-            Update current file size
-        Sleep for a bit
-"""
-# [Thu Feb 14 12:36:32 2013] Your Location is 4027.73, -2795.26, -56.74
-# Old Regex("^(\D{4}\s\D{3}\s\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}] Your Location is)")
-# is the new slicing Regex faster than this?
-# D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt
+class ParentSignals(QObject):
+    """ Defines the signals to pass to a worker thread for parent control """
+
+    terminate = pyqtSignal()
 
 
-def main(location):
-    # def Txt(text, **kwargs):
-    #     return sg.Text(text, font=("Helvetica 8"), **kwargs)
+class EQLogParser(QRunnable):
+    """
+    Worker thread, inherits from QRunnable to handler worker thread setup,
+    signals and wrap-up.
+    """
 
-    sg.theme("Black")
-    sg.set_options(element_padding=(0, 0), margins=(1, 1), border_width=0)
+    def __init__(self, parent_signals, *args, **kwargs):
+        super(EQLogParser, self).__init__()
+        # Store constructor arguments (re-used for processing)
+        self._stopped = False
+        self.args = args
+        self.kwargs = kwargs
+        self.signals = WorkerSignals()
+        self.parent_signals = parent_signals
+        self.parent_signals.terminate.connect(self.stop)
+        # Can use a timer in the worker thread for periodic checks, or something
+        # self.show_status = QTimer()
+        # self.show_status.timeout.connect(self.parser_status)
+        # self.show_status.start(2000)
 
-    # Red X graphic
-    red_x = "R0lGODlhEAAQAPeQAIsAAI0AAI4AAI8AAJIAAJUAAJQCApkAAJoAAJ4AAJkJCaAAAKYAAKcAAKcCAKcDA6cGAKgAAKsAAKsCAKwAAK0AAK8AAK4CAK8DAqUJAKULAKwLALAAALEAALIAALMAALMDALQAALUAALYAALcEALoAALsAALsCALwAAL8AALkJAL4NAL8NAKoTAKwbAbEQALMVAL0QAL0RAKsREaodHbkQELMsALg2ALk3ALs+ALE2FbgpKbA1Nbc1Nb44N8AAAMIWAMsvAMUgDMcxAKVABb9NBbVJErFYEq1iMrtoMr5kP8BKAMFLAMxKANBBANFCANJFANFEB9JKAMFcANFZANZcANpfAMJUEMZVEc5hAM5pAMluBdRsANR8AM9YOrdERMpIQs1UVMR5WNt8X8VgYMdlZcxtYtx4YNF/btp9eraNf9qXXNCCZsyLeNSLd8SSecySf82kd9qqc9uBgdyBgd+EhN6JgtSIiNuJieGHhOGLg+GKhOKamty1ste4sNO+ueenp+inp+HHrebGrefKuOPTzejWzera1O7b1vLb2/bl4vTu7fbw7ffx7vnz8f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAJAALAAAAAAQABAAAAjUACEJHEiwYEEABniQKfNFgQCDkATQwAMokEU+PQgUFDAjjR09e/LUmUNnh8aBCcCgUeRmzBkzie6EeQBAoAAMXuA8ciRGCaJHfXzUMCAQgYooWN48anTokR8dQk4sELggBhQrU9Q8evSHiJQgLCIIfMDCSZUjhbYuQkLFCRAMAiOQGGLE0CNBcZYmaRIDLqQFGF60eTRoSxc5jwjhACFWIAgMLtgUocJFy5orL0IQRHAiQgsbRZYswbEhBIiCCH6EiJAhAwQMKU5DjHCi9gnZEHMTDAgAOw=="
-    layout = [
-        [
-            sg.Button(
-                image_data=red_x,
-                button_color=("black", "black"),
-                key="Exit",
-                tooltip="Closes window",
-            ),
-        ],
-        [sg.Text("Zone", key="zone", size=(30, 1))],
-        [sg.Text("Current Loc", key="current_loc", size=(30, 1))],
-        [sg.Text("Previous Loc", key="previous_loc", size=(30, 1))],
-    ]
+    def __del__(self):
+        self.stop()
 
-    # Create Window
-    window = sg.Window(
-        "PyDWMG",
-        layout,
-        keep_on_top=True,
-        auto_size_buttons=False,
-        grab_anywhere=True,
-        no_titlebar=True,
-        default_button_element_size=(12, 1),
-        return_keyboard_events=True,
-        alpha_channel=TRANSPARENCY,
-        use_default_focus=False,
-        finalize=True,
-        location=location,
-    )
+    def stop(self):
+        self._stopped = True
 
-    log = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
-    # log = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Mezr_P1999Green.txt"
-    zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
-    loc_pattern = re.compile(
-        r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
-    )
-    previous_log_size = 0
-    current_loc = previous_loc = None
-    # main loop
-    while True:
-        event, values = window.read(timeout=POLL_FREQUENCY)  # loop throttle control
-        if event in (sg.WIN_CLOSED, "Exit"):
-            break
+    # def parser_status(self):
+    #     print("Log parsing thread active...")
 
-        new_log_size = get_logsize(log)
-        if new_log_size != previous_log_size:
-            loc1 = loc2 = new_zone = None
-            #            file_offset = new_log_size - previous_log_size
-            for line in reverse_readline(log, skip=previous_log_size):
+    @pyqtSlot()
+    def run(self):
+        # Static log file path if needed:
+        logfile = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+        # logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
+        try:
+            # Read log file path from local config file:
+            with open("eq_logfile.txt", "rt") as f:
+                logfile_path = f.readline().strip()
+            print(f"Found eq_logfile.txt, using log file location:\n{logfile_path}")
+        except Exception:
+            print(
+                "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
+            )
+
+        zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
+        loc_pattern = re.compile(
+            r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+        )
+        logfile = open(logfile_path, "rt")
+        with open(logfile_path, "rt") as logfile:
+            print("Log parser started...")
+            logfile.seek(0, 2)  # Go to the end of the file
+            while not self._stopped:
+                line = logfile.readline()
+                if not line:
+                    time.sleep(0.1)  # Sleep briefly
+                    continue
                 try:
                     new_zone = zone_pattern.findall(line)[0]
-                    current_loc = previous_loc = None
-                    window.element("current_loc").Update("no loc")
-                    window.element("previous_loc").Update("no loc")
-                    window.element("zone").Update(new_zone)
-                    print(f"Zone: {new_zone}")
-                    break
+                    self.signals.zone.emit(new_zone)
                 except IndexError:
-                    if loc1 is None or loc2 is None:
-                        try:
-                            x, y, z = loc_pattern.findall(line)[0]
-                            if loc1 is None:
-                                loc1 = (x, y, z)
-                            else:
-                                loc2 = (x, y, z)
-                        except IndexError:
-                            pass
-            if loc2 is not None:
-                # two locs, set current and previous:
-                current_loc = loc1
-                previous_loc = loc2
-                window.element("current_loc").Update(current_loc)
-                window.element("previous_loc").Update(previous_loc)
-                print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
-
-            elif loc1 is not None:
-                # only one loc, save current as previous and set new current:
-                previous_loc = current_loc
-                current_loc = loc1
-                window.element("current_loc").Update(current_loc)
-                window.element("previous_loc").Update(previous_loc)
-                print(f"Current loc: {current_loc}\nPrevious loc: {previous_loc}")
-
-            previous_log_size = new_log_size
-    window.close()
-    # last_readline = next(reverse_readline(log))
-    # if pattern.fullmatch(last_readline, 27, 43):
-    #     print(last_readline)
-
-    """ broken multi-line read code (see long comment up top) """
-    # last_loc = ""
-    # while True:  # make escapable!
-    #     if current_size != get_logsize(log):
-    #         readback_limit = 10  # prevents too much looping through spam
-    #         line_num = 0
-    #         for line in reverse_readline(log):
-    #             # ?Loop and break till we find the last loc(multiline read)
-
-    #             if line_num <= readback_limit:
-    #                 if line == last_loc:  # break if same line found
-    #                     break
-    #                 elif (
-    #                     pattern.fullmatch(line, 27, 43) and line != last_loc
-    #                 ):  # at position of 'You Location is', is this faster/easier?
-    #                     print(line, end="\n")
-    #                     last_loc = line
-    #                     # break  # if there is any pattern match then break
-    #                 line_num += 1
-    #             else:
-    #                 break
-
-    # current_size = get_logsize(log)
-    # sleep here
-    # sleep(0.1) # being controlled from gui poll timer
-    """ notes from experimentation. Half second sleep caught 65 out of 82 spammed /locs
-            0.1 caught 125 out of 125 spammed /locs """
-
-    # i = 0
-    # for line in reverse_readline(log):
-    #     if i >= 10:
-    #         break
-    #     else:
-    #         print(line, end="\n")
-    #         i += 1
-
-    #     # f.closed #not needed for with block
-    #      """print(f.tell())
+                    try:
+                        x, y, z = loc_pattern.findall(line)[0]
+                        # print(f"x: {x} y: {y} z: {z}") # Log loc to console
+                        self.signals.loc.emit((x, y, z))
+                    except IndexError:
+                        pass
+        print("Log parser stopped.")
 
 
-if __name__ == "__main__":
-    # when invoking this program, if a location is set on the command line, then the window will be created there. Use x,y with no ( )
-    if len(sys.argv) > 1:
-        location = sys.argv[1].split(",")
-        location = (int(location[0]), int(location[1]))
-    else:
-        location = (None, None)
-    main(location)
+class MainWindow(QMainWindow):
+    def __init__(self, *args, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+
+        layout = QVBoxLayout()
+
+        label_main = QLabel("Dude, Where's My Guildies???\n")
+        label_zone = QLabel("Zone:")
+        self.label_currentzone = QLabel("")
+        label_loc = QLabel("Location:")
+        self.label_currentloc = QLabel("")
+        button_quit = QPushButton("Quit")
+        button_quit.pressed.connect(self.quit_app)
+        self.button_terminatelogger = QPushButton("Terminate Log Parser")
+        self.button_terminatelogger.pressed.connect(self.terminate_logparser)
+
+        layout.addWidget(label_main)
+        layout.addWidget(label_zone)
+        layout.addWidget(self.label_currentzone)
+        layout.addWidget(label_loc)
+        layout.addWidget(self.label_currentloc)
+        layout.addWidget(button_quit)
+        layout.addWidget(self.button_terminatelogger)
+
+        w = QWidget()
+        w.setLayout(layout)
+
+        self.setCentralWidget(w)
+
+        self.show()
+
+        self.threadpool = QThreadPool()
+        print(
+            "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount()
+        )
+
+        self.start_workers()
+
+    def update_zone(self, zone_text):
+        self.current_zone = zone_text
+        self.label_currentzone.setText(zone_text)
+
+    def update_loc(self, loc_tuple):
+        self.current_loc = loc_tuple
+        x, y, z = loc_tuple
+        self.label_currentloc.setText(f"({x}, {y}, {z})")
+
+    def terminate_logparser(self):
+        self.button_terminatelogger.setDisabled(True)
+        self.logparser_control.terminate.emit()
+
+    def start_workers(self):
+        self.logparser_control = ParentSignals()
+        self.worker_logfile = EQLogParser(self.logparser_control)
+        self.worker_logfile.signals.zone.connect(self.update_zone)
+        self.worker_logfile.signals.loc.connect(self.update_loc)
+        self.threadpool.start(self.worker_logfile)
+
+    def quit_app(self):
+        self.terminate_logparser()
+        app.quit()
+
+
+app = QApplication([1, "-widgetcount"])
+window = MainWindow()
+sys.exit(app.exec())
