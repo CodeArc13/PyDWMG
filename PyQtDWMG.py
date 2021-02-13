@@ -19,8 +19,6 @@ from PyQt5.QtCore import (
     pyqtSignal,
 )
 
-import time
-
 
 class WorkerSignals(QObject):
     """ Defines the signals available from a running worker thread."""
@@ -30,56 +28,62 @@ class WorkerSignals(QObject):
 
 
 class ParentSignals(QObject):
+    """ Defines the signals to pass to a worker thread for parent control """
+
     terminate = pyqtSignal()
 
 
 class EQLogParser(QRunnable):
     """
-    Worker thread
-
-    Inherits from QRunnable to handler worker thread setup, signals and wrap-up.
-
-    :param callback: The function callback to run on this worker thread. Supplied args and
-                     kwargs will be passed through to the runner.
-    :type callback: function
-    :param args: Arguments to pass to the callback function
-    :param kwargs: Keywords to pass to the callback function
-
+    Worker thread, inherits from QRunnable to handler worker thread setup,
+    signals and wrap-up.
     """
 
     def __init__(self, parent_signals, *args, **kwargs):
         super(EQLogParser, self).__init__()
         # Store constructor arguments (re-used for processing)
+        self._stopped = False
         self.args = args
         self.kwargs = kwargs
         self.signals = WorkerSignals()
         self.parent_signals = parent_signals
-        self._stopped = False
         self.parent_signals.terminate.connect(self.stop)
-        self.show_status = QTimer()
-        self.show_status.timeout.connect(self.parser_status)
-        self.show_status.start(2000)
+        # Can use a timer in the worker thread for periodic checks, or something
+        # self.show_status = QTimer()
+        # self.show_status.timeout.connect(self.parser_status)
+        # self.show_status.start(2000)
 
     def __del__(self):
-        self._stopped = True
+        self.stop()
 
     def stop(self):
         self._stopped = True
 
-    def parser_status(self):
-        print("Log parsing thread active...")
+    # def parser_status(self):
+    #     print("Log parsing thread active...")
 
     @pyqtSlot()
     def run(self):
-        # logfile = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
-        logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
+        # Static log file path if needed:
+        logfile = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+        # logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
+        try:
+            # Read log file path from local config file:
+            with open("eq_logfile.txt", "rt") as f:
+                logfile_path = f.readline().strip()
+            print(f"Found eq_logfile.txt, using log file location:\n{logfile_path}")
+        except Exception:
+            print(
+                "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
+            )
+
         zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
         loc_pattern = re.compile(
             r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
         )
-        print("starting timer...")
         logfile = open(logfile_path, "rt")
         with open(logfile_path, "rt") as logfile:
+            print("Log parser started...")
             logfile.seek(0, 2)  # Go to the end of the file
             while not self._stopped:
                 line = logfile.readline()
@@ -96,6 +100,7 @@ class EQLogParser(QRunnable):
                         self.signals.loc.emit((x, y, z))
                     except IndexError:
                         pass
+        print("Log parser stopped.")
 
 
 class MainWindow(QMainWindow):
@@ -158,9 +163,9 @@ class MainWindow(QMainWindow):
 
     def quit_app(self):
         self.terminate_logparser()
-        sys.exit(app.quit())
+        app.quit()
 
 
-app = QApplication([])
+app = QApplication([1, "-widgetcount"])
 window = MainWindow()
 sys.exit(app.exec())
