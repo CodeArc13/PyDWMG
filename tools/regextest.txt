@@ -1,0 +1,44 @@
+# Testing two locs after zone change:
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Sat Nov 02 21:58:46 2019] You have entered Trakanon's Teeth.
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
+[Sat Nov 02 21:58:46 2019] You have entered Erudin.
+[Sat Nov 02 21:58:46 2019] MESSAGE OF THE DAY: Welcome to Project 1999
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Sat Nov 02 22:02:10 2019] You have entered Erudin Palace.
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Mon Nov 11 15:31:24 2019] Your Location is 3085.67, -198.87, 21.93
+
+
+# Testing one loc after zone change:
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Sat Nov 02 21:58:46 2019] You have entered Trakanon's Teeth.
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
+[Sat Nov 02 21:58:46 2019] You have entered Erudin.
+[Sat Nov 02 21:58:46 2019] MESSAGE OF THE DAY: Welcome to Project 1999
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Sat Nov 02 22:02:10 2019] You have entered Erudin Palace.
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
+[Mon Nov 11 15:31:24 2019] Your Location is 3085.67, -198.87, 21.93
+
+# Testing no loc after zone change:
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Sat Nov 02 21:58:46 2019] You have entered Trakanon's Teeth.
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
+[Sat Nov 02 21:58:46 2019] You have entered Erudin.
+[Sat Nov 02 21:58:46 2019] MESSAGE OF THE DAY: Welcome to Project 1999
+[Mon Nov 11 15:31:15 2019] Your Location is 3208.57, -270.16, 9.46
+[Mon Nov 11 15:31:16 2019] Your Location is 3201.80, -265.52, 7.27
+[Mon Nov 11 15:31:16 2019] Your Location is 3194.55, -260.55, 4.89
+[Sat Nov 02 22:02:10 2019] You have entered Erudin Palace.
+[Mon Nov 11 15:31:18 2019] You think you are heading SouthWest.
