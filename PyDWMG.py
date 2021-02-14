@@ -65,7 +65,7 @@ class EQLogParser(QRunnable):
     @pyqtSlot()
     def run(self):
         # Static log file path if needed:
-        logfile = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+        logfile_path = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
         # logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
         try:
             # Read log file path from local config file:
