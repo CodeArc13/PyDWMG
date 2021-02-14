@@ -108,7 +108,8 @@ class EQLogParser(QRunnable):
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-<<<<<<< HEAD
+
+        app.aboutToQuit.connect(self.quit_app)
         self.title = "Dude, Where's My Guildies???"
         self.setWindowTitle(self.title)
         outer_layout = QVBoxLayout()
@@ -122,13 +123,7 @@ class MainWindow(QMainWindow):
         label_map.setPixmap(pixmap)
         label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
-=======
-        app.aboutToQuit.connect(self.quit_app)
 
-        layout = QVBoxLayout()
-
-        label_main = QLabel("Dude, Where's My Guildies???\n")
->>>>>>> master
         label_zone = QLabel("Zone:")
         self.label_currentzone = QLabel("")
         label_loc = QLabel("Location:")
