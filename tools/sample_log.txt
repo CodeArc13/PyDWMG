@@ -22,8 +22,8 @@
 [Mon Jan 11 22:16:07 2021] ---------------------------
 [Mon Jan 11 22:16:07 2021] [52 Wanderer] Piedmont (Wood Elf)
 [Mon Jan 11 22:16:07 2021] [3 Druid] Haynus (Halfling)
-[Mon Jan 11 22:16:07 2021] [ANONYMOUS] Ocktavia 
-[Mon Jan 11 22:16:07 2021] [ANONYMOUS] Watergod 
+[Mon Jan 11 22:16:07 2021] [ANONYMOUS] Ocktavia
+[Mon Jan 11 22:16:07 2021] [ANONYMOUS] Watergod
 [Mon Jan 11 22:16:07 2021] [ANONYMOUS] Anastasie  <Odin>
 [Mon Jan 11 22:16:07 2021] [34 Magician] Pezcandy (Gnome)
 [Mon Jan 11 22:16:07 2021] [30 Enchanter] Bluedust (Dark Elf)
@@ -31,19 +31,14 @@
 [Mon Jan 11 22:16:07 2021] [11 Druid] Neachdain (Human)
 [Mon Jan 11 22:16:07 2021] [1 Warrior] Pescetarian (Human)
 [Mon Jan 11 22:16:07 2021] There are 10 players in South Qeynos.
-[Mon Jan 11 22:16:24 2021] You say out of character, 'does anyone know where Ebon Strongbear is?'
 [Mon Jan 11 22:16:38 2021] Kazlo Naedra begins to cast a spell.
 [Mon Jan 11 22:16:53 2021] Lieutenant Arathur begins to cast a spell.
 [Mon Jan 11 22:16:55 2021] Port Authority Officer shouts 'Hear ye, hear ye! The ship bound for the far island of Odus is now departing the Qeynos docks.  On time and on schedule, all hail Antonius Bayle!'
 [Mon Jan 11 22:17:36 2021] Kazlo Naedra begins to cast a spell.
 [Mon Jan 11 22:17:39 2021] Lieutenant Arathur begins to radiate.
-[Mon Jan 11 22:17:57 2021] Guard Kwint judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 22:18:10 2021] Zamel judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 22:18:10 2021] Yestura Rhamrey begins to cast a spell.
 [Mon Jan 11 22:18:59 2021] LOADING, PLEASE WAIT...
 [Mon Jan 11 22:19:08 2021] You have entered North Qeynos.
-[Mon Jan 11 22:19:45 2021] Corporal Lancot judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 22:20:07 2021] Priestess Caulria judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 22:20:16 2021] Roesager Thusten begins to cast a spell.
 [Mon Jan 11 22:21:34 2021] LOADING, PLEASE WAIT...
 [Mon Jan 11 22:21:42 2021] You have entered South Qeynos.
@@ -68,33 +63,9 @@
 [Mon Jan 11 22:28:43 2021] Your Location is 75.60, -509.40, 31.75
 [Mon Jan 11 22:28:49 2021] Your Location is 74.94, -511.32, 31.75
 [Mon Jan 11 22:30:06 2021] Nostahla Westfend begins to cast a spell.
-[Mon Jan 11 22:31:22 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:31:29 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:31:37 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:31:43 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:31:49 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:31:55 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:32:01 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:32:06 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:32:11 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
 [Mon Jan 11 22:32:19 2021] Asmerayus was injured by falling.
 [Mon Jan 11 22:32:47 2021] Port Authority Officer shouts 'Hear ye, hear ye! The ship bound for the far island of Odus is now departing the Qeynos docks.  On time and on schedule, all hail Antonius Bayle!'
-[Mon Jan 11 22:33:05 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:33:10 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:33:16 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
 [Mon Jan 11 22:34:44 2021] Nostahla Westfend begins to cast a spell.
-[Mon Jan 11 22:34:48 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:34:54 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:35:01 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:35:06 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:36:51 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:36:51 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:36:51 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:36:51 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:14 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:14 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:14 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:14 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
 [Mon Jan 11 22:37:36 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:37:36 2021] Cytal begins to cast a spell.
 [Mon Jan 11 22:37:39 2021] Chiefy's casting is interrupted!
@@ -105,39 +76,7 @@
 [Mon Jan 11 22:37:53 2021] Cytal begins to cast a spell.
 [Mon Jan 11 22:37:55 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:37:56 2021] Chiefy's casting is interrupted!
-[Mon Jan 11 22:37:58 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:58 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:58 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:37:58 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:10 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:10 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:10 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:10 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:30 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:30 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:30 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:30 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:40 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:40 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:46 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:46 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:46 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:46 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:38:50 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:02 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:02 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:02 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:02 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:03 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:03 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:03 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:03 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:13 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:13 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
 [Mon Jan 11 22:39:23 2021] Neachdain was injured by falling.
-[Mon Jan 11 22:39:24 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:24 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
-[Mon Jan 11 22:39:24 2021] Captain Tillin says 'Very good!  One less gnoll the people of Qeynos need to fear.  Here is your bounty as promised.'
 [Mon Jan 11 22:39:25 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:39:27 2021] Chiefy's casting is interrupted!
 [Mon Jan 11 22:39:36 2021] Nostahla Westfend begins to cast a spell.
@@ -148,20 +87,16 @@
 [Mon Jan 11 22:39:51 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:39:57 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:40:13 2021] Cytal begins to cast a spell.
-[Mon Jan 11 22:40:20 2021] Vekn says 'At your service Master.'
 [Mon Jan 11 22:40:38 2021] Chiefy begins to cast a spell.
 [Mon Jan 11 22:41:12 2021] Cytal begins to cast a spell.
 [Mon Jan 11 22:42:00 2021] Port Authority Officer shouts 'The boat to Odus is about to depart from the Erudin docks.  It will arrive at the Qeynos docks in a matter of minutes.  Remember, smuggling is a serious offense!'
-[Mon Jan 11 22:43:49 2021] Gryxis says out of character, 'wtb service of jewler pst'
 [Mon Jan 11 22:44:28 2021] Nostahla Westfend begins to cast a spell.
 [Mon Jan 11 22:47:08 2021] Kazlo Naedra begins to cast a spell.
-[Mon Jan 11 22:47:16 2021] Gryxis says out of character, 'WTB Jeweler service'
 [Mon Jan 11 22:48:38 2021] Port Authority Officer shouts 'Hear ye, hear ye! The ship bound for the far island of Odus is now departing the Qeynos docks.  On time and on schedule, all hail Antonius Bayle!'
 [Mon Jan 11 22:53:39 2021] Nostahla Westfend begins to cast a spell.
 [Mon Jan 11 22:56:11 2021] Players on EverQuest:
 [Mon Jan 11 22:56:11 2021] ---------------------------
 [Mon Jan 11 22:56:11 2021] There are no players in South Qeynos that match those who filters.
-[Mon Jan 11 22:56:27 2021] Ebon Strongbear says, 'So then, you wish to join the ranks of the Steel Warriors? Very good, then - take this tunic and wear it with pride. Visit our arena trainers to make preparations for battle and then take your weapon to the field! Remember in all that you do, you represent the Steel Warriors in thought and deed!'
 [Mon Jan 11 22:56:27 2021] Your faction standing with SteelWarriors got better.
 [Mon Jan 11 22:56:27 2021] Your faction standing with GuardsofQeynos got better.
 [Mon Jan 11 22:56:27 2021] Your faction standing with CorruptQeynosGuards got worse.
@@ -219,14 +154,11 @@
 [Mon Jan 11 22:58:42 2021] a bat glowers at you dubiously -- looks like an even fight.
 [Mon Jan 11 22:58:43 2021] a bat glowers at you dubiously -- looks like an even fight.
 [Mon Jan 11 22:59:00 2021] You no longer have a target.
-[Mon Jan 11 22:59:02 2021] Priest of Order regards you indifferently -- what would you like your tombstone to say?
 [Mon Jan 11 22:59:02 2021] a gnoll pup scowls at you, ready to attack -- looks like an even fight.
 [Mon Jan 11 22:59:04 2021] a gnoll pup scowls at you, ready to attack -- looks like an even fight.
 [Mon Jan 11 22:59:10 2021] a fire beetle glowers at you dubiously -- looks like quite a gamble.
 [Mon Jan 11 22:59:11 2021] a decaying skeleton regards you indifferently -- looks like an even fight.
 [Mon Jan 11 22:59:17 2021] Auto attack on.
-[Mon Jan 11 22:59:17 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Mon Jan 11 22:59:17 2021] a gnoll pup says, 'Your intolerable reputation insults all in this realm!'
 [Mon Jan 11 22:59:17 2021] You slash a gnoll pup for 5 points of damage.
 [Mon Jan 11 22:59:17 2021] A gnoll pup pierces YOU for 1 point of damage.
 [Mon Jan 11 22:59:17 2021] You taunt a gnoll pup to ignore others and attack you!
@@ -272,12 +204,9 @@
 [Mon Jan 11 23:00:11 2021] You no longer have a target.
 [Mon Jan 11 23:00:15 2021] Pescetarian is no longer berserk.
 [Mon Jan 11 23:00:17 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
-[Mon Jan 11 23:00:27 2021] Guard Gehnus judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 23:00:28 2021] Guard Gehnus judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 23:00:28 2021] a decaying skeleton regards you indifferently -- looks like an even fight.
 [Mon Jan 11 23:00:29 2021] a large rat glowers at you dubiously -- looks like an even fight.
 [Mon Jan 11 23:00:29 2021] a decaying skeleton regards you indifferently -- looks like an even fight.
-[Mon Jan 11 23:00:29 2021] Guard Hezlan judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 23:00:30 2021] a bat glowers at you dubiously -- looks like an even fight.
 [Mon Jan 11 23:00:30 2021] a bat glowers at you dubiously -- looks like an even fight.
 [Mon Jan 11 23:00:30 2021] a bat glowers at you dubiously -- looks like an even fight.
@@ -304,16 +233,13 @@
 [Mon Jan 11 23:01:07 2021] You have slain a snake!
 [Mon Jan 11 23:01:07 2021] You gain experience!!
 [Mon Jan 11 23:01:07 2021] You must first click on the being you wish to attack!
-[Mon Jan 11 23:01:10 2021] Pbardon says, 'Hail, Pescetarian'
 [Mon Jan 11 23:01:14 2021] Players on EverQuest:
 [Mon Jan 11 23:01:14 2021] ---------------------------
 [Mon Jan 11 23:01:14 2021] [28 Bard] Pbardon (Wood Elf)
 [Mon Jan 11 23:01:14 2021] There is 1 player in North Qeynos.
-[Mon Jan 11 23:01:16 2021] You say, 'Hail, Pbardon'
 [Mon Jan 11 23:01:20 2021] Pbardon has offered you a Split Paw Hide Mask.
 [Mon Jan 11 23:01:20 2021] You bow before Pbardon.
 [Mon Jan 11 23:01:25 2021] You thank Pbardon heartily.
-[Mon Jan 11 23:01:27 2021] Pbardon says, 'have fun'
 [Mon Jan 11 23:01:34 2021] You no longer have a target.
 [Mon Jan 11 23:01:41 2021] Auto attack on.
 [Mon Jan 11 23:01:42 2021] You try to slash a snake, but miss!
@@ -434,9 +360,6 @@
 [Mon Jan 11 23:04:29 2021] --You have looted a Rusty Mace.--
 [Mon Jan 11 23:04:30 2021] --You have looted a Short Beer.--
 [Mon Jan 11 23:04:34 2021] Pescetarian is no longer berserk.
-[Mon Jan 11 23:04:35 2021] Cleri is now your friend.
-[Mon Jan 11 23:04:38 2021] Deathwatch is now your friend.
-[Mon Jan 11 23:04:39 2021] Friends currently on EverQuest:
 [Mon Jan 11 23:04:39 2021] ---------------------------------
 [Mon Jan 11 23:04:40 2021] There are no players in EverQuest that match those who filters.
 [Mon Jan 11 23:04:47 2021] You are too far away from your target to taunt.
@@ -458,24 +381,10 @@
 [Mon Jan 11 23:05:36 2021] You have gained a level! Welcome to level 2!
 [Mon Jan 11 23:05:38 2021] You receive 1 silver and 9 copper from the corpse.
 [Mon Jan 11 23:05:41 2021] a Klicnik Worker glowers at you dubiously -- looks like an even fight.
-[Mon Jan 11 23:06:00 2021] Lashun Novashine judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 23:06:06 2021] You say, 'Hail, Lashun Novashine'
-[Mon Jan 11 23:06:07 2021] You say, 'Hail, Lashun Novashine'
-[Mon Jan 11 23:06:07 2021] Lashun Novashine says, 'Well met, Pescetarian. My name is Lashun Novashine and I am a humble priest of Rodcet Nife, the Prime Healer. I wish to spread His word to every corner of Norrath. My job gets more difficult each day with so many so willing to take lives rather than preserve them.'
-[Mon Jan 11 23:06:17 2021] You say, 'Hail, Priest of Order'
 [Mon Jan 11 23:06:17 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
-[Mon Jan 11 23:06:23 2021] You say, 'Hail, Priest of Order'
-[Mon Jan 11 23:06:23 2021] You say, 'Hail, Priest of Order'
-[Mon Jan 11 23:06:23 2021] You say, 'Hail, Priest of Order'
-[Mon Jan 11 23:06:23 2021] Priest of Order says, 'Hi, I'm the Priest of Order.  My quests aren't implemented yet.  In the meantime, I can remove your [pvp] status if you'd like.'
-[Mon Jan 11 23:06:24 2021] You say, 'Hail, Priest of Order'
-[Mon Jan 11 23:06:24 2021] Priest of Order says, 'Hi, I'm the Priest of Order.  My quests aren't implemented yet.  In the meantime, I can remove your [pvp] status if you'd like.'
 [Mon Jan 11 23:06:31 2021] You no longer have a target.
-[Mon Jan 11 23:06:44 2021] Corporal Lancot judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 23:06:46 2021] You make a rude gesture at Corporal Lancot.
 [Mon Jan 11 23:06:49 2021] You make a rude gesture at Corporal Lancot.
-[Mon Jan 11 23:06:58 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:07:02 2021] Enic Ruklin judges you amiably -- what would you like your tombstone to say?
 [Mon Jan 11 23:07:07 2021] a Koalindl judges you amiably -- looks like you would have the upper hand.
 [Mon Jan 11 23:07:24 2021] Auto attack on.
 [Mon Jan 11 23:07:25 2021] You slash a Koalindl for 8 points of damage.
@@ -618,31 +527,13 @@
 [Mon Jan 11 23:08:54 2021] Returning to home point, please wait...
 [Mon Jan 11 23:08:54 2021] LOADING, PLEASE WAIT...
 [Mon Jan 11 23:09:02 2021] You have entered North Qeynos.
-[Mon Jan 11 23:09:15 2021] Guard Hezlan regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:17 2021] Guard Hezlan regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:17 2021] Guard Gehnus regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:18 2021] Guard Gehnus regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:18 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:18 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:20 2021] Tubal Weaver judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:36 2021] Guard Buce regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:39 2021] Guard Buce regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:41 2021] Guard Hewet regards you indifferently -- what would you like your tombstone to say?
-[Mon Jan 11 23:09:41 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
 [Mon Jan 11 23:09:43 2021] You are out of food and drink.
-[Mon Jan 11 23:09:46 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
 [Mon Jan 11 23:10:05 2021] You receive 1 silver and 49 copper from the corpse.
 [Mon Jan 11 23:10:20 2021] It will take you about 30 seconds to prepare your camp.
 [Mon Jan 11 23:10:24 2021] It will take about 25 more seconds to prepare your camp.
-[Mon Jan 11 23:10:28 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
 [Mon Jan 11 23:10:29 2021] It will take about 20 more seconds to prepare your camp.
-[Mon Jan 11 23:10:33 2021] Nomsoe Jusagta looks your way apprehensively -- what would you like your tombstone to say?
 [Mon Jan 11 23:10:34 2021] It will take about 15 more seconds to prepare your camp.
-[Mon Jan 11 23:10:35 2021] Ladia Qursii judges you amiably -- what would you like your tombstone to say?
-[Mon Jan 11 23:10:37 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
-[Mon Jan 11 23:10:38 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
 [Mon Jan 11 23:10:39 2021] It will take about 10 more seconds to prepare your camp.
-[Mon Jan 11 23:10:41 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
 [Mon Jan 11 23:10:44 2021] It will take about 5 more seconds to prepare your camp.
 [Thu Jan 14 12:16:18 2021] Welcome to EverQuest!
 [Thu Jan 14 12:16:18 2021] If you need help, click on the EQ Menu button at the bottom of your screen and select the "Help" option.
@@ -668,7 +559,6 @@
 [Thu Jan 14 12:17:41 2021] Auto attack on.
 [Thu Jan 14 12:17:41 2021] You have become better at Offense! (5)
 [Thu Jan 14 12:17:41 2021] You try to slash a Koalindl, but miss!
-[Thu Jan 14 12:17:42 2021] Enic Ruklin says, 'Prime Healer!!  Guide me to victory!!'
 [Thu Jan 14 12:17:42 2021] A Koalindl bites YOU for 3 points of damage.
 [Thu Jan 14 12:17:43 2021] A Koalindl bites YOU for 1 point of damage.
 [Thu Jan 14 12:17:44 2021] a Koalindl glares at you threateningly -- looks like you would have the upper hand.
@@ -676,31 +566,17 @@
 [Thu Jan 14 12:17:44 2021] Enic Ruklin bashes YOU for 17 points of damage.
 [Thu Jan 14 12:17:44 2021] Enic Ruklin slashes YOU for 65 points of damage.
 [Thu Jan 14 12:17:44 2021] You have been slain by Enic Ruklin!
-[Thu Jan 14 12:17:44 2021] Enic Ruklin says, 'A pity..Such a waste of life.'
 [Thu Jan 14 12:17:48 2021] Returning to home point, please wait...
 [Thu Jan 14 12:17:49 2021] LOADING, PLEASE WAIT...
 [Thu Jan 14 12:17:56 2021] You have entered North Qeynos.
-[Thu Jan 14 12:18:02 2021] Guard Hezlan regards you indifferently -- what would you like your tombstone to say?
 [Thu Jan 14 12:18:14 2021] Players on EverQuest:
 [Thu Jan 14 12:18:14 2021] ---------------------------
 [Thu Jan 14 12:18:14 2021] [24 Druid] Tinluin (Half Elf)
 [Thu Jan 14 12:18:14 2021] [10 Magician] Aliamaru (Erudite)
 [Thu Jan 14 12:18:14 2021] [2 Warrior] Pescetarian (Human)
 [Thu Jan 14 12:18:14 2021] There are 3 players in North Qeynos.
-[Thu Jan 14 12:18:18 2021] Guard Buce regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:19 2021] Guard Buce regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:19 2021] Guard Buce regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:27 2021] Guard Simkin looks your way apprehensively -- what would you like your tombstone to say?
 [Thu Jan 14 12:18:38 2021] You are out of food and drink.
-[Thu Jan 14 12:18:42 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
 [Thu Jan 14 12:18:48 2021] a Koalindl looks your way apprehensively -- looks like you would have the upper hand.
-[Thu Jan 14 12:18:53 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:57 2021] Enpero Mesog judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:57 2021] Enpero Mesog judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:57 2021] Enpero Mesog judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:57 2021] Ladia Qursii judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:58 2021] Ladia Qursii judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:18:58 2021] Nomsoe Jusagta looks your way apprehensively -- what would you like your tombstone to say?
 [Thu Jan 14 12:19:06 2021] You are too far away to loot that corpse.
 [Thu Jan 14 12:19:06 2021] This corpse will decay in 6 days, 23 hours, 58 minutes and 37 seconds.
 [Thu Jan 14 12:19:06 2021] This corpse's resurrection time will expire in 5 minute(s) 37 seconds.
@@ -830,7 +706,6 @@
 [Thu Jan 14 12:21:25 2021] You slash a Koalindl for 7 points of damage.
 [Thu Jan 14 12:21:26 2021] A Koalindl tries to bite YOU, but misses!
 [Thu Jan 14 12:21:28 2021] You slash a Koalindl for 8 points of damage.
-[Thu Jan 14 12:21:28 2021] Enic Ruklin says, 'Prime Healer!!  Guide me to victory!!'
 [Thu Jan 14 12:21:29 2021] A Koalindl tries to bite YOU, but misses!
 [Thu Jan 14 12:21:30 2021] You can't see your target from here.
 [Thu Jan 14 12:21:31 2021] You are stunned!
@@ -838,16 +713,11 @@
 [Thu Jan 14 12:21:31 2021] Auto attack off.
 [Thu Jan 14 12:21:31 2021] Enic Ruklin slashes YOU for 65 points of damage.
 [Thu Jan 14 12:21:31 2021] You have been slain by Enic Ruklin!
-[Thu Jan 14 12:21:31 2021] Enic Ruklin says, 'A pity..Such a waste of life.'
 [Thu Jan 14 12:21:35 2021] Returning to home point, please wait...
 [Thu Jan 14 12:21:35 2021] LOADING, PLEASE WAIT...
 [Thu Jan 14 12:21:42 2021] You have entered North Qeynos.
-[Thu Jan 14 12:21:54 2021] Guard Hezlan regards you indifferently -- what would you like your tombstone to say?
 [Thu Jan 14 12:22:21 2021] You no longer have a target.
 [Thu Jan 14 12:22:24 2021] You are out of food and drink.
-[Thu Jan 14 12:22:26 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:22:26 2021] Corporal Lancot regards you indifferently -- what would you like your tombstone to say?
-[Thu Jan 14 12:22:28 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
 [Thu Jan 14 12:22:59 2021] You have become better at Swimming! (2)
 [Thu Jan 14 12:23:10 2021] You are out of food and drink.
 [Thu Jan 14 12:23:56 2021] You are out of food and drink.
@@ -944,9 +814,6 @@
 [Thu Jan 14 12:25:35 2021] You no longer have a target.
 [Thu Jan 14 12:25:43 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
 [Thu Jan 14 12:25:47 2021] It will take you about 30 seconds to prepare your camp.
-[Thu Jan 14 12:25:48 2021] Enpero Mesog judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:25:49 2021] Ladia Qursii judges you amiably -- what would you like your tombstone to say?
-[Thu Jan 14 12:25:50 2021] Nomsoe Jusagta looks your way apprehensively -- what would you like your tombstone to say?
 [Thu Jan 14 12:25:51 2021] It will take about 25 more seconds to prepare your camp.
 [Thu Jan 14 12:25:56 2021] It will take about 20 more seconds to prepare your camp.
 [Thu Jan 14 12:26:01 2021] It will take about 15 more seconds to prepare your camp.
@@ -957,7 +824,6 @@
 [Sat Jan 16 22:05:45 2021] You have entered North Qeynos.
 [Sat Jan 16 22:05:45 2021] MESSAGE OF THE DAY: Welcome to Project 1999: Green!  Please take the time to visit our forums and review the Play-Nice-Policy!
 [Sat Jan 16 22:06:03 2021] a Koalindl looks your way apprehensively -- looks like you would have the upper hand.
-[Sat Jan 16 22:06:05 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
 [Sat Jan 16 22:06:42 2021] You no longer have a target.
 [Sat Jan 16 22:06:54 2021] Corporal Lancot begins to cast a spell.
 [Sat Jan 16 22:07:03 2021] Auto attack on.
@@ -980,7 +846,6 @@
 [Sat Jan 16 22:07:21 2021] A Koalindl bites YOU for 1 point of damage.
 [Sat Jan 16 22:07:24 2021] A Koalindl bites YOU for 1 point of damage.
 [Sat Jan 16 22:07:24 2021] A Koalindl bites YOU for 2 points of damage.
-[Sat Jan 16 22:07:27 2021] Enic Ruklin says, 'Prime Healer!!  Guide me to victory!!'
 [Sat Jan 16 22:07:27 2021] A Koalindl bites YOU for 1 point of damage.
 [Sat Jan 16 22:07:27 2021] A Koalindl bites YOU for 1 point of damage.
 [Sat Jan 16 22:07:29 2021] You are stunned!
@@ -990,13 +855,11 @@
 [Sat Jan 16 22:07:32 2021] Enic Ruklin slashes YOU for 65 points of damage.
 [Sat Jan 16 22:07:33 2021] You have been knocked unconscious!
 [Sat Jan 16 22:07:33 2021] You have been slain by Enic Ruklin!
-[Sat Jan 16 22:07:33 2021] Enic Ruklin says, 'A pity..Such a waste of life.'
 [Sat Jan 16 22:07:36 2021] Returning to home point, please wait...
 [Sat Jan 16 22:07:36 2021] LOADING, PLEASE WAIT...
 [Sat Jan 16 22:07:44 2021] You have entered North Qeynos.
 [Sat Jan 16 22:08:17 2021] Fippy Darkpaw shouts, '<BBBBBAAAARRRKKKK!!!!!> You humans will pay for ruining our homeland!! GRRRRRRRR!!!! Family Darkpaw of the Sabertooth Clan will slay you all!! <BARK!>'
 [Sat Jan 16 22:08:25 2021] You are out of food and drink.
-[Sat Jan 16 22:08:30 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
 [Sat Jan 16 22:08:36 2021] You are too far away to loot that corpse.
 [Sat Jan 16 22:08:36 2021] This corpse will decay in 6 days, 23 hours, 58 minutes and 55 seconds.
 [Sat Jan 16 22:08:36 2021] This corpse's resurrection time will expire in 5 minute(s) 55 seconds.
@@ -1131,18 +994,15 @@
 [Sat Jan 16 22:10:39 2021] You try to kick a Koalindl, but miss!
 [Sat Jan 16 22:10:39 2021] You have become better at Kick! (6)
 [Sat Jan 16 22:10:41 2021] Auto attack off.
-[Sat Jan 16 22:11:06 2021] Enic Ruklin says, 'Prime Healer!!  Guide me to victory!!'
 [Sat Jan 16 22:11:09 2021] You are stunned!
 [Sat Jan 16 22:11:09 2021] Enic Ruklin bashes YOU for 17 points of damage.
 [Sat Jan 16 22:11:09 2021] Enic Ruklin slashes YOU for 49 points of damage.
 [Sat Jan 16 22:11:09 2021] Enic Ruklin slashes YOU for 65 points of damage.
 [Sat Jan 16 22:11:09 2021] You have been slain by Enic Ruklin!
-[Sat Jan 16 22:11:09 2021] Enic Ruklin says, 'A pity..Such a waste of life.'
 [Sat Jan 16 22:11:13 2021] Returning to home point, please wait...
 [Sat Jan 16 22:11:13 2021] LOADING, PLEASE WAIT...
 [Sat Jan 16 22:11:21 2021] You have entered North Qeynos.
 [Sat Jan 16 22:11:43 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
-[Sat Jan 16 22:11:56 2021] Cheerio says out of character, 'Cheerio's Porting Services LLC  Traveling to WC, BB, NK, EK, RO, DL, LS,  Steamfont, and Feerrott. Donations Welcome. Have a safe journey!            '
 [Sat Jan 16 22:12:02 2021] You are out of food and drink.
 [Sat Jan 16 22:12:40 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:12:48 2021] You are out of food and drink.
@@ -1152,7 +1012,6 @@
 [Sat Jan 16 22:13:16 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:13:22 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:13:34 2021] You are out of food and drink.
-[Sat Jan 16 22:13:36 2021] Cheerio says, 'hope you find it '
 [Sat Jan 16 22:13:38 2021] You cheer at Cheerio.
 [Sat Jan 16 22:13:40 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:13:44 2021] You snap to attention and salute Cheerio crisply.
@@ -1164,38 +1023,17 @@
 [Sat Jan 16 22:13:56 2021] [37 Druid] Cheerio (Halfling)
 [Sat Jan 16 22:13:56 2021] There is 1 player in North Qeynos.
 [Sat Jan 16 22:13:58 2021] Cheerio begins to cast a spell.
-[Sat Jan 16 22:14:02 2021] You say, 'best halfling in all the land'
 [Sat Jan 16 22:14:02 2021] Fysto is surrounded by a brief lupine aura.
-[Sat Jan 16 22:14:08 2021] Cheerio says, 'good luck!'
-[Sat Jan 16 22:14:10 2021] Cheerio says, 'haha'
-[Sat Jan 16 22:14:14 2021] Cheerio says, 'take care'
 [Sat Jan 16 22:14:18 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:14:20 2021] You are out of food and drink.
 [Sat Jan 16 22:14:21 2021] You are surrounded by a thorny barrier.
 [Sat Jan 16 22:14:23 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:14:29 2021] You begin to regenerate.
-[Sat Jan 16 22:14:32 2021] You say, 'the fish won't know what hit em'
-[Sat Jan 16 22:14:34 2021] You say, 'haha thanks :D'
 [Sat Jan 16 22:14:34 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:14:39 2021] You feel stronger.
-[Sat Jan 16 22:14:41 2021] Cheerio says, 'lol'
-[Sat Jan 16 22:14:52 2021] You told cheerio, 'hey it's Mezr :D'
 [Sat Jan 16 22:15:06 2021] You are out of food and drink.
-[Sat Jan 16 22:15:16 2021] You told cheerio, 'you gave me a port earlier to EC hehe'
-[Sat Jan 16 22:15:20 2021] Cheerio tells you, 'oh hi! having fun on a new char?'
-[Sat Jan 16 22:15:26 2021] Cheerio tells you, 'yup i remember'
-[Sat Jan 16 22:15:27 2021] You told Cheerio, 'doin the stein of moggok quest'
-[Sat Jan 16 22:15:32 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
 [Sat Jan 16 22:15:34 2021] Nixx Darkpaw shouts, '<BBBBBAAAARRRKKKK!!!!!> You humans will pay for ruining our homeland!! GRRRRRRRR!!!! Family Darkpaw of the Sabertooth Clan will slay you all!! <BARK!>
 [Sat Jan 16 22:15:45 2021] You receive 1 silver and 49 copper from the corpse.
-[Sat Jan 16 22:15:46 2021] Cheerio tells you, 'oh noice, ive never done that one before. '
-[Sat Jan 16 22:15:56 2021] You told Cheerio, 'yea I have to kill this holy fish'
-[Sat Jan 16 22:16:08 2021] You told Cheerio, 'but it gives you such heavy faction hits, you want a new toon for it lol'
-[Sat Jan 16 22:16:55 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
-[Sat Jan 16 22:16:55 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
-[Sat Jan 16 22:16:56 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
-[Sat Jan 16 22:16:56 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
-[Sat Jan 16 22:16:56 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
 [Sat Jan 16 22:16:56 2021] a Koalindl looks your way apprehensively -- looks like you would have the upper hand.
 [Sat Jan 16 22:16:56 2021] a Koalindl looks your way apprehensively -- looks like you would have the upper hand.
 [Sat Jan 16 22:17:02 2021] Auto attack on.
@@ -1205,7 +1043,6 @@
 [Sat Jan 16 22:17:03 2021] You taunt a Koalindl to ignore others and attack you!
 [Sat Jan 16 22:17:05 2021] You slash a Koalindl for 8 points of damage.
 [Sat Jan 16 22:17:05 2021] A Koalindl tries to bite YOU, but misses!
-[Sat Jan 16 22:17:06 2021] Cheerio tells you, 'smart move'
 [Sat Jan 16 22:17:08 2021] You can't see your target from here.
 [Sat Jan 16 22:17:08 2021] A Koalindl was pierced by thorns.
 [Sat Jan 16 22:17:08 2021] a Koalindl was hit by non-melee for 12 points of damage.
@@ -1250,14 +1087,11 @@
 [Sat Jan 16 22:18:03 2021] You gain experience!!
 [Sat Jan 16 22:18:03 2021] a Koalindl 's corpse dies..  Rodcet Nife is not pleased.
 [Sat Jan 16 22:18:05 2021] The brambles fall away.
-[Sat Jan 16 22:18:32 2021] Bihgg says out of character, 'anyone have bone chips for sale? '
-[Sat Jan 16 22:18:48 2021] You told Cheerio, 'sometimes you kill the fish and it ends up being the god Rodcet Nife and he smites you into oblivion'
-[Sat Jan 16 22:19:45 2021] Cheerio tells you, 'is this in the sewers?'
 [Sat Jan 16 22:23:21 2021] Players on EverQuest:
 [Sat Jan 16 22:23:21 2021] ---------------------------
 [Sat Jan 16 22:23:21 2021] [1 Ranger] Foncaldil (Human)
 [Sat Jan 16 22:23:21 2021] [5 Druid] Spruse (Half Elf)
-[Sat Jan 16 22:23:21 2021] [ANONYMOUS] Thanasaurus 
+[Sat Jan 16 22:23:21 2021] [ANONYMOUS] Thanasaurus
 [Sat Jan 16 22:23:21 2021] [9 Necromancer] Bihgg (Erudite)
 [Sat Jan 16 22:23:21 2021] [16 Druid] Neachdain (Human)
 [Sat Jan 16 22:23:21 2021] [1 Cleric] Dataniel (Human)
@@ -1267,13 +1101,12 @@
 [Sat Jan 16 22:23:21 2021] [1 Monk] Jfoe (Human)
 [Sat Jan 16 22:23:21 2021] [2 Warrior] Pescetarian (Human)
 [Sat Jan 16 22:23:21 2021] There are 11 players in North Qeynos.
-[Sat Jan 16 22:23:36 2021] You told Cheerio, 'no it's here in north qeynos in the pond in front of the flying saucer'
 [Sat Jan 16 22:23:38 2021] Players on EverQuest:
 [Sat Jan 16 22:23:38 2021] ---------------------------
 [Sat Jan 16 22:23:38 2021] [1 Monk] Onepunchh (Human)
 [Sat Jan 16 22:23:38 2021] [1 Ranger] Foncaldil (Human)
 [Sat Jan 16 22:23:38 2021] [5 Druid] Spruse (Half Elf)
-[Sat Jan 16 22:23:38 2021] [ANONYMOUS] Thanasaurus 
+[Sat Jan 16 22:23:38 2021] [ANONYMOUS] Thanasaurus
 [Sat Jan 16 22:23:38 2021] [9 Necromancer] Bihgg (Erudite)
 [Sat Jan 16 22:23:38 2021] [16 Druid] Neachdain (Human)
 [Sat Jan 16 22:23:38 2021] [1 Cleric] Dataniel (Human)
@@ -1285,16 +1118,8 @@
 [Sat Jan 16 22:23:38 2021] There are 12 players in North Qeynos.
 [Sat Jan 16 22:23:43 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
 [Sat Jan 16 22:23:46 2021] a Koalindl looks your way apprehensively -- looks like you would have the upper hand.
-[Sat Jan 16 22:23:47 2021] Enic Ruklin looks your way apprehensively -- what would you like your tombstone to say?
-[Sat Jan 16 22:24:06 2021] Cheerio tells you, 'ahhh no wonder i never heard of it. im prob going to check that quest out later. i thought it was a much higher level quest'
-[Sat Jan 16 22:25:19 2021] You told Cheerio, 'nah as soon as a chanter hits lvl 12 they can get illusion dark elf and do the quest'
-[Sat Jan 16 22:25:43 2021] You told Cheerio, 'dark elf chanters I heard can do it at lvl 4 with illusion human lol'
-[Sat Jan 16 22:26:00 2021] You told Cheerio, 'since you need to go into Erudin and Oggok you will need illusions either way'
 [Sat Jan 16 22:26:42 2021] You have stopped regenerating.
-[Sat Jan 16 22:26:53 2021] Cheerio tells you, 'is that item a no drop?'
 [Sat Jan 16 22:26:59 2021] Fippy Darkpaw shouts, '<BBBBBAAAARRRKKKK!!!!!> You humans will pay for ruining our homeland!! GRRRRRRRR!!!! Family Darkpaw of the Sabertooth Clan will slay you all!! <BARK!>'
-[Sat Jan 16 22:27:10 2021] Cheerio tells you, 'the stien'
-[Sat Jan 16 22:28:17 2021] You told Cheerio, 'nope, it sells for about 200p'
 [Sat Jan 16 22:28:42 2021] Auto attack on.
 [Sat Jan 16 22:28:42 2021] You slash a Koalindl for 3 points of damage.
 [Sat Jan 16 22:28:42 2021] A Koalindl tries to bite YOU, but misses!
@@ -1314,10 +1139,8 @@
 [Sat Jan 16 22:28:51 2021] Your faction standing with PriestsofLife got worse.
 [Sat Jan 16 22:28:51 2021] You gain experience!!
 [Sat Jan 16 22:28:51 2021] a Koalindl 's corpse dies..  Rodcet Nife is not pleased.
-[Sat Jan 16 22:28:51 2021] a Koalindl says, 'Foolish mortal!! You have disturbed the Prime Healer as he swims in the guise of his creatures.  For this.. You shall perish!!
 [Sat Jan 16 22:28:52 2021] A Koalindl tries to bite YOU, but misses!
 [Sat Jan 16 22:28:52 2021] A Koalindl tries to kick YOU, but misses!
-[Sat Jan 16 22:28:53 2021] a Koalindl glares at you threateningly -- what would you like your tombstone to say?
 [Sat Jan 16 22:28:53 2021] A Koalindl bites YOU for 475 points of damage.
 [Sat Jan 16 22:28:53 2021] You have been knocked unconscious!
 [Sat Jan 16 22:28:53 2021] You have been slain by a Koalindl!
@@ -1331,48 +1154,25 @@
 [Sat Jan 16 22:29:46 2021] You are thirsty.
 [Sat Jan 16 22:29:46 2021] You are hungry.
 [Sat Jan 16 22:29:46 2021] You are out of food and drink.
-[Sat Jan 16 22:30:24 2021] You told Cheerio, 'yuuuupppp I just got destroyed by Rodcet Nife for killing a fish lol'
 [Sat Jan 16 22:30:32 2021] You are thirsty.
 [Sat Jan 16 22:30:32 2021] You are hungry.
 [Sat Jan 16 22:30:32 2021] You are out of food and drink.
 [Sat Jan 16 22:30:37 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:30:46 2021] Cheerio begins to cast a spell.
-[Sat Jan 16 22:30:49 2021] You told Cheerio, 'he spawned as a new fish and bit me for 475'
 [Sat Jan 16 22:30:50 2021] You feel the spirit of wolf enter you.
-[Sat Jan 16 22:30:51 2021] Cheerio says, ']need invis?'
 [Sat Jan 16 22:30:53 2021] You laugh at Cheerio.
-[Sat Jan 16 22:30:55 2021] You say, 'no thanks :D'
-[Sat Jan 16 22:31:07 2021] Cheerio says, 'sorry you died '
-[Sat Jan 16 22:31:08 2021] You say, 'sow helps chase after em'
-[Sat Jan 16 22:31:12 2021] You say, 'eh its ok'
-[Sat Jan 16 22:31:13 2021] Cheerio says, 'haha'
-[Sat Jan 16 22:31:14 2021] Cheerio says, 'hey'
-[Sat Jan 16 22:31:15 2021] You say, 'part of the job haha'
 [Sat Jan 16 22:31:19 2021] You are thirsty.
 [Sat Jan 16 22:31:19 2021] You are hungry.
 [Sat Jan 16 22:31:19 2021] You are out of food and drink.
-[Sat Jan 16 22:31:19 2021] Cheerio says, 'I can give you underwater spell'
-[Sat Jan 16 22:31:22 2021] Cheerio says, 'how about that?'
-[Sat Jan 16 22:31:24 2021] You say, 'oh EB'
-[Sat Jan 16 22:31:26 2021] You say, 'that could help'
-[Sat Jan 16 22:31:30 2021] You say, 'but I will die again soon'
 [Sat Jan 16 22:31:36 2021] Cheerio begins to cast a spell.
 [Sat Jan 16 22:31:40 2021] You feel no need to breathe.
 [Sat Jan 16 22:31:44 2021] You cheer at Cheerio.
-[Sat Jan 16 22:31:45 2021] Lashun Novashine glowers at you dubiously -- what would you like your tombstone to say?
 [Sat Jan 16 22:31:48 2021] You thank Cheerio heartily.
-[Sat Jan 16 22:31:51 2021] Cheerio says, 'well try it anyways :P'
 [Sat Jan 16 22:31:51 2021] Lashun Novashine begins to cast a spell.
 [Sat Jan 16 22:31:53 2021] Guard Hezlan looks courageous.
-[Sat Jan 16 22:31:54 2021] You say, 'hehe'
-[Sat Jan 16 22:31:58 2021] You say, 'lets see if I'm kos to the myet'
-[Sat Jan 16 22:31:58 2021] Cheerio says, 'want a weapon?'
 [Sat Jan 16 22:32:05 2021] You are thirsty.
 [Sat Jan 16 22:32:05 2021] You are hungry.
 [Sat Jan 16 22:32:05 2021] You are out of food and drink.
-[Sat Jan 16 22:32:07 2021] You say, 'my corpse has a sword'
-[Sat Jan 16 22:32:19 2021] You told Cheerio, 'wow megasow'
-[Sat Jan 16 22:32:25 2021] Enic Ruklin glowers at you dubiously -- what would you like your tombstone to say?
 [Sat Jan 16 22:32:36 2021] You are too far away to loot that corpse.
 [Sat Jan 16 22:32:37 2021] This corpse will decay in 1 days, 23 hours, 31 minutes and 17 seconds.
 [Sat Jan 16 22:32:37 2021] This corpse is too old to be resurrected.
@@ -1391,7 +1191,6 @@
 [Sat Jan 16 22:33:04 2021] It will take about 25 more seconds to prepare your camp.
 [Sat Jan 16 22:33:09 2021] It will take about 20 more seconds to prepare your camp.
 [Sat Jan 16 22:33:14 2021] It will take about 15 more seconds to prepare your camp.
-[Sat Jan 16 22:33:17 2021] You told Cheerio, 'brb on mezr the fish dropped :D I'll come to ent and hit ya with a breeze'
 [Sat Jan 16 22:33:19 2021] It will take about 10 more seconds to prepare your camp.
 [Sat Jan 16 22:33:24 2021] It will take about 5 more seconds to prepare your camp.
 [Wed Jan 20 21:46:58 2021] Welcome to EverQuest!
@@ -1405,9 +1204,6 @@
 [Wed Jan 20 21:47:13 2021] You may not loot this corpse at this time.
 [Wed Jan 20 21:47:29 2021] You no longer have a target.
 [Wed Jan 20 21:47:37 2021] Corporal Lancot begins to cast a spell.
-[Wed Jan 20 21:47:40 2021] Enic Ruklin glowers at you dubiously -- what would you like your tombstone to say?
-[Wed Jan 20 21:48:02 2021] Lailola says out of character, 'sometimes I load the game and it's not dark at night, other times it's pitch black. How do I get it to always adjust the brightness?''
-[Wed Jan 20 21:50:31 2021] Niccii says out of character, 'Summoned: Coldstone and Dimensional Hole at gate for first to hail me'
 [Wed Jan 20 21:50:37 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
 [Wed Jan 20 21:51:45 2021] Enic Ruklin begins to cast a spell.
 [Wed Jan 20 21:52:34 2021] Solamh shouts, 'ULTRAVISION!'
@@ -1538,28 +1334,20 @@
 [Wed Jan 20 22:00:09 2021] Your target is too far away, get closer!
 [Wed Jan 20 22:00:09 2021] Your target is too far away, get closer!
 [Wed Jan 20 22:00:10 2021] Auto attack off.
-[Wed Jan 20 22:00:10 2021] Enic Ruklin says, 'Prime Healer!!  Guide me to victory!!'
 [Wed Jan 20 22:00:13 2021] You are stunned!
 [Wed Jan 20 22:00:13 2021] Enic Ruklin bashes YOU for 17 points of damage.
 [Wed Jan 20 22:00:13 2021] Enic Ruklin slashes YOU for 65 points of damage.
 [Wed Jan 20 22:00:13 2021] You have been slain by Enic Ruklin!
-[Wed Jan 20 22:00:13 2021] Enic Ruklin says, 'A pity..Such a waste of life.'
 [Wed Jan 20 22:00:17 2021] Returning to home point, please wait...
 [Wed Jan 20 22:00:17 2021] LOADING, PLEASE WAIT...
 [Wed Jan 20 22:00:24 2021] You have entered North Qeynos.
-[Wed Jan 20 22:00:32 2021] Friends currently on EverQuest:
 [Wed Jan 20 22:00:32 2021] ---------------------------------
 [Wed Jan 20 22:00:32 2021] There are no players in EverQuest that match those who filters.
-[Wed Jan 20 22:00:36 2021] Deathwatch is no longer your friend.
-[Wed Jan 20 22:00:39 2021] Tobeunce is now your friend.
-[Wed Jan 20 22:00:40 2021] Deathwatch is now your friend.
-[Wed Jan 20 22:00:44 2021] cleri is no longer your friend.
-[Wed Jan 20 22:00:45 2021] cleri is now your friend.
 [Wed Jan 20 22:00:53 2021] Players on EverQuest:
 [Wed Jan 20 22:00:53 2021] ---------------------------
 [Wed Jan 20 22:00:53 2021] [2 Magician] Draeson (Erudite)
 [Wed Jan 20 22:00:53 2021] [2 Enchanter] Lailola (Human)
-[Wed Jan 20 22:00:53 2021] [ANONYMOUS] Spektorbaal 
+[Wed Jan 20 22:00:53 2021] [ANONYMOUS] Spektorbaal
 [Wed Jan 20 22:00:53 2021] [3 Monk] Solamh (Human)
 [Wed Jan 20 22:00:53 2021] [1 Paladin] Minn (Erudite)
 [Wed Jan 20 22:00:53 2021] [2 Warrior] Pescetarian (Human)
@@ -1568,15 +1356,12 @@
 [Wed Jan 20 22:01:04 2021] Consider whom?
 [Wed Jan 20 22:01:06 2021] Consider whom?
 [Wed Jan 20 22:01:06 2021] You are out of food and drink.
-[Wed Jan 20 22:01:06 2021] Corporal Lancot looks your way apprehensively -- what would you like your tombstone to say?
-[Wed Jan 20 22:01:07 2021] Felodius Sworddancer regards you indifferently -- what would you like your tombstone to say?
 [Wed Jan 20 22:01:09 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
 [Wed Jan 20 22:01:10 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
 [Wed Jan 20 22:01:11 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
 [Wed Jan 20 22:01:12 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
 [Wed Jan 20 22:01:12 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
 [Wed Jan 20 22:01:14 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
-[Wed Jan 20 22:01:20 2021] Enic Ruklin glowers at you dubiously -- what would you like your tombstone to say?
 [Wed Jan 20 22:01:38 2021] You receive 1 silver and 49 copper from the corpse.
 [Wed Jan 20 22:01:52 2021] It will take you about 30 seconds to prepare your camp.
 [Wed Jan 20 22:01:56 2021] It will take about 25 more seconds to prepare your camp.
@@ -1589,7 +1374,6 @@
 [Sat Feb 06 11:17:07 2021] You have entered North Qeynos.
 [Sat Feb 06 11:17:07 2021] MESSAGE OF THE DAY: Welcome to Project 1999: Green!  Please take the time to visit our forums and review the Play-Nice-Policy!
 [Sat Feb 06 11:17:12 2021] a Koalindl glowers at you dubiously -- looks like you would have the upper hand.
-[Sat Feb 06 11:17:14 2021] Enic Ruklin glowers at you dubiously -- what would you like your tombstone to say?
 [Sat Feb 06 11:17:19 2021] Auto attack on.
 [Sat Feb 06 11:17:20 2021] You try to slash a Koalindl, but miss!
 [Sat Feb 06 11:17:20 2021] A Koalindl bites YOU for 3 points of damage.
@@ -1662,7 +1446,6 @@
 [Sat Feb 06 11:18:31 2021] Your faction standing with PriestsofLife got worse.
 [Sat Feb 06 11:18:31 2021] You gain experience!!
 [Sat Feb 06 11:18:31 2021] a Koalindl 's corpse dies..  Rodcet Nife is not pleased.
-[Sat Feb 06 11:18:45 2021] Enic Ruklin glares at you threateningly -- what would you like your tombstone to say?
 [Sat Feb 06 11:18:46 2021] It will take you about 30 seconds to prepare your camp.
 [Sat Feb 06 11:18:50 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
 [Sat Feb 06 11:18:50 2021] It will take about 25 more seconds to prepare your camp.
@@ -1680,8 +1463,6 @@
 [Thu Feb 11 02:49:05 2021] MESSAGE OF THE DAY: Welcome to Project 1999: Green!  Please take the time to visit our forums and review the Play-Nice-Policy!
 [Thu Feb 11 02:49:54 2021] You can't reach that, get closer.
 [Thu Feb 11 02:49:54 2021] You can't reach that, get closer.
-[Thu Feb 11 02:50:11 2021] Nomsoe Jusagta glares at you threateningly -- what would you like your tombstone to say?
-[Thu Feb 11 02:50:13 2021] Enic Ruklin glares at you threateningly -- what would you like your tombstone to say?
 [Thu Feb 11 02:50:39 2021] You are stunned!
 [Thu Feb 11 02:50:39 2021] Astaed Wemor bashes YOU for 64 points of damage.
 [Thu Feb 11 02:50:39 2021] Astaed Wemor punches YOU for 118 points of damage.
@@ -1689,7 +1470,6 @@
 [Thu Feb 11 02:50:43 2021] Returning to home point, please wait...
 [Thu Feb 11 02:50:43 2021] LOADING, PLEASE WAIT...
 [Thu Feb 11 02:50:50 2021] You have entered North Qeynos.
-[Thu Feb 11 02:50:55 2021] Friends currently on EverQuest:
 [Thu Feb 11 02:50:55 2021] ---------------------------------
 [Thu Feb 11 02:50:55 2021] There are no players in EverQuest that match those who filters.
 [Thu Feb 11 02:50:55 2021] Players on EverQuest:
@@ -1702,17 +1482,12 @@
 [Thu Feb 11 02:53:04 2021] You are out of food and drink.
 [Thu Feb 11 02:53:50 2021] You are out of food and drink.
 [Thu Feb 11 02:54:36 2021] You are out of food and drink.
-[Thu Feb 11 02:55:08 2021] Lashun Novashine glares at you threateningly -- what would you like your tombstone to say?
-[Thu Feb 11 02:55:11 2021] Priest of Order regards you indifferently -- what would you like your tombstone to say?
 [Thu Feb 11 02:55:13 2021] a decaying skeleton regards you indifferently -- looks like you would have the upper hand.
-[Thu Feb 11 02:55:14 2021] Guard Gehnus looks your way apprehensively -- what would you like your tombstone to say?
-[Thu Feb 11 02:55:17 2021] Lashun Novashine glares at you threateningly -- what would you like your tombstone to say?
 [Thu Feb 11 02:55:22 2021] You are out of food and drink.
 [Thu Feb 11 02:56:08 2021] You are out of food and drink.
 [Thu Feb 11 02:56:17 2021] Fippy Darkpaw shouts, '<BBBBBAAAARRRKKKK!!!!!> You humans will pay for ruining our homeland!! GRRRRRRRR!!!! Family Darkpaw of the Sabertooth Clan will slay you all!! <BARK!>'
 [Thu Feb 11 02:56:55 2021] You are out of food and drink.
 [Thu Feb 11 02:57:41 2021] You are out of food and drink.
-[Thu Feb 11 02:57:51 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Thu Feb 11 02:57:53 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Thu Feb 11 02:57:56 2021] Lashun Novashine punches YOU for 11 points of damage.
 [Thu Feb 11 02:57:59 2021] Lashun Novashine punches YOU for 7 points of damage.
@@ -1759,7 +1534,6 @@
 [Thu Feb 11 03:07:43 2021] You are thirsty.
 [Thu Feb 11 03:07:43 2021] You are hungry.
 [Thu Feb 11 03:07:43 2021] You are out of food and drink.
-[Thu Feb 11 03:08:20 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Thu Feb 11 03:08:21 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Thu Feb 11 03:08:24 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Thu Feb 11 03:08:27 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -1777,7 +1551,6 @@
 [Thu Feb 11 03:08:46 2021] Returning to home point, please wait...
 [Thu Feb 11 03:08:46 2021] LOADING, PLEASE WAIT...
 [Thu Feb 11 03:08:54 2021] You have entered North Qeynos.
-[Thu Feb 11 03:09:03 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Thu Feb 11 03:09:03 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Thu Feb 11 03:09:06 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Thu Feb 11 03:09:09 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2060,7 +1833,6 @@
 [Fri Feb 12 14:03:29 2021] You are thirsty.
 [Fri Feb 12 14:03:29 2021] You are hungry.
 [Fri Feb 12 14:03:29 2021] You are out of food and drink.
-[Fri Feb 12 14:04:01 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:04:02 2021] Lashun Novashine punches YOU for 6 points of damage.
 [Fri Feb 12 14:04:05 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:04:08 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2105,7 +1877,6 @@
 [Fri Feb 12 14:11:19 2021] You are thirsty.
 [Fri Feb 12 14:11:19 2021] You are hungry.
 [Fri Feb 12 14:11:19 2021] You are out of food and drink.
-[Fri Feb 12 14:11:21 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:11:22 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:11:25 2021] Lashun Novashine punches YOU for 1 point of damage.
 [Fri Feb 12 14:11:28 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -2124,7 +1895,6 @@
 [Fri Feb 12 14:11:47 2021] Returning to home point, please wait...
 [Fri Feb 12 14:11:47 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 14:11:55 2021] You have entered North Qeynos.
-[Fri Feb 12 14:12:02 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:12:03 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:12:03 2021] You have become better at Defense! (11)
 [Fri Feb 12 14:12:06 2021] Lashun Novashine punches YOU for 9 points of damage.
@@ -2183,7 +1953,6 @@
 [Fri Feb 12 14:22:29 2021] You are thirsty.
 [Fri Feb 12 14:22:29 2021] You are hungry.
 [Fri Feb 12 14:22:29 2021] You are out of food and drink.
-[Fri Feb 12 14:22:57 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:22:58 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:23:01 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:23:04 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2202,7 +1971,6 @@
 [Fri Feb 12 14:23:18 2021] Returning to home point, please wait...
 [Fri Feb 12 14:23:18 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 14:23:25 2021] You have entered North Qeynos.
-[Fri Feb 12 14:23:32 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:23:33 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:23:35 2021] Lashun Novashine punches YOU for 2 points of damage.
 [Fri Feb 12 14:23:38 2021] Lashun Novashine punches YOU for 2 points of damage.
@@ -2481,8 +2249,6 @@
 [Fri Feb 12 14:31:50 2021] A Klicnik Worker bites YOU for 1 point of damage.
 [Fri Feb 12 14:31:52 2021] You try to punch a Klicnik Worker, but miss!
 [Fri Feb 12 14:31:52 2021] A Klicnik Worker tries to bite YOU, but misses!
-[Fri Feb 12 14:31:52 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Fri Feb 12 14:31:52 2021] a gnoll pup says, 'Your intolerable reputation insults all in this realm!'
 [Fri Feb 12 14:31:53 2021] A Klicnik Worker tries to bite YOU, but misses!
 [Fri Feb 12 14:31:53 2021] A gnoll pup tries to pierce YOU, but misses!
 [Fri Feb 12 14:31:55 2021] You try to punch a Klicnik Worker, but miss!
@@ -2544,7 +2310,6 @@
 [Fri Feb 12 14:32:25 2021] Pescetarian is no longer berserk.
 [Fri Feb 12 14:32:25 2021] A fire beetle bites YOU for 2 points of damage.
 [Fri Feb 12 14:32:25 2021] A Klicnik Worker tries to bite YOU, but misses!
-[Fri Feb 12 14:32:26 2021] You say, 'oh it's ok I can die'
 [Fri Feb 12 14:32:26 2021] A Klicnik Worker bites YOU for 1 point of damage.
 [Fri Feb 12 14:32:26 2021] A gnoll pup tries to pierce YOU, but misses!
 [Fri Feb 12 14:32:28 2021] You punch a Klicnik Worker for 2 points of damage.
@@ -2554,7 +2319,6 @@
 [Fri Feb 12 14:32:29 2021] You feel a little better.
 [Fri Feb 12 14:32:29 2021] A Klicnik Worker tries to bite YOU, but misses!
 [Fri Feb 12 14:32:29 2021] A gnoll pup tries to pierce YOU, but misses!
-[Fri Feb 12 14:32:31 2021] You say, 'thanks though bud'
 [Fri Feb 12 14:32:31 2021] A fire beetle bites YOU for 5 points of damage.
 [Fri Feb 12 14:32:31 2021] You try to punch a Klicnik Worker, but miss!
 [Fri Feb 12 14:32:31 2021] A Klicnik Worker tries to bite YOU, but misses!
@@ -2564,7 +2328,6 @@
 [Fri Feb 12 14:32:34 2021] You are hungry.
 [Fri Feb 12 14:32:34 2021] You are out of food and drink.
 [Fri Feb 12 14:32:34 2021] A fire beetle tries to bite YOU, but misses!
-[Fri Feb 12 14:32:34 2021] Slaen says, 'ok man'
 [Fri Feb 12 14:32:34 2021] A Klicnik Worker tries to bite YOU, but misses!
 [Fri Feb 12 14:32:35 2021] A Klicnik Worker bites YOU for 6 points of damage.
 [Fri Feb 12 14:32:35 2021] Pescetarian goes into a berserker frenzy!
@@ -2605,26 +2368,16 @@
 [Fri Feb 12 14:32:59 2021] Returning to home point, please wait...
 [Fri Feb 12 14:32:59 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 14:33:07 2021] You have entered North Qeynos.
-[Fri Feb 12 14:33:11 2021] Slaen regards you indifferently -- what would you like your tombstone to say?
-[Fri Feb 12 14:33:13 2021] Slaen tells you, 'do you want to pull them off of me one at a time?'
-[Fri Feb 12 14:33:22 2021] You told Slaen, 'nah it's ok thanks man you can kill em'
-[Fri Feb 12 14:33:26 2021] You told Slaen, 'I'm about to log anyway'
 [Fri Feb 12 14:33:31 2021] Players on EverQuest:
 [Fri Feb 12 14:33:31 2021] ---------------------------
 [Fri Feb 12 14:33:31 2021] [5 Shaman] Slaen (Barbarian)
 [Fri Feb 12 14:33:31 2021] There is 1 player in North Qeynos.
-[Fri Feb 12 14:33:41 2021] Slaen tells you, 'ah i gotcha'
-[Fri Feb 12 14:33:44 2021] You told Slaen, 'this was my fish killing toon but he got kos so he's useless now haha'
-[Fri Feb 12 14:33:44 2021] Lashun Novashine glares at you threateningly -- what would you like your tombstone to say?
-[Fri Feb 12 14:33:48 2021] You say, 'Hail, Lashun Novashine'
 [Fri Feb 12 14:33:48 2021] You are thirsty.
 [Fri Feb 12 14:33:48 2021] You are hungry.
 [Fri Feb 12 14:33:48 2021] You are out of food and drink.
-[Fri Feb 12 14:33:50 2021] Slaen tells you, 'hahahahaha'
 [Fri Feb 12 14:34:34 2021] You are thirsty.
 [Fri Feb 12 14:34:34 2021] You are hungry.
 [Fri Feb 12 14:34:34 2021] You are out of food and drink.
-[Fri Feb 12 14:35:11 2021] Guard Hezlan looks your way apprehensively -- what would you like your tombstone to say?
 [Fri Feb 12 14:35:17 2021] Players on EverQuest:
 [Fri Feb 12 14:35:17 2021] ---------------------------
 [Fri Feb 12 14:35:17 2021] [13 Magician] Itdaar (Erudite) LFG
@@ -2667,7 +2420,6 @@
 [Fri Feb 12 14:43:01 2021] You are thirsty.
 [Fri Feb 12 14:43:01 2021] You are hungry.
 [Fri Feb 12 14:43:01 2021] You are out of food and drink.
-[Fri Feb 12 14:43:11 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:43:11 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:43:11 2021] You have become better at Defense! (15)
 [Fri Feb 12 14:43:14 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2690,7 +2442,6 @@
 [Fri Feb 12 14:44:26 2021] You are thirsty.
 [Fri Feb 12 14:44:26 2021] You are hungry.
 [Fri Feb 12 14:44:26 2021] You are out of food and drink.
-[Fri Feb 12 14:44:59 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:45:00 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 14:45:03 2021] Lashun Novashine punches YOU for 7 points of damage.
 [Fri Feb 12 14:45:06 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -2752,7 +2503,6 @@
 [Fri Feb 12 14:55:34 2021] You are thirsty.
 [Fri Feb 12 14:55:34 2021] You are hungry.
 [Fri Feb 12 14:55:34 2021] You are out of food and drink.
-[Fri Feb 12 14:55:36 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:55:38 2021] Lashun Novashine punches YOU for 5 points of damage.
 [Fri Feb 12 14:55:41 2021] Lashun Novashine punches YOU for 7 points of damage.
 [Fri Feb 12 14:55:44 2021] Lashun Novashine punches YOU for 6 points of damage.
@@ -2767,7 +2517,6 @@
 [Fri Feb 12 14:55:57 2021] Returning to home point, please wait...
 [Fri Feb 12 14:55:57 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 14:56:04 2021] You have entered North Qeynos.
-[Fri Feb 12 14:56:10 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 14:56:11 2021] Lashun Novashine punches YOU for 8 points of damage.
 [Fri Feb 12 14:56:12 2021] Lashun Novashine begins to cast a spell.
 [Fri Feb 12 14:56:14 2021] You are struck by a sudden burst of force.  You have taken 16 points of damage.
@@ -2822,7 +2571,6 @@
 [Fri Feb 12 15:06:30 2021] You are thirsty.
 [Fri Feb 12 15:06:30 2021] You are hungry.
 [Fri Feb 12 15:06:30 2021] You are out of food and drink.
-[Fri Feb 12 15:07:11 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:07:11 2021] Lashun Novashine punches YOU for 9 points of damage.
 [Fri Feb 12 15:07:15 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 15:07:16 2021] You are thirsty.
@@ -2845,7 +2593,6 @@
 [Fri Feb 12 15:07:46 2021] Returning to home point, please wait...
 [Fri Feb 12 15:07:46 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 15:07:54 2021] You have entered North Qeynos.
-[Fri Feb 12 15:08:02 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:08:04 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 15:08:07 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:08:10 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2856,7 +2603,6 @@
 [Fri Feb 12 15:08:17 2021] Lashun Novashine punches YOU for 6 points of damage.
 [Fri Feb 12 15:08:20 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 15:08:23 2021] Lashun Novashine punches YOU for 2 points of damage.
-[Fri Feb 12 15:08:25 2021] Friends currently on EverQuest:
 [Fri Feb 12 15:08:25 2021] ---------------------------------
 [Fri Feb 12 15:08:25 2021] There are no players in EverQuest that match those who filters.
 [Fri Feb 12 15:08:26 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -2904,7 +2650,6 @@
 [Fri Feb 12 15:17:46 2021] You are thirsty.
 [Fri Feb 12 15:17:46 2021] You are hungry.
 [Fri Feb 12 15:17:46 2021] You are out of food and drink.
-[Fri Feb 12 15:18:27 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:18:28 2021] Lashun Novashine punches YOU for 11 points of damage.
 [Fri Feb 12 15:18:31 2021] Lashun Novashine punches YOU for 2 points of damage.
 [Fri Feb 12 15:18:32 2021] You are thirsty.
@@ -2969,7 +2714,6 @@
 [Fri Feb 12 15:29:41 2021] You are thirsty.
 [Fri Feb 12 15:29:41 2021] You are hungry.
 [Fri Feb 12 15:29:41 2021] You are out of food and drink.
-[Fri Feb 12 15:29:53 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:29:54 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:29:54 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 15:29:56 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -3030,7 +2774,6 @@
 [Fri Feb 12 15:40:25 2021] You are thirsty.
 [Fri Feb 12 15:40:25 2021] You are hungry.
 [Fri Feb 12 15:40:25 2021] You are out of food and drink.
-[Fri Feb 12 15:40:56 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:40:57 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 15:41:00 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:41:03 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -3051,7 +2794,6 @@
 [Fri Feb 12 15:41:22 2021] Returning to home point, please wait...
 [Fri Feb 12 15:41:22 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 15:41:30 2021] You have entered North Qeynos.
-[Fri Feb 12 15:41:48 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:41:49 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:41:52 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:41:52 2021] Lashun Novashine begins to cast a spell.
@@ -3118,7 +2860,6 @@
 [Fri Feb 12 15:52:53 2021] You are thirsty.
 [Fri Feb 12 15:52:53 2021] You are hungry.
 [Fri Feb 12 15:52:53 2021] You are out of food and drink.
-[Fri Feb 12 15:53:00 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:53:00 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:53:00 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Fri Feb 12 15:53:03 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -3134,7 +2875,6 @@
 [Fri Feb 12 15:53:22 2021] Returning to home point, please wait...
 [Fri Feb 12 15:53:22 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 15:53:30 2021] You have entered North Qeynos.
-[Fri Feb 12 15:53:40 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 15:53:41 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 15:53:44 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Fri Feb 12 15:53:47 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -3191,7 +2931,6 @@
 [Fri Feb 12 16:03:18 2021] You are thirsty.
 [Fri Feb 12 16:03:18 2021] You are hungry.
 [Fri Feb 12 16:03:18 2021] You are out of food and drink.
-[Fri Feb 12 16:03:54 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:03:55 2021] Lashun Novashine punches YOU for 2 points of damage.
 [Fri Feb 12 16:03:58 2021] Lashun Novashine punches YOU for 7 points of damage.
 [Fri Feb 12 16:04:01 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -3210,7 +2949,6 @@
 [Fri Feb 12 16:04:23 2021] Returning to home point, please wait...
 [Fri Feb 12 16:04:23 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 16:04:30 2021] You have entered North Qeynos.
-[Fri Feb 12 16:04:40 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:04:40 2021] Lashun Novashine punches YOU for 6 points of damage.
 [Fri Feb 12 16:04:43 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 16:04:46 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -3244,8 +2982,6 @@
 [Fri Feb 12 16:09:42 2021] You are thirsty.
 [Fri Feb 12 16:09:42 2021] You are hungry.
 [Fri Feb 12 16:09:42 2021] You are out of food and drink.
-[Fri Feb 12 16:09:49 2021] Slickshoos says out of character, 'woot thanks )'
-[Fri Feb 12 16:10:16 2021] Jenla says out of character, 'anytime'
 [Fri Feb 12 16:10:28 2021] You are thirsty.
 [Fri Feb 12 16:10:28 2021] You are hungry.
 [Fri Feb 12 16:10:28 2021] You are out of food and drink.
@@ -3262,14 +2998,12 @@
 [Fri Feb 12 16:13:33 2021] You are thirsty.
 [Fri Feb 12 16:13:33 2021] You are hungry.
 [Fri Feb 12 16:13:33 2021] You are out of food and drink.
-[Fri Feb 12 16:14:14 2021] Slickshoos says out of character, 'alright Fippy!  Where you at boy?  It's payback time!'
 [Fri Feb 12 16:14:19 2021] You are thirsty.
 [Fri Feb 12 16:14:19 2021] You are hungry.
 [Fri Feb 12 16:14:19 2021] You are out of food and drink.
 [Fri Feb 12 16:15:06 2021] You are thirsty.
 [Fri Feb 12 16:15:06 2021] You are hungry.
 [Fri Feb 12 16:15:06 2021] You are out of food and drink.
-[Fri Feb 12 16:15:18 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:15:18 2021] Lashun Novashine punches YOU for 9 points of damage.
 [Fri Feb 12 16:15:21 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 16:15:22 2021] Lashun Novashine begins to cast a spell.
@@ -3289,7 +3023,6 @@
 [Fri Feb 12 16:15:40 2021] Returning to home point, please wait...
 [Fri Feb 12 16:15:41 2021] LOADING, PLEASE WAIT...
 [Fri Feb 12 16:15:48 2021] You have entered North Qeynos.
-[Fri Feb 12 16:15:55 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:15:56 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Fri Feb 12 16:15:59 2021] Lashun Novashine punches YOU for 2 points of damage.
 [Fri Feb 12 16:16:02 2021] Lashun Novashine punches YOU for 7 points of damage.
@@ -3368,7 +3101,6 @@
 [Fri Feb 12 16:26:26 2021] You are thirsty.
 [Fri Feb 12 16:26:26 2021] You are hungry.
 [Fri Feb 12 16:26:26 2021] You are out of food and drink.
-[Fri Feb 12 16:26:39 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:26:40 2021] Lashun Novashine tries to punch YOU, but misses!
 [Fri Feb 12 16:26:43 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 16:26:46 2021] Lashun Novashine punches YOU for 5 points of damage.
@@ -3502,8 +3234,6 @@
 [Fri Feb 12 16:35:36 2021] You are thirsty.
 [Fri Feb 12 16:35:36 2021] You are hungry.
 [Fri Feb 12 16:35:36 2021] You are out of food and drink.
-[Fri Feb 12 16:35:49 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Fri Feb 12 16:35:49 2021] a gnoll pup says, 'It's Humans like you who have ruined your own lands. You'll not ruin mine!'
 [Fri Feb 12 16:35:50 2021] A gnoll pup hits YOU for 1 point of damage.
 [Fri Feb 12 16:35:53 2021] A gnoll pup hits YOU for 4 points of damage.
 [Fri Feb 12 16:35:56 2021] A gnoll pup hits YOU for 5 points of damage.
@@ -3591,7 +3321,6 @@
 [Fri Feb 12 16:40:12 2021] Your Location is 802.65, -215.01, 3.75
 [Fri Feb 12 16:40:13 2021] Your Location is 802.65, -215.01, 3.75
 [Fri Feb 12 16:40:13 2021] Your Location is 802.65, -215.01, 3.75
-[Fri Feb 12 16:40:46 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Fri Feb 12 16:40:47 2021] Lashun Novashine punches YOU for 5 points of damage.
 [Fri Feb 12 16:40:50 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Fri Feb 12 16:40:53 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -3718,8 +3447,6 @@
 [Sat Feb 13 00:14:12 2021] You are thirsty.
 [Sat Feb 13 00:14:12 2021] You are hungry.
 [Sat Feb 13 00:14:12 2021] You are out of food and drink.
-[Sat Feb 13 00:14:46 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Sat Feb 13 00:14:46 2021] a gnoll pup says, 'Your actions and history are a personal affront to all I stand for!'
 [Sat Feb 13 00:14:46 2021] A gnoll pup tries to crush YOU, but misses!
 [Sat Feb 13 00:14:49 2021] A gnoll pup crushes YOU for 4 points of damage.
 [Sat Feb 13 00:14:52 2021] A gnoll pup crushes YOU for 1 point of damage.
@@ -3751,7 +3478,6 @@
 [Sat Feb 13 00:15:29 2021] A gnoll pup crushes YOU for 2 points of damage.
 [Sat Feb 13 00:15:29 2021] You punch a gnoll pup for 1 point of damage.
 [Sat Feb 13 00:15:32 2021] A gnoll pup tries to crush YOU, but misses!
-[Sat Feb 13 00:15:32 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:15:33 2021] Lashun Novashine tries to punch YOU, but misses!
 [Sat Feb 13 00:15:33 2021] You punch a gnoll pup for 2 points of damage.
 [Sat Feb 13 00:15:35 2021] Your target is too far away, get closer!
@@ -3769,7 +3495,6 @@
 [Sat Feb 13 00:15:45 2021] You punch a gnoll pup for 1 point of damage.
 [Sat Feb 13 00:15:45 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 00:15:45 2021] Pescetarian goes into a berserker frenzy!
-[Sat Feb 13 00:15:46 2021] Lashun Novashine glares at you threateningly -- what would you like your tombstone to say?
 [Sat Feb 13 00:15:47 2021] Auto attack on.
 [Sat Feb 13 00:15:48 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 00:15:48 2021] A gnoll pup tries to crush YOU, but misses!
@@ -3787,7 +3512,6 @@
 [Sat Feb 13 00:16:44 2021] You are thirsty.
 [Sat Feb 13 00:16:44 2021] You are hungry.
 [Sat Feb 13 00:16:44 2021] You are out of food and drink.
-[Sat Feb 13 00:17:02 2021] Jamme says out of character, 'Erudites are a bunch of racist assholes'
 [Sat Feb 13 00:17:31 2021] You are thirsty.
 [Sat Feb 13 00:17:31 2021] You are hungry.
 [Sat Feb 13 00:17:31 2021] You are out of food and drink.
@@ -3813,7 +3537,6 @@
 [Sat Feb 13 00:22:53 2021] You are thirsty.
 [Sat Feb 13 00:22:53 2021] You are hungry.
 [Sat Feb 13 00:22:53 2021] You are out of food and drink.
-[Sat Feb 13 00:23:15 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:23:16 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 00:23:19 2021] Lashun Novashine tries to punch YOU, but misses!
 [Sat Feb 13 00:23:22 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -3883,8 +3606,6 @@
 [Sat Feb 13 00:25:20 2021] You are thirsty.
 [Sat Feb 13 00:25:20 2021] You are hungry.
 [Sat Feb 13 00:25:20 2021] You are out of food and drink.
-[Sat Feb 13 00:25:47 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Sat Feb 13 00:25:47 2021] a gnoll pup says, 'Filthy Humans like you must die!'
 [Sat Feb 13 00:25:47 2021] A gnoll pup tries to pierce YOU, but misses!
 [Sat Feb 13 00:25:50 2021] A gnoll pup tries to pierce YOU, but misses!
 [Sat Feb 13 00:25:53 2021] A gnoll pup pierces YOU for 2 points of damage.
@@ -4040,7 +3761,6 @@
 [Sat Feb 13 00:34:18 2021] You are thirsty.
 [Sat Feb 13 00:34:18 2021] You are hungry.
 [Sat Feb 13 00:34:18 2021] You are out of food and drink.
-[Sat Feb 13 00:34:31 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:34:32 2021] Lashun Novashine punches YOU for 11 points of damage.
 [Sat Feb 13 00:34:35 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Sat Feb 13 00:34:38 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -4118,7 +3838,6 @@
 [Sat Feb 13 00:42:32 2021] Your Location is 705.63, -184.98, 3.75
 [Sat Feb 13 00:42:32 2021] Your Location is 705.41, -190.88, 3.75
 [Sat Feb 13 00:42:33 2021] Your Location is 705.18, -197.05, 3.75
-[Sat Feb 13 00:42:42 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:42:43 2021] Lashun Novashine punches YOU for 10 points of damage.
 [Sat Feb 13 00:42:45 2021] You are thirsty.
 [Sat Feb 13 00:42:45 2021] You are hungry.
@@ -4145,7 +3864,6 @@
 [Sat Feb 13 00:45:27 2021] You are thirsty.
 [Sat Feb 13 00:45:27 2021] You are hungry.
 [Sat Feb 13 00:45:27 2021] You are out of food and drink.
-[Sat Feb 13 00:45:49 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:45:50 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 00:45:51 2021] Lashun Novashine begins to cast a spell.
 [Sat Feb 13 00:45:53 2021] You are struck by a sudden burst of force.  You have taken 16 points of damage.
@@ -4211,7 +3929,6 @@
 [Sat Feb 13 00:56:52 2021] You are thirsty.
 [Sat Feb 13 00:56:52 2021] You are hungry.
 [Sat Feb 13 00:56:52 2021] You are out of food and drink.
-[Sat Feb 13 00:57:21 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:57:22 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 00:57:25 2021] Lashun Novashine tries to punch YOU, but misses!
 [Sat Feb 13 00:57:26 2021] Lashun Novashine begins to cast a spell.
@@ -4231,7 +3948,6 @@
 [Sat Feb 13 00:57:47 2021] Returning to home point, please wait...
 [Sat Feb 13 00:57:47 2021] LOADING, PLEASE WAIT...
 [Sat Feb 13 00:57:55 2021] You have entered North Qeynos.
-[Sat Feb 13 00:58:03 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 00:58:04 2021] Lashun Novashine punches YOU for 5 points of damage.
 [Sat Feb 13 00:58:07 2021] Lashun Novashine punches YOU for 9 points of damage.
 [Sat Feb 13 00:58:10 2021] Lashun Novashine punches YOU for 10 points of damage.
@@ -4259,7 +3975,6 @@
 [Sat Feb 13 01:00:45 2021] You are thirsty.
 [Sat Feb 13 01:00:45 2021] You are hungry.
 [Sat Feb 13 01:00:45 2021] You are out of food and drink.
-[Sat Feb 13 01:00:50 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 01:00:52 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:00:54 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:00:54 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -4320,8 +4035,6 @@
 [Sat Feb 13 01:07:15 2021] Your Location is 771.17, -87.94, 3.75
 [Sat Feb 13 01:07:15 2021] Your Location is 777.26, -85.84, 3.75
 [Sat Feb 13 01:07:15 2021] Your Location is 782.95, -83.88, 3.75
-[Sat Feb 13 01:07:20 2021] a gnoll pup says, 'YAP!  YAP!  YAP!  In the way of my father, I claim your blood for the glory of Blackburrow!! WOOOOOOOF!!'
-[Sat Feb 13 01:07:20 2021] a gnoll pup says, 'Your foul deeds have earned my contempt!'
 [Sat Feb 13 01:07:21 2021] A gnoll pup tries to slash YOU, but misses!
 [Sat Feb 13 01:07:22 2021] Auto attack on.
 [Sat Feb 13 01:07:22 2021] You punch a gnoll pup for 1 point of damage.
@@ -4689,38 +4402,34 @@
 [Sat Feb 13 01:13:56 2021] Players in EverQuest:
 [Sat Feb 13 01:13:56 2021] ---------------------------
 
-[Sat Feb 13 01:13:56 2021] [60 High Priest] Neeroy (High Elf) <Kingdom> ZONE: charasis  
-[Sat Feb 13 01:13:56 2021] [33 Cleric] Saralee (High Elf) <Fires of Heaven> ZONE: freportw  
-[Sat Feb 13 01:13:56 2021] [12 Cleric] Elenna (High Elf)  ZONE: butcher  
-[Sat Feb 13 01:13:56 2021] [9 Cleric] Debedo (High Elf)  ZONE: gfaydark  
-[Sat Feb 13 01:13:56 2021] [57 Templar] Vexatus (Dark Elf) <Black Lotus> ZONE: hole  
-[Sat Feb 13 01:13:56 2021] [55 Templar] Shinnosuke (Halfling) <Akatsuki> ZONE: hole  
-[Sat Feb 13 01:13:56 2021] [1 Cleric] Incivility (High Elf)  ZONE: felwithea  
-[Sat Feb 13 01:13:56 2021] [23 Cleric] Taldendra (Dark Elf) <Dynasty> ZONE: guktop  
-[Sat Feb 13 01:13:56 2021] [46 Cleric] Goleta (Dwarf) <Castle> ZONE: freportn  
-[Sat Feb 13 01:13:56 2021] [59 Templar] Bansoukou (High Elf) <Akatsuki> ZONE: hole  
-[Sat Feb 13 01:13:56 2021] [60 High Priest] Nekomimi (High Elf) <Akatsuki> ZONE: hole  
-[Sat Feb 13 01:13:56 2021] [59 Templar] Milkie (High Elf) <Seal Team> ZONE: sebilis  
-[Sat Feb 13 01:13:56 2021] [57 Templar] Xixi (High Elf) <Dynasty> ZONE: hole  
-[Sat Feb 13 01:13:56 2021] [60 High Priest] Hurora (Dwarf) <Fires of Heaven> ZONE: sebilis  
-[Sat Feb 13 01:13:56 2021] [35 Cleric] Lookunto (Dwarf)  ZONE: paw  
+[Sat Feb 13 01:13:56 2021] [60 High Priest] Neeroy (High Elf) <Kingdom> ZONE: charasis
+[Sat Feb 13 01:13:56 2021] [33 Cleric] Saralee (High Elf) <Fires of Heaven> ZONE: freportw
+[Sat Feb 13 01:13:56 2021] [12 Cleric] Elenna (High Elf)  ZONE: butcher
+[Sat Feb 13 01:13:56 2021] [9 Cleric] Debedo (High Elf)  ZONE: gfaydark
+[Sat Feb 13 01:13:56 2021] [57 Templar] Vexatus (Dark Elf) <Black Lotus> ZONE: hole
+[Sat Feb 13 01:13:56 2021] [55 Templar] Shinnosuke (Halfling) <Akatsuki> ZONE: hole
+[Sat Feb 13 01:13:56 2021] [1 Cleric] Incivility (High Elf)  ZONE: felwithea
+[Sat Feb 13 01:13:56 2021] [23 Cleric] Taldendra (Dark Elf) <Dynasty> ZONE: guktop
+[Sat Feb 13 01:13:56 2021] [46 Cleric] Goleta (Dwarf) <Castle> ZONE: freportn
+[Sat Feb 13 01:13:56 2021] [59 Templar] Bansoukou (High Elf) <Akatsuki> ZONE: hole
+[Sat Feb 13 01:13:56 2021] [60 High Priest] Nekomimi (High Elf) <Akatsuki> ZONE: hole
+[Sat Feb 13 01:13:56 2021] [59 Templar] Milkie (High Elf) <Seal Team> ZONE: sebilis
+[Sat Feb 13 01:13:56 2021] [57 Templar] Xixi (High Elf) <Dynasty> ZONE: hole
+[Sat Feb 13 01:13:56 2021] [60 High Priest] Hurora (Dwarf) <Fires of Heaven> ZONE: sebilis
+[Sat Feb 13 01:13:56 2021] [35 Cleric] Lookunto (Dwarf)  ZONE: paw
 [Sat Feb 13 01:13:56 2021] [9 Cleric] Aldious (High Elf) <Dynasty> ZONE: crushbone  LFG
-[Sat Feb 13 01:13:56 2021] [4 Cleric] Cornmeal (Halfling)  ZONE: ecommons  
-[Sat Feb 13 01:13:56 2021] [1 Cleric] Wamangar (Human) <Friends Unanimous> ZONE: ecommons  
-[Sat Feb 13 01:13:56 2021] [49 Cleric] Cyanna (High Elf) <Dynasty> ZONE: gukbottom  
-[Sat Feb 13 01:13:56 2021] [1 Cleric] Zorasiel (High Elf)  ZONE: gfaydark  
+[Sat Feb 13 01:13:56 2021] [4 Cleric] Cornmeal (Halfling)  ZONE: ecommons
+[Sat Feb 13 01:13:56 2021] [49 Cleric] Cyanna (High Elf) <Dynasty> ZONE: gukbottom
+[Sat Feb 13 01:13:56 2021] [1 Cleric] Zorasiel (High Elf)  ZONE: gfaydark
 [Sat Feb 13 01:13:56 2021] Your who request was cut short..too many players.
 [Sat Feb 13 01:13:56 2021] You can't see your target from here.
 [Sat Feb 13 01:13:56 2021] You can't see your target from here.
 [Sat Feb 13 01:13:57 2021] A gnoll pup tries to slash YOU, but misses!
-[Sat Feb 13 01:13:58 2021] Friends currently on EverQuest:
 [Sat Feb 13 01:13:58 2021] ---------------------------------
 [Sat Feb 13 01:13:59 2021] There are no players in EverQuest that match those who filters.
 [Sat Feb 13 01:13:59 2021] You can't see your target from here.
 [Sat Feb 13 01:13:59 2021] You can't see your target from here.
-[Sat Feb 13 01:14:00 2021] Cleri is no longer your friend.
 [Sat Feb 13 01:14:00 2021] A gnoll pup tries to slash YOU, but misses!
-[Sat Feb 13 01:14:02 2021] Cleri is now your friend.
 [Sat Feb 13 01:14:03 2021] Lashun Novashine shouts, 'Cease this endless conflict and seek salvation in the Temple of Life! The glory of Rodcet Nife awaits you!'
 [Sat Feb 13 01:14:03 2021] You can't see your target from here.
 [Sat Feb 13 01:14:03 2021] You can't see your target from here.
@@ -4729,12 +4438,9 @@
 [Sat Feb 13 01:14:06 2021] You can't see your target from here.
 [Sat Feb 13 01:14:06 2021] You can't see your target from here.
 [Sat Feb 13 01:14:06 2021] A gnoll pup tries to slash YOU, but misses!
-[Sat Feb 13 01:14:08 2021] Tobeunce is no longer your friend.
 [Sat Feb 13 01:14:09 2021] A gnoll pup tries to slash YOU, but misses!
 [Sat Feb 13 01:14:10 2021] You can't see your target from here.
 [Sat Feb 13 01:14:10 2021] You can't see your target from here.
-[Sat Feb 13 01:14:10 2021] Tobeunce is now your friend.
-[Sat Feb 13 01:14:12 2021] Friends currently on EverQuest:
 [Sat Feb 13 01:14:12 2021] ---------------------------------
 [Sat Feb 13 01:14:12 2021] A gnoll pup tries to slash YOU, but misses!
 [Sat Feb 13 01:14:13 2021] There are no players in EverQuest that match those who filters.
@@ -4869,7 +4575,6 @@
 [Sat Feb 13 01:19:38 2021] You are thirsty.
 [Sat Feb 13 01:19:38 2021] You are hungry.
 [Sat Feb 13 01:19:38 2021] You are out of food and drink.
-[Sat Feb 13 01:19:39 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 01:19:40 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:19:43 2021] Lashun Novashine punches YOU for 3 points of damage.
 [Sat Feb 13 01:19:46 2021] Lashun Novashine punches YOU for 11 points of damage.
@@ -4885,7 +4590,6 @@
 [Sat Feb 13 01:20:05 2021] Returning to home point, please wait...
 [Sat Feb 13 01:20:05 2021] LOADING, PLEASE WAIT...
 [Sat Feb 13 01:20:13 2021] You have entered North Qeynos.
-[Sat Feb 13 01:20:17 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 01:20:17 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:20:21 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:20:23 2021] Lashun Novashine tries to punch YOU, but misses!
@@ -4900,7 +4604,6 @@
 [Sat Feb 13 01:20:37 2021] Returning to home point, please wait...
 [Sat Feb 13 01:20:38 2021] LOADING, PLEASE WAIT...
 [Sat Feb 13 01:20:45 2021] You have entered North Qeynos.
-[Sat Feb 13 01:20:52 2021] Lashun Novashine says, 'Rodcet, protect your loyal servant!'
 [Sat Feb 13 01:20:53 2021] Lashun Novashine punches YOU for 6 points of damage.
 [Sat Feb 13 01:20:56 2021] Lashun Novashine punches YOU for 12 points of damage.
 [Sat Feb 13 01:20:59 2021] Lashun Novashine punches YOU for 12 points of damage.
@@ -5189,7 +4892,6 @@
 [Sat Feb 13 02:12:57 2021] You are thirsty.
 [Sat Feb 13 02:12:57 2021] You are hungry.
 [Sat Feb 13 02:12:57 2021] You are out of food and drink.
-[Sat Feb 13 02:13:22 2021] Moxima says out of character, ''
 [Sat Feb 13 02:13:34 2021] Fippy Darkpaw shouts, '<BBBBBAAAARRRKKKK!!!!!> You humans will pay for ruining our homeland!! GRRRRRRRR!!!! Family Darkpaw of the Sabertooth Clan will slay you all!! <BARK!>'
 [Sat Feb 13 02:13:43 2021] You are thirsty.
 [Sat Feb 13 02:13:43 2021] You are hungry.
