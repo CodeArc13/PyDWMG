@@ -5,6 +5,7 @@
 
 # DWMG-specific dev files
 eq_logfile.txt
+fake_logfile.txt
 
 # User-specific files
 *.rsuser
@@ -13,6 +14,7 @@ eq_logfile.txt
 *.userosscache
 *.sln.docstates
 .venv
+.vscode/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
