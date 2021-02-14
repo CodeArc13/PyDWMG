@@ -120,8 +120,7 @@ class MainWindow(QMainWindow):
 
         # label_main = QLabel("Dude, Where's My Guildies???\n")
         label_map = QLabel(self)
-        pixmap = QPixmap(f"{os.getcwd()}/maps/Qeynoshills.jpg")
-        print(f"{os.getcwd()}/maps/Qeynoshills.jpg")
+        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", "Qeynoshills.jpg"))
         label_map.setPixmap(pixmap)
         label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
