@@ -153,6 +153,10 @@ class MainWindow(QMainWindow):
 
         self.setCentralWidget(w)
 
+        self.setMaximumSize(
+            outer_layout.geometry().width(), outer_layout.geometry().height()
+        )
+
         self.show()
 
         self.threadpool = QThreadPool()
