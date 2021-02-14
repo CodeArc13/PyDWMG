@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 import time
@@ -18,6 +19,8 @@ from PyQt5.QtCore import (
     pyqtSlot,
     pyqtSignal,
 )
+
+from PyQt5.QtGui import QPixmap
 
 
 class WorkerSignals(QObject):
@@ -65,7 +68,7 @@ class EQLogParser(QRunnable):
     @pyqtSlot()
     def run(self):
         # Static log file path if needed:
-        logfile_path = r"D:\Games\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
+        # logfile_path = r"F:\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
         # logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
         try:
             # Read log file path from local config file:
@@ -106,11 +109,22 @@ class EQLogParser(QRunnable):
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
+
         app.aboutToQuit.connect(self.quit_app)
+        self.title = "Dude, Where's My Guildies???"
+        self.setWindowTitle(self.title)
+        outer_layout = QVBoxLayout()
+        map_layout = QVBoxLayout()
+        data_layout = QVBoxLayout()
+        button_layout = QVBoxLayout()
 
-        layout = QVBoxLayout()
+        # label_main = QLabel("Dude, Where's My Guildies???\n")
+        label_map = QLabel(self)
+        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", "Qeynoshills.jpg"))
+        label_map.setPixmap(pixmap)
+        label_map.resize(pixmap.width(), pixmap.height())
+        self.resize(pixmap.width(), pixmap.height())
 
-        label_main = QLabel("Dude, Where's My Guildies???\n")
         label_zone = QLabel("Zone:")
         self.label_currentzone = QLabel("")
         label_loc = QLabel("Location:")
@@ -120,16 +134,22 @@ class MainWindow(QMainWindow):
         self.button_terminatelogger = QPushButton("Terminate Log Parser")
         self.button_terminatelogger.pressed.connect(self.terminate_logparser)
 
-        layout.addWidget(label_main)
-        layout.addWidget(label_zone)
-        layout.addWidget(self.label_currentzone)
-        layout.addWidget(label_loc)
-        layout.addWidget(self.label_currentloc)
-        layout.addWidget(button_quit)
-        layout.addWidget(self.button_terminatelogger)
+        # layout.addWidget(label_main)
+        map_layout.addWidget(label_map)
+        data_layout.addStretch()
+        data_layout.addWidget(label_zone)
+        data_layout.addWidget(self.label_currentzone)
+        data_layout.addWidget(label_loc)
+        data_layout.addWidget(self.label_currentloc)
+        button_layout.addWidget(button_quit)
+        button_layout.addWidget(self.button_terminatelogger)
+
+        outer_layout.addLayout(map_layout)
+        outer_layout.addLayout(data_layout)
+        outer_layout.addLayout(button_layout)
 
         w = QWidget()
-        w.setLayout(layout)
+        w.setLayout(outer_layout)
 
         self.setCentralWidget(w)
 
