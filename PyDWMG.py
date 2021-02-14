@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 import time
@@ -119,7 +120,8 @@ class MainWindow(QMainWindow):
 
         # label_main = QLabel("Dude, Where's My Guildies???\n")
         label_map = QLabel(self)
-        pixmap = QPixmap(r"Maps\Qeynoshills.jpg")
+        pixmap = QPixmap(f"{os.getcwd()}/maps/Qeynoshills.jpg")
+        print(f"{os.getcwd()}/maps/Qeynoshills.jpg")
         label_map.setPixmap(pixmap)
         label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
