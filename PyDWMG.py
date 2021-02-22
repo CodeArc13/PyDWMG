@@ -1,6 +1,8 @@
 import os
 import re
 import sys
+import csv
+import pdb
 import time
 from PyQt5.QtWidgets import (
     QApplication,
@@ -34,6 +36,24 @@ class ParentSignals(QObject):
     """ Defines the signals to pass to a worker thread for parent control """
 
     terminate = pyqtSignal()
+
+
+class Zone:
+    def __init__(self, zone_info):
+        (
+            self.zone_name,
+            self.map_filename,
+            self.zone_who_name,
+            self.zone_alpha_name,
+            self.eq_grid_size,
+            self.map_grid_size,
+            self.offset_x,
+            self.offset_y,
+        ) = zone_info
+        self.eq_grid_size = int(self.eq_grid_size)
+        self.map_grid_size = int(self.map_grid_size)
+        self.offset_x = float(self.offset_x)
+        self.offset_y = float(self.offset_y)
 
 
 class EQLogParser(QRunnable):
@@ -110,7 +130,17 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
+        # INIT STUFF
         app.aboutToQuit.connect(self.quit_app)
+        try:
+            with open("zone_info.csv") as f:
+                zone_csv = csv.reader(f)
+                next(zone_csv)  # Skip first line
+                self.zones = [Zone(zone_info) for zone_info in zone_csv]
+        except FileNotFoundError:
+            print("zone_info.csv not found, quitting!")
+            sys.exit(1)
+
         self.title = "Dude, Where's My Guildies???"
         self.setWindowTitle(self.title)
         outer_layout = QVBoxLayout()
@@ -118,13 +148,14 @@ class MainWindow(QMainWindow):
         data_layout = QVBoxLayout()
         button_layout = QVBoxLayout()
 
-        # label_main = QLabel("Dude, Where's My Guildies???\n")
-        label_map = QLabel(self)
-        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", "Qeynoshills.jpg"))
-        label_map.setPixmap(pixmap)
-        label_map.resize(pixmap.width(), pixmap.height())
+        # MAP LABEL
+        self.label_map = QLabel()
+        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", "Map_eastcommons.jpg"))
+        self.label_map.setPixmap(pixmap)
+        self.label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
 
+        # BOTTOM TESTING LABELS
         label_zone = QLabel("Zone:")
         self.label_currentzone = QLabel("")
         label_loc = QLabel("Location:")
@@ -134,8 +165,8 @@ class MainWindow(QMainWindow):
         self.button_terminatelogger = QPushButton("Terminate Log Parser")
         self.button_terminatelogger.pressed.connect(self.terminate_logparser)
 
-        # layout.addWidget(label_main)
-        map_layout.addWidget(label_map)
+        # LAYOUT SETUP
+        map_layout.addWidget(self.label_map)
         data_layout.addStretch()
         data_layout.addWidget(label_zone)
         data_layout.addWidget(self.label_currentzone)
@@ -166,9 +197,21 @@ class MainWindow(QMainWindow):
 
         self.start_workers()
 
+    def get_zone(self, zone_text):
+        for zone in self.zones:
+            if zone.zone_name == zone_text:
+                return zone
+            elif zone.zone_who_name == zone_text:
+                return zone
+
     def update_zone(self, zone_text):
-        self.current_zone = zone_text
-        self.label_currentzone.setText(zone_text)
+        zone = self.get_zone(zone_text)
+        self.current_zone = zone.zone_name
+        self.label_currentzone.setText(zone.zone_name)
+        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", zone.map_filename))
+        self.label_map.setPixmap(pixmap)
+        self.label_map.resize(pixmap.width(), pixmap.height())
+        self.resize(pixmap.width(), pixmap.height())
 
     def update_loc(self, loc_tuple):
         self.current_loc = loc_tuple
