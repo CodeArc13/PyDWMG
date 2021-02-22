@@ -2,7 +2,6 @@ import os
 import re
 import sys
 import csv
-import pdb
 import time
 from PyQt5.QtWidgets import (
     QApplication,
@@ -17,7 +16,6 @@ from PyQt5.QtCore import (
     QObject,
     QRunnable,
     QThreadPool,
-    QTimer,
     pyqtSlot,
     pyqtSignal,
 )
@@ -55,6 +53,9 @@ class Zone:
         self.offset_x = float(self.offset_x)
         self.offset_y = float(self.offset_y)
 
+    def __repr__(self):
+        return f"Zone({self.zone_name})"
+
 
 class EQLogParser(QRunnable):
     """
@@ -87,9 +88,6 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        # Static log file path if needed:
-        # logfile_path = r"F:\EQLite\Logs\eqlog_Cleri_P1999Green.txt"  # 'r' makes it raw, no need for \\ escapes, thanks!
-        # logfile_path = "/home/mlakin/opt/storage/LutrisGames/everquest/Sony/EverQuest/Logs/eqlog_Pescetarian_P1999Green.txt"
         try:
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
@@ -149,8 +147,9 @@ class MainWindow(QMainWindow):
         button_layout = QVBoxLayout()
 
         # MAP LABEL
+        INITIAL_MAP = "Map_eastcommons.jpg"
         self.label_map = QLabel()
-        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", "Map_eastcommons.jpg"))
+        pixmap = QPixmap(os.path.join(os.getcwd(), "maps", INITIAL_MAP))
         self.label_map.setPixmap(pixmap)
         self.label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
@@ -203,10 +202,15 @@ class MainWindow(QMainWindow):
                 return zone
             elif zone.zone_who_name == zone_text:
                 return zone
+        return None
 
     def update_zone(self, zone_text):
         zone = self.get_zone(zone_text)
-        self.current_zone = zone.zone_name
+        if zone is None:
+            self.current_zone = None
+            self.label_currentzone.setText(zone_text)
+            return None
+        self.current_zone = zone
         self.label_currentzone.setText(zone.zone_name)
         pixmap = QPixmap(os.path.join(os.getcwd(), "maps", zone.map_filename))
         self.label_map.setPixmap(pixmap)
