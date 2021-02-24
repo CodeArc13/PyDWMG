@@ -36,6 +36,40 @@ class ParentSignals(QObject):
     terminate = pyqtSignal()
 
 
+def reverse_readline(filename, buffer_size=1024):
+    """A generator that returns the lines of a file in reverse order"""
+    SEEK_FILE_END = 2  # seek "whence" value for end of stream
+
+    with open(filename) as fd:
+        first_line = None
+        offset = 0
+        file_size = bytes_remaining = fd.seek(0, SEEK_FILE_END)
+        while bytes_remaining > 0:
+            offset = min(file_size, offset + buffer_size)
+            fd.seek(file_size - offset)
+            read_buffer = fd.read(min(bytes_remaining, buffer_size))
+            bytes_remaining -= buffer_size
+            lines = read_buffer.split("\n")
+            if first_line is not None:
+                """The first line of the buffer is probably not a complete
+                line, so store it and add it to the end of the next buffer.
+                Unless there is already a newline at the end of the buffer,
+                then just yield it because it is a complete line.
+                """
+                if read_buffer[-1] != "\n":
+                    lines[-1] += first_line
+                else:
+                    yield first_line
+            first_line = lines[0]
+            for line_num in range(len(lines) - 1, 0, -1):
+                if lines[line_num]:
+                    yield lines[line_num]
+
+        if first_line is not None:
+            """Current first_line is never yielded in the while loop """
+            yield first_line
+
+
 class Zone:
     def __init__(self, zone_info):
         (
@@ -88,6 +122,7 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
+        # Read log file path from eq_logfile.txt
         try:
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
@@ -98,11 +133,24 @@ class EQLogParser(QRunnable):
                 "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
             )
 
+        # Define regex patterns to use for log line matching
         zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
         loc_pattern = re.compile(
             r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
         )
         logfile = open(logfile_path, "rt")
+
+        # Get starting zone before beginning log read loop
+        for line in reverse_readline(logfile_path):
+            try:
+                starting_zone = zone_pattern.findall(line)[0]
+                print(f"Found starting zone {starting_zone}")
+                self.signals.zone.emit(starting_zone)
+                break
+            except IndexError:
+                pass
+
+        # Start log read loop
         with open(logfile_path, "rt") as logfile:
             print("Log parser started...")
             logfile.seek(0, 2)  # Go to the end of the file
