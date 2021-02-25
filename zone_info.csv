@@ -1,0 +1,50 @@
+zone_name,map_filename,zone_who_name,zone_alpha_name,eq_grid_size,map_grid_size,offset_x,offset_y
+The Burning Wood,Map_burningwood.jpg,Burning Woods,Burning Woods,1000,47,179.0,352.0
+Butcherblock Mountains,Butcherblock.jpg,Butcherblock Mountains,Butcherblock,1000,73,257.0,250.0
+East Commonlands,Map_eastcommons.jpg,East Commonlands,Commons East,1000,89,475.0,143.0
+West Commonlands,Zone_westcommons.jpg,West Commonlands,Commons West,1000,96,441.0,136.0
+Cobaltscar,Map_cobalt_scar.jpg,Cobalt Scar,Cobalt Scar,500,60,263.0,224.0
+Crushbone,Crushbone.jpg,Clan Crushbone,Crushbone,200,66,310.0,156.0
+Dreadlands,Map_dreadlands.jpg,Dreadlands,Dreadlands,1000,47,504.0,188.0
+The Emerald Jungle,Map_emeraldjungle.jpg,The Emerald Jungle,Emerald Jungle,1000,57,324.0,282.0
+Everfrost,Map_everfrost.jpg,Everfrost Peaks,Everfrost,1000,56,107.0,240.0
+Greater Faydark,Greaterfaydark.jpg,Greater Faydark,Faydark Greater,1000,89,275.0,265.0
+Lesser Faydark,Lesserfaydark.jpg,Lesser Faydark,Faydark Lesser,1000,87,364.0,201.0
+The Feerrott,Map_feerrott.jpg,The Feerrott,Feerrott,500,40,279.0,153.0
+Field of Bone,Map_fieldofbone.jpg,The Field of Bone,Field of Bone,1000,77,359.0,291.0
+Firiona Vie,Map_firionavie.jpg,Firiona Vie,Firiona Vie,1000,52,329.0,292.0
+Frontier Mountains,Map_frontiermtns.jpg,Frontier Mountains,Frontier Mountains,1000,58,277.0,298.0
+The Great Divide,Map_great_divide.jpg,Great Divide,Great Divide,1000,54,266.0,51.0
+Guk,Upperguk.jpg,Upper Guk,Guk Upper,250,80,242.0,574.0
+The Iceclad Ocean,Iceclad.jpg,Iceclad Ocean,Iceclad Ocean,2000,44,250.0,228.0
+Innothule Swamp,Map_innothule.jpg,Innothule Swamp,Innothule,1000,117,256.0,307.0
+Eastern Plains of Karana,Map_ekarana.jpg,East Karana,Karana East,1000,79,125.0,203.0
+Northern Plains of Karana,Map_nkarana.jpg,North Karana,Karana North,1000,70,269.0,145.0
+Southern Plains of Karana,Zone_southkarana.jpg,South Karana,Karana South,1000,47,182.0,142.0
+Western Plains of Karana,Zone_westkarana.jpg,West Karana,Karana West,1000,64,0,117.0
+Kithicor Woods,Map_kithicor.jpg,Kithicor Forest,Kithicor,1000,88,456.0,207.0
+Lake of Ill Omen,Map_lakeofillomen.jpg,Lake of Ill Omen,Lake Of Ill Omen,2000,87,197.0,338.0
+Lavastorm Mountains,Map_lavastorm.jpg,Lavastorm Mountains,Lavastorm Mountains,500,66,228.0,224.0
+Castle Mistmoore,Mistmoore.jpg,Castle Mistmoore,Mistmoore,100,62,396.0,203.0
+Misty Thicket,Map_mistythicket.jpg,Misty Thicket,Misty Thicket,500,60,203.0,174.0
+Najena,Najena.jpg,Najena,Najena,250,94,373.0,233.0
+The Nektulos Forest,Map_nektulos.jpg,Nektulos Forest,Nektulos Forest,1000,91,143.0,275.0
+Oasis of Marr,Map_oasisofmarr.jpg,Oasis of Marr,Oasis Of Marr,1000,102,178.0,281.0
+Ocean of Tears,Ocean_of_Tears.jpg,Ocean of Tears,Ocean of Tears,1000,37,391.0,139.0
+The Overthere,Map_overthere.jpg,The Overthere,Overthere,1000,57,266.0,300.0
+Permafrost,Zone_permafrost.jpg,Permafrost Keep,Permafrost Caverns,100,37,187.0,487.0
+Qeynos Hills,Qeynoshills.jpg,Qeynos Hills,Qeynos Hills,1000,94,141.0,526.0
+Rathe Mountains,Zone_rathemtns.jpg,Mountains of Rathe,Rathe Mountains,1500,106,226.0,464.0
+Rivervale,Rivervale.jpg,Rivervale,Rivervale,200,104,92.0,297.0
+Northern Desert of Ro,Map_northro.jpg,North Ro,Ro North,1000,87,175.0,389.0
+Southern Desert of Ro,Zone_southro.jpg,South Ro,Ro South,1000,99,181.0,182.0
+Skyfire Mountains,Map_skyfiremtns.jpg,Skyfire Mountains,Skyfire Mountains,1000,52,294.0,319.0
+Steamfont Mountains,Steamfont.jpg,Steamfont Mountains,Steamfont Mountains,1000,106,251.0,233.0
+Swamp Of No Hope,Map_swampofnohope.jpg,Swamp of No Hope,Swamp Of No Hope,1000,58,251.0,347.0
+Timorous Deep,Map_timdeep.jpg,Timorous Deep,Timorous Deep,1000,31,158.0,327.0
+Toxxulia Forest,Toxxulia.jpg,Toxxulia Forest,Toxxulia Forest,1000,91,268.0,271.0
+Trakanon's Teeth,Map_trakanonsteeth.jpg,Trakanon's Teeth,Trakanon's Teeth,1000,47,270.0,230.0
+The Wakening Land,Map_wakening_lands.jpg,The Wakening Land,Wakening Land,1000,49,262.0,186.0
+Warsliks Woods,Map_warslikswood.jpg,Warsliks Wood,Warsliks Woods,1000,59,292.0,266.0
+Eastern Wastes,Map_eastern_wastes.jpg,Eastern Wastes,Wastes Eastern,1000,38,289.0,71.0
+The Western Wastes,Westernwastes.jpg,Western Wastes,Wastes Western,1000,53,295.0,292.0
