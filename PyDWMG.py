@@ -20,7 +20,7 @@ from PyQt5.QtCore import (
     pyqtSignal,
 )
 
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QPainter
 
 
 class WorkerSignals(QObject):
@@ -84,6 +84,7 @@ class Zone:
         ) = zone_info
         self.eq_grid_size = int(self.eq_grid_size)
         self.map_grid_size = int(self.map_grid_size)
+        self.map_scale_factor = self.eq_grid_size / self.map_grid_size
         self.offset_x = float(self.offset_x)
         self.offset_y = float(self.offset_y)
 
@@ -164,8 +165,9 @@ class EQLogParser(QRunnable):
                     self.signals.zone.emit(new_zone)
                 except IndexError:
                     try:
-                        x, y, z = loc_pattern.findall(line)[0]
-                        # print(f"x: {x} y: {y} z: {z}") # Log loc to console
+                        # EQ swaps x and y in its loc printout
+                        y, x, z = loc_pattern.findall(line)[0]
+                        x, y, z = map(float, [x, y, z])
                         self.signals.loc.emit((x, y, z))
                     except IndexError:
                         pass
@@ -261,14 +263,39 @@ class MainWindow(QMainWindow):
         self.current_zone = zone
         self.label_currentzone.setText(zone.zone_name)
         pixmap = QPixmap(os.path.join(os.getcwd(), "maps", zone.map_filename))
+        self.map_base = pixmap
         self.label_map.setPixmap(pixmap)
         self.label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
 
     def update_loc(self, loc_tuple):
-        self.current_loc = loc_tuple
-        x, y, z = loc_tuple
+        try:
+            prev_loc = self.current_loc
+        except AttributeError:
+            pass
+        prev_loc = loc_tuple
+        new_loc = loc_tuple
+        self.current_loc = new_loc
+        x, y, z = new_loc
         self.label_currentloc.setText(f"({x}, {y}, {z})")
+        if self.current_zone is not None:
+            self.draw_map(prev_loc, new_loc)
+
+    def draw_map(self, prev_loc, new_loc):
+        px, py, _ = prev_loc
+        nx, ny, _ = new_loc
+        nx = -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
+        ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
+        new_map = QPixmap(self.map_base)
+        painter = QPainter(new_map)
+        marker_size = 11
+        painter.drawEllipse(
+            nx - marker_size / 2, ny - marker_size / 2, marker_size, marker_size
+        )
+        painter.end()
+        self.label_map.setPixmap(new_map)
+        self.label_map.resize(new_map.width(), new_map.height())
+        self.resize(new_map.width(), new_map.height())
 
     def terminate_logparser(self):
         self.button_terminatelogger.setDisabled(True)
