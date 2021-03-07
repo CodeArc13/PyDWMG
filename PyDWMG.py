@@ -3,6 +3,7 @@ import re
 import sys
 import csv
 import time
+import math
 from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
@@ -272,6 +273,11 @@ class MainWindow(QMainWindow):
         self.label_map.setPixmap(pixmap)
         self.label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
+        self.current_loc = (
+            None,
+            None,
+            None,
+        )  # set current loc to None as the current value is for the last zone.
 
     def update_loc(self, loc_tuple):
         try:
@@ -290,19 +296,82 @@ class MainWindow(QMainWindow):
     def draw_map(self, prev_loc, new_loc):
         px, py, _ = prev_loc
         nx, ny, _ = new_loc
-        nx = -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
-        ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
         new_map = QPixmap(self.map_base)
         painter = QPainter(new_map)
         painter.setPen(QPen(Qt.red, 2))  # colour and width
-        marker_size = 11
-        painter.drawEllipse(
-            nx - marker_size / 2, ny - marker_size / 2, marker_size, marker_size
-        )
+        circle_marker_size = 11
+        cross_marker_size = 9.0  # this is a float in VB, not sure if it needs to be
+
+        nx = -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
+        ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
+        if px is None:  # test to see if there is a valid prev loc
+            painter.drawEllipse(
+                nx - circle_marker_size / 2,
+                ny - circle_marker_size / 2,
+                circle_marker_size,
+                circle_marker_size,
+            )
+        else:  # if there is a prev loc calculate direction
+            px = -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
+            py = -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
+
+            # calculate heading vectors
+            x_vec = px - nx
+            y_vec = py - ny
+
+            # calculate length/magnitude of vector
+            mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
+
+            # calculate unit vectors
+            x_unit_vec = x_vec / mag
+            y_unit_vec = y_vec / mag
+
+            # calculate heading bar
+            hb_start_x = px - (x_unit_vec * cross_marker_size)
+            hb_start_y = py - (y_unit_vec * cross_marker_size)
+            hb_end_x = px + (x_unit_vec * cross_marker_size)
+            hb_end_y = py + (y_unit_vec * cross_marker_size)
+
+            # calculate cross bar
+            cb_start_x, cb_start_y = self.rotate_point(hb_end_x, hb_end_y, px, py, 90)
+            cb_end_x, cb_end_y = self.rotate_point(hb_end_x, hb_end_y, px, py, 270)
+
+            # calculate arrow head
+            arrow_start_x, arrow_start_y = self.rotate_point(
+                px, py, hb_start_x, hb_start_y, 45
+            )
+            arrow_end_x, arrow_end_y = self.rotate_point(
+                px, py, hb_start_x, hb_start_y, -45
+            )
+
+            # draw direction marker
+            painter.drawLine(hb_start_x, hb_start_y, hb_end_x, hb_end_y)  # heading bar
+            painter.drawLine(cb_start_x, cb_start_y, cb_end_x, cb_end_y)  # cross bar
+            painter.setPen(QPen(Qt.black, 2))  # colour and width
+            painter.drawLine(
+                arrow_start_x, arrow_start_y, hb_start_x, hb_start_y
+            )  # arrow head
+            painter.drawLine(arrow_end_x, arrow_end_y, hb_start_x, hb_start_y)
+            painter.drawLine(arrow_start_x, arrow_start_y, arrow_end_x, arrow_end_y)
+
         painter.end()
         self.label_map.setPixmap(new_map)
         self.label_map.resize(new_map.width(), new_map.height())
         self.resize(new_map.width(), new_map.height())
+
+    def rotate_point(self, end_x, end_y, start_x, start_y, degrees):
+        rotated_x = start_x + (
+            math.cos(self.d_to_r(degrees)) * (end_x - start_x)
+            - math.sin(self.d_to_r(degrees)) * (end_y - start_y)
+        )
+        rotated_y = start_y + (
+            math.sin(self.d_to_r(degrees)) * (end_x - start_x)
+            + math.cos(self.d_to_r(degrees)) * (end_y - start_y)
+        )
+        return (rotated_x, rotated_y)
+
+    def d_to_r(self, angle):  # returns the radian equivalent of degrees
+        return angle / 180 * math.pi
 
     def terminate_logparser(self):
         self.button_terminatelogger.setDisabled(True)
