@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import (
 )
 
 from PyQt5.QtCore import (
+    Qt,
     QObject,
     QRunnable,
     QThreadPool,
@@ -20,7 +21,7 @@ from PyQt5.QtCore import (
     pyqtSignal,
 )
 
-from PyQt5.QtGui import QPixmap, QPainter
+from PyQt5.QtGui import QPixmap, QPainter, QPen
 
 
 class WorkerSignals(QObject):
@@ -209,6 +210,8 @@ class MainWindow(QMainWindow):
         self.label_currentzone = QLabel("")
         label_loc = QLabel("Location:")
         self.label_currentloc = QLabel("")
+        label_prevloc = QLabel("Previous Location:")
+        self.label_prevloc = QLabel("")
         button_quit = QPushButton("Quit")
         button_quit.pressed.connect(self.quit_app)
         self.button_terminatelogger = QPushButton("Terminate Log Parser")
@@ -221,6 +224,8 @@ class MainWindow(QMainWindow):
         data_layout.addWidget(self.label_currentzone)
         data_layout.addWidget(label_loc)
         data_layout.addWidget(self.label_currentloc)
+        data_layout.addWidget(label_prevloc)
+        data_layout.addWidget(self.label_prevloc)
         button_layout.addWidget(button_quit)
         button_layout.addWidget(self.button_terminatelogger)
 
@@ -272,12 +277,13 @@ class MainWindow(QMainWindow):
         try:
             prev_loc = self.current_loc
         except AttributeError:
-            pass
-        prev_loc = loc_tuple
+            prev_loc = (None, None, None)
+        # prev_loc = loc_tuple
         new_loc = loc_tuple
         self.current_loc = new_loc
-        x, y, z = new_loc
-        self.label_currentloc.setText(f"({x}, {y}, {z})")
+        # x, y, z = new_loc # we never use these vars, just print tuple for testing and so it matches prev_loc printing
+        self.label_currentloc.setText(f"{new_loc}")
+        self.label_prevloc.setText(f"{prev_loc}")
         if self.current_zone is not None:
             self.draw_map(prev_loc, new_loc)
 
@@ -288,6 +294,7 @@ class MainWindow(QMainWindow):
         ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
         new_map = QPixmap(self.map_base)
         painter = QPainter(new_map)
+        painter.setPen(QPen(Qt.red, 2))  # colour and width
         marker_size = 11
         painter.drawEllipse(
             nx - marker_size / 2, ny - marker_size / 2, marker_size, marker_size
