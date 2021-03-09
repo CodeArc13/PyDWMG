@@ -306,8 +306,8 @@ class MainWindow(QMainWindow):
         ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
         if px is None:  # test to see if there is a valid prev loc
             painter.drawEllipse(
-                nx - circle_marker_size / 2,
-                ny - circle_marker_size / 2,
+                round(nx - circle_marker_size / 2),
+                round(ny - circle_marker_size / 2),
                 circle_marker_size,
                 circle_marker_size,
             )
@@ -327,21 +327,25 @@ class MainWindow(QMainWindow):
             y_unit_vec = y_vec / mag
 
             # calculate heading bar
-            hb_start_x = px - (x_unit_vec * cross_marker_size)
-            hb_start_y = py - (y_unit_vec * cross_marker_size)
-            hb_end_x = px + (x_unit_vec * cross_marker_size)
-            hb_end_y = py + (y_unit_vec * cross_marker_size)
+            hb_start_x = round(px - (x_unit_vec * cross_marker_size))
+            hb_start_y = round(py - (y_unit_vec * cross_marker_size))
+            hb_end_x = round(px + (x_unit_vec * cross_marker_size))
+            hb_end_y = round(py + (y_unit_vec * cross_marker_size))
 
             # calculate cross bar
-            cb_start_x, cb_start_y = self.rotate_point(hb_end_x, hb_end_y, px, py, 90)
-            cb_end_x, cb_end_y = self.rotate_point(hb_end_x, hb_end_y, px, py, 270)
+            cb_start_x, cb_start_y = map(
+                round, self.rotate_point(hb_end_x, hb_end_y, px, py, 90)
+            )
+            cb_end_x, cb_end_y = map(
+                round, self.rotate_point(hb_end_x, hb_end_y, px, py, 270)
+            )
 
             # calculate arrow head
-            arrow_start_x, arrow_start_y = self.rotate_point(
-                px, py, hb_start_x, hb_start_y, 45
+            arrow_start_x, arrow_start_y = map(
+                round, self.rotate_point(px, py, hb_start_x, hb_start_y, 45)
             )
-            arrow_end_x, arrow_end_y = self.rotate_point(
-                px, py, hb_start_x, hb_start_y, -45
+            arrow_end_x, arrow_end_y = map(
+                round, self.rotate_point(px, py, hb_start_x, hb_start_y, -45)
             )
 
             # draw direction marker
