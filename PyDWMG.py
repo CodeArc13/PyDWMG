@@ -293,8 +293,10 @@ class MainWindow(QMainWindow):
         if self.current_zone is not None:
             self.draw_map(prev_loc, new_loc)
 
-    def draw_map(self, prev_loc, new_loc):
-        px, py, _ = prev_loc
+    def draw_map(
+        self, prev_loc, new_loc
+    ):  # changed the n and p coordinates to unscaled numbers and then use another set of vars for scaled so edge calcs are less confusing
+        px, py, _ = prev_loc  # unscaled locs
         nx, ny, _ = new_loc
         new_map = QPixmap(self.map_base)
         painter = QPainter(new_map)
@@ -302,22 +304,36 @@ class MainWindow(QMainWindow):
         circle_marker_size = 11
         cross_marker_size = 9.0  # this is a float in VB, not sure if it needs to be
 
-        nx = -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
-        ny = -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
+        # calculate scaled new locs
+        scaled_nx = (
+            -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
+        )
+        scaled_ny = (
+            -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
+        )
+        # use if/or statement to test all edges to check if shifting it needed,
+        # then use nested ifs to test which edges need shifting
+        # and draw on edge
+
+        # else if no edge cases found then draw on map normally
         if px is None:  # test to see if there is a valid prev loc
             painter.drawEllipse(
-                round(nx - circle_marker_size / 2),
-                round(ny - circle_marker_size / 2),
+                round(scaled_nx - circle_marker_size / 2),
+                round(scaled_ny - circle_marker_size / 2),
                 circle_marker_size,
                 circle_marker_size,
             )
         else:  # if there is a prev loc calculate direction
-            px = -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
-            py = -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
+            scaled_px = (
+                -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
+            )
+            scaled_py = (
+                -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
+            )
 
             # calculate heading vectors
-            x_vec = px - nx
-            y_vec = py - ny
+            x_vec = scaled_px - scaled_nx
+            y_vec = scaled_py - scaled_ny
 
             # calculate length/magnitude of vector
             mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
@@ -327,25 +343,27 @@ class MainWindow(QMainWindow):
             y_unit_vec = y_vec / mag
 
             # calculate heading bar
-            hb_start_x = round(px - (x_unit_vec * cross_marker_size))
-            hb_start_y = round(py - (y_unit_vec * cross_marker_size))
-            hb_end_x = round(px + (x_unit_vec * cross_marker_size))
-            hb_end_y = round(py + (y_unit_vec * cross_marker_size))
+            hb_start_x = round(scaled_px - (x_unit_vec * cross_marker_size))
+            hb_start_y = round(scaled_py - (y_unit_vec * cross_marker_size))
+            hb_end_x = round(scaled_px + (x_unit_vec * cross_marker_size))
+            hb_end_y = round(scaled_py + (y_unit_vec * cross_marker_size))
 
             # calculate cross bar
             cb_start_x, cb_start_y = map(
-                round, self.rotate_point(hb_end_x, hb_end_y, px, py, 90)
+                round, self.rotate_point(hb_end_x, hb_end_y, scaled_px, scaled_py, 90)
             )
             cb_end_x, cb_end_y = map(
-                round, self.rotate_point(hb_end_x, hb_end_y, px, py, 270)
+                round, self.rotate_point(hb_end_x, hb_end_y, scaled_px, scaled_py, 270)
             )
 
             # calculate arrow head
             arrow_start_x, arrow_start_y = map(
-                round, self.rotate_point(px, py, hb_start_x, hb_start_y, 45)
+                round,
+                self.rotate_point(scaled_px, scaled_py, hb_start_x, hb_start_y, 45),
             )
             arrow_end_x, arrow_end_y = map(
-                round, self.rotate_point(px, py, hb_start_x, hb_start_y, -45)
+                round,
+                self.rotate_point(scaled_px, scaled_py, hb_start_x, hb_start_y, -45),
             )
 
             # draw direction marker
