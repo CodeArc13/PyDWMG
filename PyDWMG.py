@@ -313,10 +313,7 @@ class MainWindow(QMainWindow):
         scaled_ny = (
             -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
         )
-        scaled_px, scaled_py = (
-            0,
-            0,
-        )  # need to be initialized so they can be used even if there is no prev loc
+
         if px is not None:  # test to see if there is a valid prev loc
             scaled_px = (
                 -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
@@ -324,6 +321,11 @@ class MainWindow(QMainWindow):
             scaled_py = (
                 -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
             )
+        else:
+            scaled_px, scaled_py = (
+                0,
+                0,
+            )  # need to be initialized so they can be used even if there is no prev loc
 
         # use if/or statement to test all edges to check if shifting is needed,
         if (
