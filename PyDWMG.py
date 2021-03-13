@@ -296,6 +296,7 @@ class MainWindow(QMainWindow):
     def draw_map(
         self, prev_loc, new_loc
     ):  # changed the n and p coordinates to unscaled numbers only and then use another set of vars for scaled so edge calcs are less confusing
+        # also enables the ability to test if there is a previous loc after scaling previous locs
         px, py, _ = prev_loc  # unscaled locs
         nx, ny, _ = new_loc
         new_map = QPixmap(self.map_base)
@@ -312,7 +313,17 @@ class MainWindow(QMainWindow):
         scaled_ny = (
             -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
         )
-        scaled_px, scaled_py = 0, 0
+        scaled_px, scaled_py = (
+            0,
+            0,
+        )  # need to be initialized so they can be used even if there is no prev loc
+        if px is not None:  # test to see if there is a valid prev loc
+            scaled_px = (
+                -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
+            )
+            scaled_py = (
+                -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
+            )
 
         # use if/or statement to test all edges to check if shifting is needed,
         if (
@@ -349,15 +360,6 @@ class MainWindow(QMainWindow):
                 circle_marker_size,
             )
             if px is not None:  # test to see if there is a valid prev loc
-                scaled_px = (
-                    -px / self.current_zone.map_scale_factor
-                    + self.current_zone.offset_x
-                )
-                scaled_py = (
-                    -py / self.current_zone.map_scale_factor
-                    + self.current_zone.offset_y
-                )
-
                 # calculate heading vectors
                 x_vec = scaled_px - scaled_nx
                 y_vec = scaled_py - scaled_ny
@@ -401,15 +403,6 @@ class MainWindow(QMainWindow):
                     circle_marker_size,
                 )
             else:  # if there is a prev loc calculate direction
-                scaled_px = (
-                    -px / self.current_zone.map_scale_factor
-                    + self.current_zone.offset_x
-                )
-                scaled_py = (
-                    -py / self.current_zone.map_scale_factor
-                    + self.current_zone.offset_y
-                )
-
                 # calculate heading vectors
                 x_vec = scaled_px - scaled_nx
                 y_vec = scaled_py - scaled_ny
