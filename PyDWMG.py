@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QMainWindow,
     QVBoxLayout,
+    QHBoxLayout,
     QLabel,
 )
 
@@ -22,7 +23,7 @@ from PyQt5.QtCore import (
     pyqtSignal,
 )
 
-from PyQt5.QtGui import QPixmap, QPainter, QPen
+from PyQt5.QtGui import QPixmap, QPainter, QPen, QIcon
 
 
 class WorkerSignals(QObject):
@@ -191,12 +192,23 @@ class MainWindow(QMainWindow):
             print("zone_info.csv not found, quitting!")
             sys.exit(1)
 
-        self.title = "Dude, Where's My Guildies???"
+        self.title = "Dude, Where's My Guild???"
         self.setWindowTitle(self.title)
+        self.setWindowIcon(QIcon(os.path.join("icons", "DWMG.png")))
         outer_layout = QVBoxLayout()
+        tool_layout = QHBoxLayout()
         map_layout = QVBoxLayout()
         data_layout = QVBoxLayout()
         button_layout = QVBoxLayout()
+
+        # WINDOW VARIABLES, could be used for persistance between sessions
+        self.on_top = False
+
+        # TOOL BAR
+        self.button_on_top = QPushButton()
+        self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
+        self.button_on_top.setToolTip("Always on top")
+        self.button_on_top.pressed.connect(self.always_on_top)
 
         # MAP LABEL
         INITIAL_MAP = "Map_eastcommons.jpg"
@@ -219,6 +231,7 @@ class MainWindow(QMainWindow):
         self.button_terminatelogger.pressed.connect(self.terminate_logparser)
 
         # LAYOUT SETUP
+        tool_layout.addWidget(self.button_on_top, 0, Qt.AlignLeft)
         map_layout.addWidget(self.label_map)
         data_layout.addStretch()
         data_layout.addWidget(label_zone)
@@ -230,6 +243,7 @@ class MainWindow(QMainWindow):
         button_layout.addWidget(button_quit)
         button_layout.addWidget(self.button_terminatelogger)
 
+        outer_layout.addLayout(tool_layout)
         outer_layout.addLayout(map_layout)
         outer_layout.addLayout(data_layout)
         outer_layout.addLayout(button_layout)
@@ -490,6 +504,18 @@ class MainWindow(QMainWindow):
         self.worker_logfile.signals.zone.connect(self.update_zone)
         self.worker_logfile.signals.loc.connect(self.update_loc)
         self.threadpool.start(self.worker_logfile)
+
+    def always_on_top(self):
+        self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
+        if self.on_top is True:
+            self.on_top = False
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
+            )
+        else:
+            self.on_top = True
+            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+        self.show()
 
     def quit_app(self):
         self.terminate_logparser()
