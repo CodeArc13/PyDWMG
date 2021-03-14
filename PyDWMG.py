@@ -391,6 +391,9 @@ class MainWindow(QMainWindow):
 
                 # draw arrow head
                 painter.setPen(QPen(Qt.black, 2))  # colour and width
+                painter.drawLine(
+                    arrow_start_x, arrow_start_y, hb_start_x, hb_start_y
+                )  # arrow head
                 painter.drawLine(arrow_end_x, arrow_end_y, hb_start_x, hb_start_y)
                 painter.drawLine(arrow_start_x, arrow_start_y, arrow_end_x, arrow_end_y)
 
