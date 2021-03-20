@@ -20,6 +20,7 @@ GENERATED_LOGFILE = "fake_logfile.txt"
 
 ZONE_NORTH_QEYNOS = "[Sat Feb 13 01:40:54 2021] You have entered North Qeynos."
 ZONE_QEYNOS_HILLS = "[Sat Feb 13 01:43:20 2021] You have entered Qeynos Hills."
+ZONE_WEST_KARANA = "[Sat Feb 13 01:43:20 2021] You have entered North Karana."
 
 LOC_SAMPLE_1 = """[Sat Feb 13 15:34:07 2021] Your Location is 1029.46, 127.82, 3.75
 [Sat Feb 13 15:34:08 2021] Your Location is 1022.43, 127.91, 3.75
@@ -36,10 +37,10 @@ LOC_SAMPLE_3 = """[Sat Feb 13 15:36:21 2021] Your Location is 333.16, 84.96, 3.1
 [Sat Feb 13 15:36:21 2021] Your Location is 346.63, 83.47, 4.23
 [Sat Feb 13 15:36:21 2021] Your Location is 353.33, 82.72, 4.49"""
 
-LOC_SAMPLE_4 = """[Sat Feb 13 15:37:42 2021] Your Location is 1336.53, -1890.43, -0.59
-[Sat Feb 13 15:37:42 2021] Your Location is 1339.75, -1896.28, -0.59
-[Sat Feb 13 15:37:43 2021] Your Location is 1343.01, -1902.20, -0.59
-[Sat Feb 13 15:37:43 2021] Your Location is 1347.14, -1907.52, -0.59"""
+LOC_SAMPLE_4 = """[Sat Feb 13 15:37:42 2021] Your Location is 1500.53, -1990.43, -0.59
+[Sat Feb 13 15:37:42 2021] Your Location is 1510.75, -1996.28, -0.59
+[Sat Feb 13 15:37:43 2021] Your Location is 1520.01, -2002.20, -0.59
+[Sat Feb 13 15:37:43 2021] Your Location is 1530.14, -2007.52, -0.59"""
 
 LOGFILE_NORTHQEYNOS = "tools/log_generator_northqeynos.txt"
 LOGFILE_QEYNOSHILLS = "tools/log_generator_qeynoshills.txt"
@@ -119,6 +120,8 @@ class MainWindow(QMainWindow):
         self.button_zone1.pressed.connect(lambda: self.update_log(ZONE_NORTH_QEYNOS))
         self.button_zone2 = QPushButton("Zone: Qeynos Hills")
         self.button_zone2.pressed.connect(lambda: self.update_log(ZONE_QEYNOS_HILLS))
+        self.button_zone3 = QPushButton("Zone: West Karana")
+        self.button_zone3.pressed.connect(lambda: self.update_log(ZONE_WEST_KARANA))
         self.button_loc1 = QPushButton("Loc Spam 1 (NQ)")
         self.button_loc1.pressed.connect(lambda: self.update_log(LOC_SAMPLE_1))
         self.button_loc2 = QPushButton("Loc Spam 2 (NQ)")
@@ -156,6 +159,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(label_single)
         layout.addWidget(self.button_zone1)
         layout.addWidget(self.button_zone2)
+        layout.addWidget(self.button_zone3)
         layout.addWidget(self.button_loc1)
         layout.addWidget(self.button_loc2)
         layout.addWidget(self.button_loc3)
@@ -200,6 +204,7 @@ class MainWindow(QMainWindow):
     def set_buttons_disabled(self, action):
         self.button_zone1.setDisabled(action)
         self.button_zone2.setDisabled(action)
+        self.button_zone3.setDisabled(action)
         self.button_loc1.setDisabled(action)
         self.button_loc2.setDisabled(action)
         self.button_loc3.setDisabled(action)

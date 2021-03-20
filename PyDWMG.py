@@ -352,20 +352,20 @@ class MainWindow(QMainWindow):
             # then use nested ifs to test which edges need shifting
             if scaled_nx < 0:
                 x_shift = scaled_nx
-                scaled_px -= x_shift
-                scaled_nx = 0
+                scaled_px -= x_shift - circle_marker_size / 2
+                scaled_nx = circle_marker_size / 2
             elif scaled_nx > map_width:
                 x_shift = scaled_nx - map_width
-                scaled_px -= x_shift
-                scaled_nx = map_width
+                scaled_px -= x_shift + circle_marker_size / 2
+                scaled_nx = map_width - circle_marker_size / 2
             if scaled_ny < 0:
                 y_shift = scaled_ny
-                scaled_py -= y_shift
-                scaled_ny = 0
+                scaled_py -= y_shift - circle_marker_size / 2
+                scaled_ny = circle_marker_size / 2
             elif scaled_ny > map_height:
                 y_shift = scaled_ny - map_height
-                scaled_py -= y_shift
-                scaled_ny = map_height
+                scaled_py -= y_shift + circle_marker_size / 2
+                scaled_ny = map_height - circle_marker_size / 2
 
             # and draw on edge
             # edge is always a circle marker with or without direction arrow
