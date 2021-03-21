@@ -1,0 +1,8 @@
+draw a circle if there's only one loc
+draw a cross with arrow for direction if there's two locs and you're within the map boundaries
+draw a circle with arrow for direction if there's two locs and you're beyond the map boundaries
+
+if you're beyond the edge of the map, draw the marker at the edge of the map
+for drawing marker on edge of map, point will be 0, so scale the vector by subtracting the other point from the point (x from y, etc.)
+
+when you zone, all location data is invalid, so set any persistent locs (current loc) to None
