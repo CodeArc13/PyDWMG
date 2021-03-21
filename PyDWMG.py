@@ -121,9 +121,6 @@ class EQLogParser(QRunnable):
     def stop(self):
         self._stopped = True
 
-    # def parser_status(self):
-    #     print("Log parsing thread active...")
-
     @pyqtSlot()
     def run(self):
         # Read log file path from eq_logfile.txt
@@ -227,8 +224,6 @@ class MainWindow(QMainWindow):
         self.label_prevloc = QLabel("")
         button_quit = QPushButton("Quit")
         button_quit.pressed.connect(self.quit_app)
-        self.button_terminatelogger = QPushButton("Terminate Log Parser")
-        self.button_terminatelogger.pressed.connect(self.terminate_logparser)
 
         # LAYOUT SETUP
         tool_layout.addWidget(self.button_on_top, 0, Qt.AlignLeft)
@@ -241,7 +236,6 @@ class MainWindow(QMainWindow):
         data_layout.addWidget(label_prevloc)
         data_layout.addWidget(self.label_prevloc)
         button_layout.addWidget(button_quit)
-        button_layout.addWidget(self.button_terminatelogger)
 
         outer_layout.addLayout(tool_layout)
         outer_layout.addLayout(map_layout)
@@ -275,6 +269,8 @@ class MainWindow(QMainWindow):
         return None
 
     def update_zone(self, zone_text):
+        # Unset saved loc, as it's no longer valid.
+        self.current_loc = None
         zone = self.get_zone(zone_text)
         if zone is None:
             self.current_zone = None
@@ -287,200 +283,169 @@ class MainWindow(QMainWindow):
         self.label_map.setPixmap(pixmap)
         self.label_map.resize(pixmap.width(), pixmap.height())
         self.resize(pixmap.width(), pixmap.height())
-        self.current_loc = (
-            None,
-            None,
-            None,
-        )  # set current loc to None as the current value is for the last zone.
 
-    def update_loc(self, loc_tuple):
-        try:
-            prev_loc = self.current_loc
-        except AttributeError:
-            prev_loc = (None, None, None)
-        # prev_loc = loc_tuple
-        new_loc = loc_tuple
+    def update_loc(self, new_loc):
+        prev_loc = self.current_loc
         self.current_loc = new_loc
-        # x, y, z = new_loc # we never use these vars, just print tuple for testing and so it matches prev_loc printing
-        self.label_currentloc.setText(f"{new_loc}")
-        self.label_prevloc.setText(f"{prev_loc}")
+        # Reverse locs to display them in EQ loc format.
+        self.label_currentloc.setText(f"{tuple(reversed(new_loc))}")
+        if prev_loc is not None:
+            self.label_prevloc.setText(f"{tuple(reversed(prev_loc))}")
         if self.current_zone is not None:
-            self.draw_map(prev_loc, new_loc)
+            self.draw_map(new_loc, prev_loc)
 
-    def draw_map(
-        self, prev_loc, new_loc
-    ):  # changed the n and p coordinates to unscaled numbers only and then use another set of vars for scaled so edge calcs are less confusing
-        # also enables the ability to test if there is a previous loc after scaling previous locs
-        px, py, _ = prev_loc  # unscaled locs
-        nx, ny, _ = new_loc
+    def draw_arrow(self, painter, start_point, end_point, size, draw_x=True):
+        """ Draw arrow of given size using painter object. """
+        start_x, start_y = start_point
+        end_x, end_y = end_point
+
+        # Calculate heading vectors.
+        x_vec = start_x - end_x
+        y_vec = start_y - end_y
+
+        # Calculate magnitude (length) of vector.
+        mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
+
+        # Calculate unit vectors.
+        # (Might want to check mag here to protect against ZeroDivisionError)
+        x_unit_vec = x_vec / mag
+        y_unit_vec = y_vec / mag
+
+        # Calculate heading bar start for arrow head.
+        hb_start_x = round(start_x - (x_unit_vec * size))
+        hb_start_y = round(start_y - (y_unit_vec * size))
+        hb_start_point = (hb_start_x, hb_start_y)
+
+        # Calculate arrow head.
+        arrow_start_point = tuple(
+            map(round, self.rotate_point(*start_point, *hb_start_point, 45))
+        )
+        arrow_end_point = tuple(
+            map(round, self.rotate_point(*start_point, *hb_start_point, -45))
+        )
+
+        if draw_x:
+            # Calculate heading bar end for X.
+            hb_end_x = round(start_x + (x_unit_vec * size))
+            hb_end_y = round(start_y + (y_unit_vec * size))
+            hb_end_point = (hb_end_x, hb_end_y)
+
+            # Calculate cross bar for X.
+            cb_start_point = tuple(
+                map(round, self.rotate_point(*hb_end_point, *start_point, 90))
+            )
+            cb_end_point = tuple(
+                map(round, self.rotate_point(*hb_end_point, *start_point, 270))
+            )
+
+            # Draw red X (marks the spot).
+            painter.setPen(QPen(Qt.red, 2))
+            painter.drawLine(*hb_start_point, *hb_end_point)
+            painter.drawLine(*cb_start_point, *cb_end_point)
+        # Draw arrow head.
+        painter.setPen(QPen(Qt.black, 2))
+        painter.drawLine(*arrow_start_point, *hb_start_point)
+        painter.drawLine(*arrow_end_point, *hb_start_point)
+        painter.drawLine(*arrow_start_point, *arrow_end_point)
+
+    def draw_circle(self, painter, point, size):
+        """ Draw circle of given size using painter object. """
+        x, y = point
+        painter.setPen(QPen(Qt.red, 2))
+        painter.drawEllipse(
+            round(x - size / 2), round(y - size / 2), size, size,
+        )
+
+    def draw_map(self, new_loc, prev_loc):
+        """ Draw marker on map based on current and previous location """
+        # Create a copy of the current map to use for drawing a new map.
         new_map = QPixmap(self.map_base)
-        map_width, map_height = new_map.width(), new_map.height()
         painter = QPainter(new_map)
-        painter.setPen(QPen(Qt.red, 2))  # colour and width
+
+        # Set marker sizes to odd numbers so shape is even around center pixel.
         circle_marker_size = 11
-        cross_marker_size = 9.0  # this is a float in VB, not sure if it needs to be
+        cross_marker_size = 9
 
-        # calculate scaled new locs
-        scaled_nx = (
-            -nx / self.current_zone.map_scale_factor + self.current_zone.offset_x
-        )
-        scaled_ny = (
-            -ny / self.current_zone.map_scale_factor + self.current_zone.offset_y
-        )
+        # Scale locs to map size using current zone scale factor and offsets.
+        map_scale_factor = self.current_zone.map_scale_factor
+        map_offset_x = self.current_zone.offset_x
+        map_offset_y = self.current_zone.offset_y
+        new_x, new_y, _ = new_loc
+        scaled_new_x = -new_x / map_scale_factor + map_offset_x
+        scaled_new_y = -new_y / map_scale_factor + map_offset_y
+        scaled_new_loc = (scaled_new_x, scaled_new_y)
+        if prev_loc is not None:
+            prev_x, prev_y, _ = prev_loc
+            # Abort map drawing if new and prev locs are the same.
+            if (new_x, new_y) == (prev_x, prev_y):
+                painter.end()
+                return
+            scaled_prev_x = -prev_x / map_scale_factor + map_offset_x
+            scaled_prev_y = -prev_y / map_scale_factor + map_offset_y
+            scaled_prev_loc = (scaled_prev_x, scaled_prev_y)
 
-        if px is not None:  # test to see if there is a valid prev loc
-            scaled_px = (
-                -px / self.current_zone.map_scale_factor + self.current_zone.offset_x
-            )
-            scaled_py = (
-                -py / self.current_zone.map_scale_factor + self.current_zone.offset_y
-            )
+        # Check if new loc is within the map image size.
+        map_width = new_map.width()
+        map_height = new_map.height()
+        if 0 < scaled_new_x < map_width and 0 < scaled_new_y < map_height:
+            if prev_loc is not None:
+                # Use previous loc to draw an arrow showing movement direction.
+                self.draw_arrow(
+                    painter,
+                    scaled_prev_loc,
+                    scaled_new_loc,
+                    cross_marker_size,
+                    draw_x=True,
+                )
+            else:
+                # Draw a circle at the new location.
+                self.draw_circle(painter, scaled_new_loc, circle_marker_size)
         else:
-            scaled_px, scaled_py = (
-                0,
-                0,
-            )  # need to be initialized so they can be used even if there is no prev loc
+            # Adjust new loc so it's within the map image at the closest edge.
+            # Set x to the center of a circle at the map edge, and make the
+            # same adjustment to prev loc to maintain accurate movement vector.
+            if scaled_new_x < 0:
+                if prev_loc is not None:
+                    x_shift = scaled_new_x
+                    scaled_prev_x -= x_shift - circle_marker_size / 2
+                scaled_new_x = circle_marker_size / 2
+            elif scaled_new_x > map_width:
+                if prev_loc is not None:
+                    x_shift = scaled_new_x - map_width
+                    scaled_prev_x -= x_shift + circle_marker_size / 2
+                scaled_new_x = map_width - circle_marker_size / 2
+            if scaled_new_y < 0:
+                if prev_loc is not None:
+                    y_shift = scaled_new_y
+                    scaled_prev_y -= y_shift - circle_marker_size / 2
+                scaled_new_y = circle_marker_size / 2
+            elif scaled_new_y > map_height:
+                if prev_loc is not None:
+                    y_shift = scaled_new_y - map_height
+                    scaled_prev_y -= y_shift + circle_marker_size / 2
+                scaled_new_y = map_height - circle_marker_size / 2
 
-        # use if/or statement to test all edges to check if shifting is needed,
-        if (
-            scaled_nx < 0
-            or scaled_nx > map_width
-            or scaled_ny < 0
-            or scaled_ny > map_height
-        ):
+            # Update tuple with new values and draw circle at the map edge.
+            scaled_new_loc = (scaled_new_x, scaled_new_y)
+            self.draw_circle(painter, scaled_new_loc, circle_marker_size)
 
-            # then use nested ifs to test which edges need shifting
-            if scaled_nx < 0:
-                x_shift = scaled_nx
-                scaled_px -= x_shift - circle_marker_size / 2
-                scaled_nx = circle_marker_size / 2
-            elif scaled_nx > map_width:
-                x_shift = scaled_nx - map_width
-                scaled_px -= x_shift + circle_marker_size / 2
-                scaled_nx = map_width - circle_marker_size / 2
-            if scaled_ny < 0:
-                y_shift = scaled_ny
-                scaled_py -= y_shift - circle_marker_size / 2
-                scaled_ny = circle_marker_size / 2
-            elif scaled_ny > map_height:
-                y_shift = scaled_ny - map_height
-                scaled_py -= y_shift + circle_marker_size / 2
-                scaled_ny = map_height - circle_marker_size / 2
-
-            # and draw on edge
-            # edge is always a circle marker with or without direction arrow
-            painter.drawEllipse(
-                round(scaled_nx - circle_marker_size / 2),
-                round(scaled_ny - circle_marker_size / 2),
-                circle_marker_size,
-                circle_marker_size,
-            )
-            if px is not None:  # test to see if there is a valid prev loc
-                # calculate heading vectors
-                x_vec = scaled_px - scaled_nx
-                y_vec = scaled_py - scaled_ny
-
-                # calculate length/magnitude of vector
-                mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
-
-                # calculate unit vectors
-                x_unit_vec = x_vec / mag
-                y_unit_vec = y_vec / mag
-
-                # calculate heading bar start for arrow head
-                hb_start_x = round(scaled_px - (x_unit_vec * cross_marker_size))
-                hb_start_y = round(scaled_py - (y_unit_vec * cross_marker_size))
-
-                # calculate arrow head
-                arrow_start_x, arrow_start_y = map(
-                    round,
-                    self.rotate_point(scaled_px, scaled_py, hb_start_x, hb_start_y, 45),
+            if prev_loc is not None:
+                scaled_prev_loc = (scaled_prev_x, scaled_prev_y)
+                # Draw arrow head (without X) to show direction with circle.
+                self.draw_arrow(
+                    painter,
+                    scaled_prev_loc,
+                    scaled_new_loc,
+                    cross_marker_size,
+                    draw_x=False,
                 )
-                arrow_end_x, arrow_end_y = map(
-                    round,
-                    self.rotate_point(
-                        scaled_px, scaled_py, hb_start_x, hb_start_y, -45
-                    ),
-                )
-
-                # draw arrow head
-                painter.setPen(QPen(Qt.black, 2))  # colour and width
-                painter.drawLine(
-                    arrow_start_x, arrow_start_y, hb_start_x, hb_start_y
-                )  # arrow head
-                painter.drawLine(arrow_end_x, arrow_end_y, hb_start_x, hb_start_y)
-                painter.drawLine(arrow_start_x, arrow_start_y, arrow_end_x, arrow_end_y)
-
-        # else if no edge cases found then draw on map normally
-        else:
-
-            if px is None:  # test to see if there is a valid prev loc
-                painter.drawEllipse(
-                    round(scaled_nx - circle_marker_size / 2),
-                    round(scaled_ny - circle_marker_size / 2),
-                    circle_marker_size,
-                    circle_marker_size,
-                )
-            else:  # if there is a prev loc calculate direction
-                # calculate heading vectors
-                x_vec = scaled_px - scaled_nx
-                y_vec = scaled_py - scaled_ny
-
-                # calculate length/magnitude of vector
-                mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
-
-                # calculate unit vectors
-                x_unit_vec = x_vec / mag
-                y_unit_vec = y_vec / mag
-
-                # calculate heading bar
-                hb_start_x = round(scaled_px - (x_unit_vec * cross_marker_size))
-                hb_start_y = round(scaled_py - (y_unit_vec * cross_marker_size))
-                hb_end_x = round(scaled_px + (x_unit_vec * cross_marker_size))
-                hb_end_y = round(scaled_py + (y_unit_vec * cross_marker_size))
-
-                # calculate cross bar
-                cb_start_x, cb_start_y = map(
-                    round,
-                    self.rotate_point(hb_end_x, hb_end_y, scaled_px, scaled_py, 90),
-                )
-                cb_end_x, cb_end_y = map(
-                    round,
-                    self.rotate_point(hb_end_x, hb_end_y, scaled_px, scaled_py, 270),
-                )
-
-                # calculate arrow head
-                arrow_start_x, arrow_start_y = map(
-                    round,
-                    self.rotate_point(scaled_px, scaled_py, hb_start_x, hb_start_y, 45),
-                )
-                arrow_end_x, arrow_end_y = map(
-                    round,
-                    self.rotate_point(
-                        scaled_px, scaled_py, hb_start_x, hb_start_y, -45
-                    ),
-                )
-
-                # draw direction marker
-                painter.drawLine(
-                    hb_start_x, hb_start_y, hb_end_x, hb_end_y
-                )  # heading bar
-                painter.drawLine(
-                    cb_start_x, cb_start_y, cb_end_x, cb_end_y
-                )  # cross bar
-                painter.setPen(QPen(Qt.black, 2))  # colour and width
-                painter.drawLine(
-                    arrow_start_x, arrow_start_y, hb_start_x, hb_start_y
-                )  # arrow head
-                painter.drawLine(arrow_end_x, arrow_end_y, hb_start_x, hb_start_y)
-                painter.drawLine(arrow_start_x, arrow_start_y, arrow_end_x, arrow_end_y)
-
         painter.end()
         self.label_map.setPixmap(new_map)
-        self.label_map.resize(new_map.width(), new_map.height())
-        self.resize(new_map.width(), new_map.height())
+        self.label_map.resize(map_width, map_height)
+        self.resize(map_width, map_height)
 
     def rotate_point(self, end_x, end_y, start_x, start_y, degrees):
+        """ Return a point after rotating it given end, start, and degrees. """
         rotated_x = start_x + (
             math.cos(self.d_to_r(degrees)) * (end_x - start_x)
             - math.sin(self.d_to_r(degrees)) * (end_y - start_y)
@@ -491,11 +456,11 @@ class MainWindow(QMainWindow):
         )
         return (rotated_x, rotated_y)
 
-    def d_to_r(self, angle):  # returns the radian equivalent of degrees
+    def d_to_r(self, angle):
+        """ Return the radian equivalent of degrees. """
         return angle / 180 * math.pi
 
     def terminate_logparser(self):
-        self.button_terminatelogger.setDisabled(True)
         self.logparser_control.terminate.emit()
 
     def start_workers(self):
