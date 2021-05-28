@@ -307,35 +307,38 @@ class MainWindow(QMainWindow):
         mag = math.sqrt((x_vec ** 2) + (y_vec ** 2))
 
         # Calculate unit vectors.
-        # (Might want to check mag here to protect against ZeroDivisionError)
-        x_unit_vec = x_vec / mag
-        y_unit_vec = y_vec / mag
+        try:
+            x_unit_vec = x_vec / mag
+            y_unit_vec = y_vec / mag
+        except ZeroDivisionError:
+            x_unit_vec = x_vec
+            y_unit_vec = y_vec
 
         # Calculate heading bar start for arrow head.
-        hb_start_x = round(start_x - (x_unit_vec * size))
-        hb_start_y = round(start_y - (y_unit_vec * size))
+        hb_start_x = round(end_x - (x_unit_vec * size))
+        hb_start_y = round(end_y - (y_unit_vec * size))
         hb_start_point = (hb_start_x, hb_start_y)
 
         # Calculate arrow head.
         arrow_start_point = tuple(
-            map(round, self.rotate_point(*start_point, *hb_start_point, 45))
+            map(round, self.rotate_point(*end_point, *hb_start_point, 45))
         )
         arrow_end_point = tuple(
-            map(round, self.rotate_point(*start_point, *hb_start_point, -45))
+            map(round, self.rotate_point(*end_point, *hb_start_point, -45))
         )
 
         if draw_x:
             # Calculate heading bar end for X.
-            hb_end_x = round(start_x + (x_unit_vec * size))
-            hb_end_y = round(start_y + (y_unit_vec * size))
+            hb_end_x = round(end_x + (x_unit_vec * size))
+            hb_end_y = round(end_y + (y_unit_vec * size))
             hb_end_point = (hb_end_x, hb_end_y)
 
             # Calculate cross bar for X.
             cb_start_point = tuple(
-                map(round, self.rotate_point(*hb_end_point, *start_point, 90))
+                map(round, self.rotate_point(*hb_end_point, *end_point, 90))
             )
             cb_end_point = tuple(
-                map(round, self.rotate_point(*hb_end_point, *start_point, 270))
+                map(round, self.rotate_point(*hb_end_point, *end_point, 270))
             )
 
             # Draw red X (marks the spot).
