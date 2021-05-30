@@ -4,6 +4,7 @@ import sys
 import csv
 import time
 import math
+from pathlib import Path
 from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
@@ -26,11 +27,17 @@ from PyQt5.QtCore import (
 from PyQt5.QtGui import QPixmap, QPainter, QPen, QIcon
 
 
-class WorkerSignals(QObject):
+class LogParserSignals(QObject):
     """ Defines the signals available from a running worker thread."""
 
     zone = pyqtSignal(str)
     loc = pyqtSignal(tuple)
+
+
+class LogScannerSignals(QObject):
+    """ Defines the signals available from a running worker thread."""
+
+    logfile = pyqtSignal(Path)
 
 
 class ParentSignals(QObject):
@@ -95,21 +102,67 @@ class Zone:
         return f"Zone({self.zone_name})"
 
 
+class EQLogScanner(QRunnable):
+    """
+    Worker thread, inherits from QRunnable to handler worker thread setup,
+    signals and wrap-up.
+    """
+
+    def __init__(self, parent_signals, eqlog_dir, *args, **kwargs):
+        super(EQLogScanner, self).__init__()
+        # Store constructor arguments (re-used for processing)
+        self._stopped = False
+        self.args = args
+        self.kwargs = kwargs
+        self.signals = LogScannerSignals()
+        self.parent_signals = parent_signals
+        self.parent_signals.terminate.connect(self.stop)
+        self.eqlogscan_dir = eqlog_dir
+        self.current_logfile = None
+
+    def __del__(self):
+        self.stop()
+
+    def stop(self):
+        self._stopped = True
+
+    @pyqtSlot()
+    def run(self):
+        # Scan log dir to find most recently modified file
+        print("Log scanner started...")
+        eqlog_format = "eqlog_*.txt"
+        while not self._stopped:
+            eqlog_files = Path(self.eqlogscan_dir).glob(eqlog_format)
+            last_modified = max(
+                eqlog_files, default=None, key=lambda f: f.stat().st_mtime
+            )
+            if last_modified != self.current_logfile and last_modified is not None:
+                # Store resolved path as current logfile and emit
+                self.current_logfile = last_modified.resolve()
+                self.signals.logfile.emit(self.current_logfile)
+            else:
+                time.sleep(2)  # Check every 2 seconds
+                continue
+
+        print("Log file scanner stopped.")
+
+
 class EQLogParser(QRunnable):
     """
     Worker thread, inherits from QRunnable to handler worker thread setup,
     signals and wrap-up.
     """
 
-    def __init__(self, parent_signals, *args, **kwargs):
+    def __init__(self, parent_signals, log_file, *args, **kwargs):
         super(EQLogParser, self).__init__()
         # Store constructor arguments (re-used for processing)
         self._stopped = False
         self.args = args
         self.kwargs = kwargs
-        self.signals = WorkerSignals()
+        self.signals = LogParserSignals()
         self.parent_signals = parent_signals
         self.parent_signals.terminate.connect(self.stop)
+        self.log_file = log_file
         # Can use a timer in the worker thread for periodic checks, or something
         # self.show_status = QTimer()
         # self.show_status.timeout.connect(self.parser_status)
@@ -123,23 +176,13 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        # Read log file path from eq_logfile.txt
-        try:
-            # Read log file path from local config file:
-            with open("eq_logfile.txt", "rt") as f:
-                logfile_path = f.readline().strip()
-            print(f"Found eq_logfile.txt, using log file location:\n{logfile_path}")
-        except Exception:
-            print(
-                "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
-            )
-
+        print("Log parser started...")
+        logfile_path = self.log_file
         # Define regex patterns to use for log line matching
         zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
         loc_pattern = re.compile(
             r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
         )
-        logfile = open(logfile_path, "rt")
 
         # Get starting zone before beginning log read loop
         for line in reverse_readline(logfile_path):
@@ -153,7 +196,6 @@ class EQLogParser(QRunnable):
 
         # Start log read loop
         with open(logfile_path, "rt") as logfile:
-            print("Log parser started...")
             logfile.seek(0, 2)  # Go to the end of the file
             while not self._stopped:
                 line = logfile.readline()
@@ -258,7 +300,11 @@ class MainWindow(QMainWindow):
             "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount()
         )
 
-        self.start_workers()
+        self.get_eqlog_dir()
+        try:
+            self.start_logscanner(self.eqlog_dir)
+        except AttributeError:
+            print("Error: No eq log dir defined, unable to start log scanner thread")
 
     def get_zone(self, zone_text):
         for zone in self.zones:
@@ -464,14 +510,54 @@ class MainWindow(QMainWindow):
         return angle / 180 * math.pi
 
     def terminate_logparser(self):
-        self.logparser_control.terminate.emit()
+        try:
+            self.logparser_control.terminate.emit()
+        except AttributeError:
+            print("No log parser to stop.")
 
-    def start_workers(self):
+    def terminate_logscanner(self):
+        try:
+            self.logscanner_control.terminate.emit()
+        except AttributeError:
+            print("No log scanner to stop.")
+
+    def start_logparser(self, log_file):
         self.logparser_control = ParentSignals()
-        self.worker_logfile = EQLogParser(self.logparser_control)
-        self.worker_logfile.signals.zone.connect(self.update_zone)
-        self.worker_logfile.signals.loc.connect(self.update_loc)
-        self.threadpool.start(self.worker_logfile)
+        self.worker_logparser = EQLogParser(self.logparser_control, log_file)
+        self.worker_logparser.signals.zone.connect(self.update_zone)
+        self.worker_logparser.signals.loc.connect(self.update_loc)
+        self.threadpool.start(self.worker_logparser)
+
+    def start_logscanner(self, eqlog_dir):
+        self.logscanner_control = ParentSignals()
+        self.worker_logscanner = EQLogScanner(self.logscanner_control, eqlog_dir)
+        self.worker_logscanner.signals.logfile.connect(self.change_log_file)
+        self.threadpool.start(self.worker_logscanner)
+
+    def change_log_file(self, new_file):
+        try:
+            self.terminate_logparser()
+        except AttributeError:
+            pass
+        self.start_logparser(new_file)
+        print(f"Changed log file to {new_file}")
+
+    def get_eqlog_dir(self):
+        # Read log file path from eq_logfile.txt
+        try:
+            # Read log file path from local config file:
+            with open("eq_logfile.txt", "rt") as f:
+                eq_logfile_path = f.readline().strip()
+            print(f"Found eq_logfile.txt, using eq log directory:\n {eq_logfile_path}")
+        except Exception:
+            print(
+                "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
+            )
+        logfile_path = Path(eq_logfile_path)
+        if Path.is_dir(logfile_path):
+            self.eqlog_dir = Path(logfile_path)
+        else:
+            print(f"Error: This path is not a directory - {eq_logfile_path}")
 
     def always_on_top(self):
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
@@ -487,6 +573,7 @@ class MainWindow(QMainWindow):
 
     def quit_app(self):
         self.terminate_logparser()
+        self.terminate_logscanner()
         app.quit()
 
 

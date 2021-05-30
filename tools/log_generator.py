@@ -16,7 +16,7 @@ from PyQt5.QtCore import (
     pyqtSignal,
 )
 
-GENERATED_LOGFILE = "fake_logfile.txt"
+GENERATED_LOGFILE = "eqlog_fakelogfile.txt"
 
 ZONE_NORTH_QEYNOS = "[Sat Feb 13 01:40:54 2021] You have entered North Qeynos."
 ZONE_QEYNOS_HILLS = "[Sat Feb 13 01:43:20 2021] You have entered Qeynos Hills."
