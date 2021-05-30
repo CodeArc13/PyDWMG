@@ -402,7 +402,10 @@ class MainWindow(QMainWindow):
         x, y = point
         painter.setPen(QPen(Qt.red, 2))
         painter.drawEllipse(
-            round(x - size / 2), round(y - size / 2), size, size,
+            round(x - size / 2),
+            round(y - size / 2),
+            size,
+            size,
         )
 
     def draw_map(self, new_loc, prev_loc):
