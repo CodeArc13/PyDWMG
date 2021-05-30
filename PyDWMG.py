@@ -7,12 +7,15 @@ import math
 from pathlib import Path
 from PyQt5.QtWidgets import (
     QApplication,
+    QStyle,
     QWidget,
     QPushButton,
     QMainWindow,
     QVBoxLayout,
     QHBoxLayout,
     QLabel,
+    QFileDialog,
+    QMessageBox,
 )
 
 from PyQt5.QtCore import (
@@ -244,6 +247,12 @@ class MainWindow(QMainWindow):
         self.on_top = False
 
         # TOOL BAR
+        self.button_log_folder = QPushButton()
+        self.button_log_folder.setIcon(
+            QApplication.style().standardIcon(QStyle.SP_DialogOpenButton)
+        )
+        self.button_log_folder.setToolTip("Select EQ or log folder")
+        self.button_log_folder.pressed.connect(self.select_log_folder)
         self.button_on_top = QPushButton()
         self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
         self.button_on_top.setToolTip("Always on top")
@@ -268,7 +277,8 @@ class MainWindow(QMainWindow):
         button_quit.pressed.connect(self.quit_app)
 
         # LAYOUT SETUP
-        tool_layout.addWidget(self.button_on_top, 0, Qt.AlignLeft)
+        tool_layout.addWidget(self.button_log_folder, 0, Qt.AlignLeft)
+        tool_layout.addWidget(self.button_on_top, 1, Qt.AlignLeft)
         map_layout.addWidget(self.label_map)
         data_layout.addStretch()
         data_layout.addWidget(label_zone)
@@ -402,7 +412,10 @@ class MainWindow(QMainWindow):
         x, y = point
         painter.setPen(QPen(Qt.red, 2))
         painter.drawEllipse(
-            round(x - size / 2), round(y - size / 2), size, size,
+            round(x - size / 2),
+            round(y - size / 2),
+            size,
+            size,
         )
 
     def draw_map(self, new_loc, prev_loc):
@@ -558,6 +571,39 @@ class MainWindow(QMainWindow):
             self.eqlog_dir = Path(logfile_path)
         else:
             print(f"Error: This path is not a directory - {eq_logfile_path}")
+
+    def select_log_folder(self):
+        nologs_message = "Please select either your EQ folder or the log folder inside it and ensure you have logs enabled with logs in the log folder."
+        log_folder_path = Path(
+            str(
+                QFileDialog.getExistingDirectory(self, "Select EQ Folder or Log Folder")
+            )
+        )
+        if (
+            os.path.basename(log_folder_path) == "Logs"
+            and len(list(Path(log_folder_path).glob("eqlog_*.txt"))) > 0
+        ):
+            print("good log folder")
+            self.start_new_log_scan(log_folder_path)
+        # check if looking in eq folder by looking for eqgame.exe
+        elif os.path.isfile(os.path.join(log_folder_path, "eqgame.exe")):
+            # if looking in eq folder and not log folder, switch to log folder
+            log_folder_path = Path(os.path.join(log_folder_path, "Logs"))
+            if len(list(Path(log_folder_path).glob("eqlog_*.txt"))) > 0:
+                print("good log folder after amending path")
+                self.start_new_log_scan(log_folder_path)
+            else:
+                self.nologs_dialog = QMessageBox.warning(self, "Error", nologs_message)
+        else:
+            self.nologs_dialog = QMessageBox.warning(self, "Error", nologs_message)
+
+    def start_new_log_scan(self, log_folder_path):
+        print(log_folder_path)
+        self.terminate_logscanner()
+        with open("eq_logfile.txt", "w") as f:
+            f.write(str(log_folder_path))
+            f.close()
+        self.start_logscanner(log_folder_path)
 
     def always_on_top(self):
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
