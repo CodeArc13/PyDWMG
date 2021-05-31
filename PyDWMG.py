@@ -258,6 +258,7 @@ class MainWindow(QMainWindow):
         self.trans_slider.setMaximum(100)
         self.trans_slider.setTickInterval(1)
         self.trans_slider.setValue(self.transparency * 100)
+        self.trans_slider.setToolTip("Window transparency")
         self.trans_slider.valueChanged.connect(self.transparency_changed)
 
         # MAP LABEL
