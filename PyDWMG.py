@@ -131,10 +131,18 @@ class EQLogScanner(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        # Scan log dir to find most recently modified file
-        print("Log scanner started...")
+        """ Scan log dir to find most recently modified file. """
+
+        print(f"Scanner thread started for dir: {self.eqlogscan_dir}...")
         eqlog_format = "eqlog_*.txt"
+        # Scan every 2 seconds
+        scan_interval = scan_counter = 20
         while not self._stopped:
+            if scan_counter < scan_interval:
+                scan_counter += 1
+                time.sleep(0.1)
+                continue
+            scan_counter = 0
             eqlog_files = Path(self.eqlogscan_dir).glob(eqlog_format)
             last_modified = max(
                 eqlog_files, default=None, key=lambda f: f.stat().st_mtime
@@ -143,11 +151,8 @@ class EQLogScanner(QRunnable):
                 # Store resolved path as current logfile and emit
                 self.current_logfile = last_modified.resolve()
                 self.signals.logfile.emit(self.current_logfile)
-            else:
-                time.sleep(2)  # Check every 2 seconds
-                continue
 
-        print("Log file scanner stopped.")
+        print(f"Scanner thread stopped for dir: {self.eqlogscan_dir}.")
 
 
 class EQLogParser(QRunnable):
@@ -179,7 +184,9 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        print("Log parser started...")
+
+        """ Parse log file for updated zone and loc data. """
+        print(f"Parser thread started for file: {self.log_file}...")
         logfile_path = self.log_file
         # Define regex patterns to use for log line matching
         zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
@@ -216,7 +223,7 @@ class EQLogParser(QRunnable):
                         self.signals.loc.emit((x, y, z))
                     except IndexError:
                         pass
-        print("Log parser stopped.")
+        print(f"Parser thread stopped for file: {self.log_file}.")
 
 
 class MainWindow(QMainWindow):
@@ -252,7 +259,7 @@ class MainWindow(QMainWindow):
             QApplication.style().standardIcon(QStyle.SP_DialogOpenButton)
         )
         self.button_log_folder.setToolTip("Select EQ or log folder")
-        self.button_log_folder.pressed.connect(self.select_log_folder)
+        self.button_log_folder.pressed.connect(self.select_eqlog_dir)
         self.button_on_top = QPushButton()
         self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
         self.button_on_top.setToolTip("Always on top")
@@ -412,10 +419,7 @@ class MainWindow(QMainWindow):
         x, y = point
         painter.setPen(QPen(Qt.red, 2))
         painter.drawEllipse(
-            round(x - size / 2),
-            round(y - size / 2),
-            size,
-            size,
+            round(x - size / 2), round(y - size / 2), size, size,
         )
 
     def draw_map(self, new_loc, prev_loc):
@@ -523,18 +527,21 @@ class MainWindow(QMainWindow):
         return angle / 180 * math.pi
 
     def terminate_logparser(self):
+        """ Stop the log parsing thread. """
         try:
             self.logparser_control.terminate.emit()
         except AttributeError:
-            print("No log parser to stop.")
+            pass
 
     def terminate_logscanner(self):
+        """ Stop the log dir scanning thread. """
         try:
             self.logscanner_control.terminate.emit()
         except AttributeError:
-            print("No log scanner to stop.")
+            pass
 
     def start_logparser(self, log_file):
+        """ Start a thread to parse log file for mapping updates. """
         self.logparser_control = ParentSignals()
         self.worker_logparser = EQLogParser(self.logparser_control, log_file)
         self.worker_logparser.signals.zone.connect(self.update_zone)
@@ -542,21 +549,20 @@ class MainWindow(QMainWindow):
         self.threadpool.start(self.worker_logparser)
 
     def start_logscanner(self, eqlog_dir):
+        """ Start a thread to scan log dir for updated log files. """
         self.logscanner_control = ParentSignals()
         self.worker_logscanner = EQLogScanner(self.logscanner_control, eqlog_dir)
         self.worker_logscanner.signals.logfile.connect(self.change_log_file)
         self.threadpool.start(self.worker_logscanner)
 
     def change_log_file(self, new_file):
-        try:
-            self.terminate_logparser()
-        except AttributeError:
-            pass
+        """ Change log file being parsed. """
+        self.terminate_logparser()
         self.start_logparser(new_file)
         print(f"Changed log file to {new_file}")
 
     def get_eqlog_dir(self):
-        # Read log file path from eq_logfile.txt
+        """ Get EQ log dir from saved app settings. """
         try:
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
@@ -564,7 +570,8 @@ class MainWindow(QMainWindow):
             print(f"Found eq_logfile.txt, using eq log directory:\n {eq_logfile_path}")
         except Exception:
             print(
-                "Unable to read log file location from eq_logfile.txt, create this file for auto-detection"
+                "Unable to read log file location from eq_logfile.txt, "
+                "create this file for auto-detection"
             )
         logfile_path = Path(eq_logfile_path)
         if Path.is_dir(logfile_path):
@@ -572,40 +579,62 @@ class MainWindow(QMainWindow):
         else:
             print(f"Error: This path is not a directory - {eq_logfile_path}")
 
-    def select_log_folder(self):
-        nologs_message = "Please select either your EQ folder or the log folder inside it and ensure you have logs enabled with logs in the log folder."
-        log_folder_path = Path(
-            str(
-                QFileDialog.getExistingDirectory(self, "Select EQ Folder or Log Folder")
-            )
-        )
-        if (
-            os.path.basename(log_folder_path) == "Logs"
-            and len(list(Path(log_folder_path).glob("eqlog_*.txt"))) > 0
-        ):
-            print("good log folder")
-            self.start_new_log_scan(log_folder_path)
-        # check if looking in eq folder by looking for eqgame.exe
-        elif os.path.isfile(os.path.join(log_folder_path, "eqgame.exe")):
-            # if looking in eq folder and not log folder, switch to log folder
-            log_folder_path = Path(os.path.join(log_folder_path, "Logs"))
-            if len(list(Path(log_folder_path).glob("eqlog_*.txt"))) > 0:
-                print("good log folder after amending path")
-                self.start_new_log_scan(log_folder_path)
-            else:
-                self.nologs_dialog = QMessageBox.warning(self, "Error", nologs_message)
-        else:
-            self.nologs_dialog = QMessageBox.warning(self, "Error", nologs_message)
+    def select_eqlog_dir(self):
+        """ Show a dialog box for the user to select their EQ log folder. """
 
-    def start_new_log_scan(self, log_folder_path):
-        print(log_folder_path)
-        self.terminate_logscanner()
+        def contains_eqlogfiles(folder_path) -> bool:
+            """ Check if the selected folder contains EQ log files. """
+            try:
+                next(folder_path.glob("eqlog_*.txt"))
+                return True
+            except StopIteration:
+                return False
+
+        verified_logs_path = None
+        while verified_logs_path is None:
+            # Present dialog box to select logs folder
+            selected_folder = QFileDialog.getExistingDirectory(
+                caption="Select EQ Folder or Logs Folder",
+                options=QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
+            )
+            if selected_folder == "":
+                # User pressed Cancel, close dialog
+                return
+            else:
+                selected_folder_path = Path(selected_folder)
+                if selected_folder_path == self.eqlog_dir:
+                    currentdir_message = (
+                        "You've selected the log folder already in use."
+                        "  If you want to change the log directory, "
+                        " please select a different folder."
+                    )
+                    QMessageBox.warning(self, "Notice", currentdir_message)
+                if selected_folder_path.joinpath("eqgame.exe").is_file():
+                    # EQ directory selected, check for valid Logs folder
+                    eqdir_logs_path = selected_folder_path.joinpath("Logs")
+                    if contains_eqlogfiles(eqdir_logs_path):
+                        verified_logs_path = eqdir_logs_path
+                # Check if selected folder contains EQ log files
+                if contains_eqlogfiles(selected_folder_path):
+                    verified_logs_path = selected_folder_path
+                else:
+                    nologs_message = (
+                        "Please select either your EQ folder or the log"
+                        " folder inside it and ensure you have logging"
+                        " enabled and logs in the log folder."
+                    )
+                    # Popup error and have user select another folder
+                    QMessageBox.warning(self, "Error", nologs_message)
+        # Save new log directory
+        self.eqlog_dir = verified_logs_path
         with open("eq_logfile.txt", "w") as f:
-            f.write(str(log_folder_path))
-            f.close()
-        self.start_logscanner(log_folder_path)
+            f.write(str(self.eqlog_dir))
+        # Re-start log scanner
+        self.terminate_logscanner()
+        self.start_logscanner(self.eqlog_dir)
 
     def always_on_top(self):
+        """ Toggle always on top window setting. """
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
         if self.on_top is True:
             self.on_top = False
@@ -618,6 +647,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def quit_app(self):
+        """ Stop any started threads before quitting the app window. """
         self.terminate_logparser()
         self.terminate_logscanner()
         app.quit()
