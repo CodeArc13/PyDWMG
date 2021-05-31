@@ -243,7 +243,7 @@ class MainWindow(QMainWindow):
 
         # WINDOW VARIABLES, could be used for persistance between sessions
         self.on_top = False
-        self.transparency = 1
+        self.opacity = 1
 
         # TOOL BAR
         self.button_on_top = QPushButton()
@@ -251,15 +251,15 @@ class MainWindow(QMainWindow):
         self.button_on_top.setToolTip("Always on top")
         self.button_on_top.pressed.connect(self.always_on_top)
 
-        # SET WINDOW TRANSPARENCY AND SETUP SLIDER
-        self.setWindowOpacity(self.transparency)
-        self.trans_slider = QSlider(Qt.Horizontal)
-        self.trans_slider.setMinimum(20)
-        self.trans_slider.setMaximum(100)
-        self.trans_slider.setTickInterval(1)
-        self.trans_slider.setValue(self.transparency * 100)
-        self.trans_slider.setToolTip("Window transparency")
-        self.trans_slider.valueChanged.connect(self.transparency_changed)
+        # SET WINDOW OPACITY AND SETUP SLIDER
+        self.setWindowOpacity(self.opacity)
+        self.opacity_slider = QSlider(Qt.Horizontal)
+        self.opacity_slider.setMinimum(20)
+        self.opacity_slider.setMaximum(100)
+        self.opacity_slider.setTickInterval(1)
+        self.opacity_slider.setValue(self.opacity * 100)
+        self.opacity_slider.setToolTip("Window transparency")
+        self.opacity_slider.valueChanged.connect(self.opacity_changed)
 
         # MAP LABEL
         INITIAL_MAP = "Map_eastcommons.jpg"
@@ -281,7 +281,7 @@ class MainWindow(QMainWindow):
 
         # LAYOUT SETUP
         tool_layout.addWidget(self.button_on_top, 0, Qt.AlignLeft)
-        tool_layout.addWidget(self.trans_slider, 1, Qt.AlignLeft)
+        tool_layout.addWidget(self.opacity_slider, 1, Qt.AlignLeft)
         map_layout.addWidget(self.label_map)
         data_layout.addStretch()
         data_layout.addWidget(label_zone)
@@ -587,8 +587,9 @@ class MainWindow(QMainWindow):
             self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
         self.show()
 
-    def transparency_changed(self):
-        self.setWindowOpacity(self.trans_slider.value() / 100)
+    def opacity_changed(self):
+        self.opacity = self.opacity_slider.value() / 100
+        self.setWindowOpacity(self.opacity)
 
     def quit_app(self):
         self.terminate_logparser()
