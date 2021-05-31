@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
     QPushButton,
+    QSlider,
     QMainWindow,
     QVBoxLayout,
     QHBoxLayout,
@@ -242,12 +243,22 @@ class MainWindow(QMainWindow):
 
         # WINDOW VARIABLES, could be used for persistance between sessions
         self.on_top = False
+        self.transparency = 1
 
         # TOOL BAR
         self.button_on_top = QPushButton()
         self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
         self.button_on_top.setToolTip("Always on top")
         self.button_on_top.pressed.connect(self.always_on_top)
+
+        # SET WINDOW TRANSPARENCY AND SETUP SLIDER
+        self.setWindowOpacity(self.transparency)
+        self.trans_slider = QSlider(Qt.Horizontal)
+        self.trans_slider.setMinimum(20)
+        self.trans_slider.setMaximum(100)
+        self.trans_slider.setTickInterval(1)
+        self.trans_slider.setValue(self.transparency * 100)
+        self.trans_slider.valueChanged.connect(self.transparency_changed)
 
         # MAP LABEL
         INITIAL_MAP = "Map_eastcommons.jpg"
@@ -269,6 +280,7 @@ class MainWindow(QMainWindow):
 
         # LAYOUT SETUP
         tool_layout.addWidget(self.button_on_top, 0, Qt.AlignLeft)
+        tool_layout.addWidget(self.trans_slider, 1, Qt.AlignLeft)
         map_layout.addWidget(self.label_map)
         data_layout.addStretch()
         data_layout.addWidget(label_zone)
@@ -402,7 +414,10 @@ class MainWindow(QMainWindow):
         x, y = point
         painter.setPen(QPen(Qt.red, 2))
         painter.drawEllipse(
-            round(x - size / 2), round(y - size / 2), size, size,
+            round(x - size / 2),
+            round(y - size / 2),
+            size,
+            size,
         )
 
     def draw_map(self, new_loc, prev_loc):
@@ -570,6 +585,9 @@ class MainWindow(QMainWindow):
             self.on_top = True
             self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
         self.show()
+
+    def transparency_changed(self):
+        self.setWindowOpacity(self.trans_slider.value() / 100)
 
     def quit_app(self):
         self.terminate_logparser()
