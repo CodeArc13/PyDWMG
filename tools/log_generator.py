@@ -96,10 +96,10 @@ class LogSimulator(QThread):
                         # self.signals.finished.emit()
                         return
                     if lines_written >= 4:
-                        for _ in range(5):
+                        for _ in range(50):
                             if self._stopped:
                                 return
-                            time.sleep(1)
+                            time.sleep(0.1)
                         lines_written = 0
                     w.writelines([line, "\n"])
                     time.sleep(0.1)
