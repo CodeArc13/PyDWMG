@@ -31,20 +31,20 @@ from PyQt5.QtGui import QPixmap, QPainter, QPen, QIcon
 
 
 class LogParserSignals(QObject):
-    """ Defines the signals available from a running worker thread."""
+    """Defines the signals available from a running worker thread."""
 
     zone = pyqtSignal(str)
     loc = pyqtSignal(tuple)
 
 
 class LogScannerSignals(QObject):
-    """ Defines the signals available from a running worker thread."""
+    """Defines the signals available from a running worker thread."""
 
     logfile = pyqtSignal(Path)
 
 
 class ParentSignals(QObject):
-    """ Defines the signals to pass to a worker thread for parent control """
+    """Defines the signals to pass to a worker thread for parent control"""
 
     terminate = pyqtSignal()
 
@@ -79,7 +79,7 @@ def reverse_readline(filename, buffer_size=1024):
                     yield lines[line_num]
 
         if first_line is not None:
-            """Current first_line is never yielded in the while loop """
+            """Current first_line is never yielded in the while loop"""
             yield first_line
 
 
@@ -131,7 +131,7 @@ class EQLogScanner(QRunnable):
 
     @pyqtSlot()
     def run(self):
-        """ Scan log dir to find most recently modified file. """
+        """Scan log dir to find most recently modified file."""
 
         print(f"Scanner thread started for dir: {self.eqlogscan_dir}...")
         eqlog_format = "eqlog_*.txt"
@@ -185,7 +185,7 @@ class EQLogParser(QRunnable):
     @pyqtSlot()
     def run(self):
 
-        """ Parse log file for updated zone and loc data. """
+        """Parse log file for updated zone and loc data."""
         print(f"Parser thread started for file: {self.log_file}...")
         logfile_path = self.log_file
         # Define regex patterns to use for log line matching
@@ -358,7 +358,7 @@ class MainWindow(QMainWindow):
             self.draw_map(new_loc, prev_loc)
 
     def draw_arrow(self, painter, start_point, end_point, size, draw_x=True):
-        """ Draw arrow of given size using painter object. """
+        """Draw arrow of given size using painter object."""
         start_x, start_y = start_point
         end_x, end_y = end_point
 
@@ -415,15 +415,18 @@ class MainWindow(QMainWindow):
         painter.drawLine(*arrow_start_point, *arrow_end_point)
 
     def draw_circle(self, painter, point, size):
-        """ Draw circle of given size using painter object. """
+        """Draw circle of given size using painter object."""
         x, y = point
         painter.setPen(QPen(Qt.red, 2))
         painter.drawEllipse(
-            round(x - size / 2), round(y - size / 2), size, size,
+            round(x - size / 2),
+            round(y - size / 2),
+            size,
+            size,
         )
 
     def draw_map(self, new_loc, prev_loc):
-        """ Draw marker on map based on current and previous location """
+        """Draw marker on map based on current and previous location"""
         # Create a copy of the current map to use for drawing a new map.
         new_map = QPixmap(self.map_base)
         painter = QPainter(new_map)
@@ -511,7 +514,7 @@ class MainWindow(QMainWindow):
         self.resize(map_width, map_height)
 
     def rotate_point(self, end_x, end_y, start_x, start_y, degrees):
-        """ Return a point after rotating it given end, start, and degrees. """
+        """Return a point after rotating it given end, start, and degrees."""
         rotated_x = start_x + (
             math.cos(self.d_to_r(degrees)) * (end_x - start_x)
             - math.sin(self.d_to_r(degrees)) * (end_y - start_y)
@@ -523,25 +526,25 @@ class MainWindow(QMainWindow):
         return (rotated_x, rotated_y)
 
     def d_to_r(self, angle):
-        """ Return the radian equivalent of degrees. """
+        """Return the radian equivalent of degrees."""
         return angle / 180 * math.pi
 
     def terminate_logparser(self):
-        """ Stop the log parsing thread. """
+        """Stop the log parsing thread."""
         try:
             self.logparser_control.terminate.emit()
         except AttributeError:
             pass
 
     def terminate_logscanner(self):
-        """ Stop the log dir scanning thread. """
+        """Stop the log dir scanning thread."""
         try:
             self.logscanner_control.terminate.emit()
         except AttributeError:
             pass
 
     def start_logparser(self, log_file):
-        """ Start a thread to parse log file for mapping updates. """
+        """Start a thread to parse log file for mapping updates."""
         self.logparser_control = ParentSignals()
         self.worker_logparser = EQLogParser(self.logparser_control, log_file)
         self.worker_logparser.signals.zone.connect(self.update_zone)
@@ -549,20 +552,20 @@ class MainWindow(QMainWindow):
         self.threadpool.start(self.worker_logparser)
 
     def start_logscanner(self, eqlog_dir):
-        """ Start a thread to scan log dir for updated log files. """
+        """Start a thread to scan log dir for updated log files."""
         self.logscanner_control = ParentSignals()
         self.worker_logscanner = EQLogScanner(self.logscanner_control, eqlog_dir)
         self.worker_logscanner.signals.logfile.connect(self.change_log_file)
         self.threadpool.start(self.worker_logscanner)
 
     def change_log_file(self, new_file):
-        """ Change log file being parsed. """
+        """Change log file being parsed."""
         self.terminate_logparser()
         self.start_logparser(new_file)
         print(f"Changed log file to {new_file}")
 
     def get_eqlog_dir(self):
-        """ Get EQ log dir from saved app settings. """
+        """Get EQ log dir from saved app settings."""
         try:
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
@@ -580,10 +583,10 @@ class MainWindow(QMainWindow):
             print(f"Error: This path is not a directory - {eq_logfile_path}")
 
     def select_eqlog_dir(self):
-        """ Show a dialog box for the user to select their EQ log folder. """
+        """Show a dialog box for the user to select their EQ log folder."""
 
         def contains_eqlogfiles(folder_path) -> bool:
-            """ Check if the selected folder contains EQ log files. """
+            """Check if the selected folder contains EQ log files."""
             try:
                 next(folder_path.glob("eqlog_*.txt"))
                 return True
@@ -634,7 +637,7 @@ class MainWindow(QMainWindow):
         self.start_logscanner(self.eqlog_dir)
 
     def always_on_top(self):
-        """ Toggle always on top window setting. """
+        """Toggle always on top window setting."""
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
         if self.on_top is True:
             self.on_top = False
@@ -647,7 +650,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def quit_app(self):
-        """ Stop any started threads before quitting the app window. """
+        """Stop any started threads before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
         app.quit()
