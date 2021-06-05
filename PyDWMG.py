@@ -623,17 +623,18 @@ class MainWindow(QMainWindow):
                     eqdir_logs_path = selected_folder_path.joinpath("Logs")
                     if contains_eqlogfiles(eqdir_logs_path):
                         verified_logs_path = eqdir_logs_path
-                # Check if selected folder contains EQ log files
-                if contains_eqlogfiles(selected_folder_path):
-                    verified_logs_path = selected_folder_path
-                else:
-                    nologs_message = (
-                        "Please select either your EQ folder or the log"
-                        " folder inside it and ensure you have logging"
-                        " enabled and logs in the log folder."
-                    )
-                    # Popup error and have user select another folder
-                    QMessageBox.warning(self, "Error", nologs_message)
+                if verified_logs_path is None:
+                    # Check if selected folder contains EQ log files
+                    if contains_eqlogfiles(selected_folder_path):
+                        verified_logs_path = selected_folder_path
+                    else:
+                        nologs_message = (
+                            "Please select either your EQ folder or the log"
+                            " folder inside it and ensure you have logging"
+                            " enabled and logs in the log folder."
+                        )
+                        # Popup error and have user select another folder
+                        QMessageBox.warning(self, "Error", nologs_message)
         # Save new log directory
         self.eqlog_dir = verified_logs_path
         with open("eq_logfile.txt", "w") as f:
