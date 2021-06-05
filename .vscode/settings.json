@@ -3,5 +3,8 @@
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
     "php.validate.executablePath": "",
-    "activestate.promptRuntimeCreation": false
+    "activestate.promptRuntimeCreation": false,
+    "editor.formatOnSave": true,
+    "python.linting.flake8Enabled": true,
+    "editor.defaultFormatter": "ms-python.python"
 }
