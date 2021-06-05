@@ -605,13 +605,6 @@ class MainWindow(QMainWindow):
                 return
             else:
                 selected_folder_path = Path(selected_folder)
-                if selected_folder_path == self.eqlog_dir:
-                    currentdir_message = (
-                        "You've selected the log folder already in use."
-                        "  If you want to change the log directory, "
-                        " please select a different folder."
-                    )
-                    QMessageBox.warning(self, "Notice", currentdir_message)
                 if selected_folder_path.joinpath("eqgame.exe").is_file():
                     # EQ directory selected, check for valid Logs folder
                     eqdir_logs_path = selected_folder_path.joinpath("Logs")
