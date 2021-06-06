@@ -266,7 +266,6 @@ class MainWindow(QMainWindow):
 
         self.on_top = self.get_setting("window/on_top")
         self.opacity = self.get_setting("window/opacity")
-        print(type(self.opacity))
         print(self.get_setting("window/on_top"))
 
         # TOOL BAR
@@ -350,6 +349,17 @@ class MainWindow(QMainWindow):
         except AttributeError:
             print("Error: No eq log dir defined, unable to start log scanner thread")
 
+    def set_setting(self, setting_key, setting_value):
+        self.settings.setValue(setting_key, setting_value)
+
+    def get_setting(self, setting_key):
+        return self.settings.value(setting_key)
+
+    def save_settings(self):
+        self.set_setting("window/on_top", self.on_top)
+        self.set_setting("window/opacity", self.opacity)
+        self.settings.sync()
+
     def get_zone(self, zone_text):
         for zone in self.zones:
             if zone.zone_name == zone_text:
@@ -357,15 +367,6 @@ class MainWindow(QMainWindow):
             elif zone.zone_who_name == zone_text:
                 return zone
         return None
-
-    def set_setting(self, setting_key, setting_value):
-        self.settings.setValue(setting_key, setting_value)
-
-    def get_setting(self, setting_key):
-        return self.settings.value(setting_key)
-
-    def save_window_settings():
-        pass
 
     def update_zone(self, zone_text):
         # Unset saved loc, as it's no longer valid.
@@ -677,18 +678,20 @@ class MainWindow(QMainWindow):
         else:
             self.on_top = True
             self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+        self.set_setting("window/on_top", self.on_top)
         self.show()
 
     def opacity_changed(self):
         self.opacity = self.opacity_slider.value() / 100
         self.setWindowOpacity(self.opacity)
+        self.set_setting("window/opacity", self.opacity)
 
     def quit_app(self):
         """Stop any started threads and save window settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
 
-        self.save_window_settings()
+        self.save_settings()
 
         app.quit()
 
