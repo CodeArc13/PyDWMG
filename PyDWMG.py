@@ -148,7 +148,10 @@ class EQLogScanner(QRunnable):
             last_modified = max(
                 eqlog_files, default=None, key=lambda f: f.stat().st_mtime
             )
-            if last_modified != self.current_logfile and last_modified is not None:
+            if (
+                last_modified != self.current_logfile
+                and last_modified is not None
+            ):
                 # Store resolved path as current logfile and emit
                 self.current_logfile = last_modified.resolve()
                 self.signals.logfile.emit(self.current_logfile)
@@ -157,8 +160,7 @@ class EQLogScanner(QRunnable):
 
 
 class EQLogParser(QRunnable):
-    """
-    Worker thread, inherits from QRunnable to handler worker thread setup,
+    """Worker thread, inherit from QRunnable to handler worker thread setup,
     signals and wrap-up.
     """
 
@@ -172,7 +174,7 @@ class EQLogParser(QRunnable):
         self.parent_signals = parent_signals
         self.parent_signals.terminate.connect(self.stop)
         self.log_file = log_file
-        # Can use a timer in the worker thread for periodic checks, or something
+        # Can use a timer in the worker thread for periodic checks or something
         # self.show_status = QTimer()
         # self.show_status.timeout.connect(self.parser_status)
         # self.show_status.start(2000)
@@ -185,14 +187,16 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
-
         """Parse log file for updated zone and loc data."""
-        print(f"Parser thread started for file: {self.log_file}...")
         logfile_path = self.log_file
+        print(f"Parser thread started for file: {logfile_path}...")
         # Define regex patterns to use for log line matching
-        zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
+        zone_pattern = re.compile(
+            r"^\[.*\] You have entered " + r"([\w\s']+)\.$"
+        )
         loc_pattern = re.compile(
-            r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+            r"^\[.*\] Your Location is "
+            + r"(\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
         )
 
         # Get starting zone before beginning log read loop
@@ -263,7 +267,9 @@ class MainWindow(QMainWindow):
         self.button_log_folder.setToolTip("Select EQ or log folder")
         self.button_log_folder.pressed.connect(self.select_eqlog_dir)
         self.button_on_top = QPushButton()
-        self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
+        self.button_on_top.setIcon(
+            QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
+        )
         self.button_on_top.setToolTip("Always on top")
         self.button_on_top.pressed.connect(self.always_on_top)
 
@@ -327,14 +333,17 @@ class MainWindow(QMainWindow):
 
         self.threadpool = QThreadPool()
         print(
-            "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount()
+            "Multithreading with maximum %d threads"
+            % self.threadpool.maxThreadCount()
         )
 
         self.get_eqlog_dir()
         try:
             self.start_logscanner(self.eqlog_dir)
         except AttributeError:
-            print("Error: No eq log dir defined, unable to start log scanner thread")
+            print(
+                "Error: No eq log dir defined, can't start log scanner thread."
+            )
 
     def get_zone(self, zone_text):
         for zone in self.zones:
@@ -567,7 +576,9 @@ class MainWindow(QMainWindow):
     def start_logscanner(self, eqlog_dir):
         """Start a thread to scan log dir for updated log files."""
         self.logscanner_control = ParentSignals()
-        self.worker_logscanner = EQLogScanner(self.logscanner_control, eqlog_dir)
+        self.worker_logscanner = EQLogScanner(
+            self.logscanner_control, eqlog_dir
+        )
         self.worker_logscanner.signals.logfile.connect(self.change_log_file)
         self.threadpool.start(self.worker_logscanner)
 
@@ -583,7 +594,9 @@ class MainWindow(QMainWindow):
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
                 eq_logfile_path = f.readline().strip()
-            print(f"Found eq_logfile.txt, using eq log directory:\n {eq_logfile_path}")
+            print(
+                f"Using log directory from eq_logfile.txt:\n {eq_logfile_path}"
+            )
         except Exception:
             print(
                 "Unable to read log file location from eq_logfile.txt, "
@@ -611,7 +624,8 @@ class MainWindow(QMainWindow):
             # Present dialog box to select logs folder
             selected_folder = QFileDialog.getExistingDirectory(
                 caption="Select EQ Folder or Logs Folder",
-                options=QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
+                options=QFileDialog.ShowDirsOnly
+                | QFileDialog.DontResolveSymlinks,
             )
             if selected_folder == "":
                 # User pressed Cancel, close dialog
@@ -653,7 +667,9 @@ class MainWindow(QMainWindow):
             )
         else:
             self.on_top = True
-            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "AlwaysOnTop.png"))
+            )
         self.show()
 
     def opacity_changed(self):
