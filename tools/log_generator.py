@@ -49,13 +49,13 @@ LOGFILE_QH_TO_NQ_FULL = "tools/log_generator_qh_to_nq_full.txt"
 
 
 class ParentSignals(QObject):
-    """ Defines the signals to pass to a worker thread for parent control """
+    """Defines the signals to pass to a worker thread for parent control"""
 
     terminate = pyqtSignal()
 
 
 class LogSimulator(QThread):
-    """ Worker thread, inherits from QThread """
+    """Worker thread, inherits from QThread"""
 
     def __init__(self, *args, parent_signals=None, sim_name="", **kwargs):
         super(LogSimulator, self).__init__()
@@ -96,10 +96,10 @@ class LogSimulator(QThread):
                         # self.signals.finished.emit()
                         return
                     if lines_written >= 4:
-                        for _ in range(5):
+                        for _ in range(50):
                             if self._stopped:
                                 return
-                            time.sleep(1)
+                            time.sleep(0.1)
                         lines_written = 0
                     w.writelines([line, "\n"])
                     time.sleep(0.1)
