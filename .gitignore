@@ -7,6 +7,9 @@
 eq_logfile.txt
 fake_logfile.txt
 
+# DWMG-specific user files
+settings.ini
+
 # User-specific files
 *.rsuser
 *.suo

@@ -21,7 +21,9 @@ from PyQt5.QtWidgets import (
 
 from PyQt5.QtCore import (
     Qt,
+    QFile,
     QObject,
+    QSettings,
     QRunnable,
     QThreadPool,
     pyqtSlot,
@@ -256,8 +258,19 @@ class MainWindow(QMainWindow):
         button_layout = QVBoxLayout()
 
         # WINDOW VARIABLES, could be used for persistance between sessions
-        self.on_top = False
-        self.opacity = 1
+        self.settings = QSettings("settings.ini", QSettings.IniFormat)
+        if QFile(self.settings.fileName()).exists():
+            print("Settings file exists")
+            print(self.settings.fileName())
+        else:
+            self.settings.setValue("window/on_top", False)
+            self.settings.setValue("window/opacity", 1)
+
+        # self.settings.setFallbacksEnabled(False)  # Forces file over registry save
+
+        self.on_top = self.get_setting("window/on_top")
+        self.opacity = self.get_setting("window/opacity")
+        print(self.get_setting("window/on_top"))
 
         # TOOL BAR
         self.button_log_folder = QPushButton()
@@ -273,13 +286,23 @@ class MainWindow(QMainWindow):
         self.button_on_top.setToolTip("Always on top")
         self.button_on_top.pressed.connect(self.always_on_top)
 
+        if self.on_top is True:
+            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        else:
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
+            )
+            self.setWindowFlags(self.windowFlags() & ~Qt.WindowStaysOnTopHint)
+        self.show()
+
         # SET WINDOW OPACITY AND SETUP SLIDER
-        self.setWindowOpacity(self.opacity)
+        self.setWindowOpacity(float(self.opacity))
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setMinimum(20)
         self.opacity_slider.setMaximum(100)
         self.opacity_slider.setTickInterval(1)
-        self.opacity_slider.setValue(self.opacity * 100)
+        self.opacity_slider.setValue(float(self.opacity) * 100)
         self.opacity_slider.setToolTip("Window transparency")
         self.opacity_slider.valueChanged.connect(self.opacity_changed)
 
@@ -344,6 +367,17 @@ class MainWindow(QMainWindow):
             print(
                 "Error: No eq log dir defined, can't start log scanner thread."
             )
+
+    def set_setting(self, setting_key, setting_value):
+        self.settings.setValue(setting_key, setting_value)
+
+    def get_setting(self, setting_key):
+        return self.settings.value(setting_key)
+
+    def save_settings(self):
+        self.set_setting("window/on_top", self.on_top)
+        self.set_setting("window/opacity", self.opacity)
+        self.settings.sync()
 
     def get_zone(self, zone_text):
         for zone in self.zones:
@@ -671,15 +705,20 @@ class MainWindow(QMainWindow):
                 QIcon(os.path.join("icons", "AlwaysOnTop.png"))
             )
         self.show()
+        self.set_setting("window/on_top", self.on_top)
 
     def opacity_changed(self):
         self.opacity = self.opacity_slider.value() / 100
         self.setWindowOpacity(self.opacity)
+        self.set_setting("window/opacity", self.opacity)
 
     def quit_app(self):
-        """Stop any started threads before quitting the app window."""
+        """Stop any started threads and save window settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
+
+        self.save_settings()
+
         app.quit()
 
 
