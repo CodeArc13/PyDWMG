@@ -280,6 +280,16 @@ class MainWindow(QMainWindow):
         self.button_on_top.setToolTip("Always on top")
         self.button_on_top.pressed.connect(self.always_on_top)
 
+        if self.on_top is True:
+            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        else:
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
+            )
+            self.setWindowFlags(self.windowFlags() & ~Qt.WindowStaysOnTopHint)
+        self.show()
+
         # SET WINDOW OPACITY AND SETUP SLIDER
         self.setWindowOpacity(float(self.opacity))
         self.opacity_slider = QSlider(Qt.Horizontal)
@@ -678,8 +688,8 @@ class MainWindow(QMainWindow):
         else:
             self.on_top = True
             self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
-        self.set_setting("window/on_top", self.on_top)
         self.show()
+        self.set_setting("window/on_top", self.on_top)
 
     def opacity_changed(self):
         self.opacity = self.opacity_slider.value() / 100
