@@ -21,7 +21,9 @@ from PyQt5.QtWidgets import (
 
 from PyQt5.QtCore import (
     Qt,
+    QFile,
     QObject,
+    QSettings,
     QRunnable,
     QThreadPool,
     pyqtSlot,
@@ -252,8 +254,20 @@ class MainWindow(QMainWindow):
         button_layout = QVBoxLayout()
 
         # WINDOW VARIABLES, could be used for persistance between sessions
-        self.on_top = False
-        self.opacity = 1
+        self.settings = QSettings("settings.ini", QSettings.IniFormat)
+        if QFile(self.settings.fileName()).exists():
+            print("Settings file exists")
+            print(self.settings.fileName())
+        else:
+            self.settings.setValue("window/on_top", False)
+            self.settings.setValue("window/opacity", 1)
+
+        # self.settings.setFallbacksEnabled(False)  # Forces file over registry save
+
+        self.on_top = self.get_setting("window/on_top")
+        self.opacity = self.get_setting("window/opacity")
+        print(type(self.opacity))
+        print(self.get_setting("window/on_top"))
 
         # TOOL BAR
         self.button_log_folder = QPushButton()
@@ -268,12 +282,12 @@ class MainWindow(QMainWindow):
         self.button_on_top.pressed.connect(self.always_on_top)
 
         # SET WINDOW OPACITY AND SETUP SLIDER
-        self.setWindowOpacity(self.opacity)
+        self.setWindowOpacity(float(self.opacity))
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setMinimum(20)
         self.opacity_slider.setMaximum(100)
         self.opacity_slider.setTickInterval(1)
-        self.opacity_slider.setValue(self.opacity * 100)
+        self.opacity_slider.setValue(float(self.opacity) * 100)
         self.opacity_slider.setToolTip("Window transparency")
         self.opacity_slider.valueChanged.connect(self.opacity_changed)
 
@@ -343,6 +357,15 @@ class MainWindow(QMainWindow):
             elif zone.zone_who_name == zone_text:
                 return zone
         return None
+
+    def set_setting(self, setting_key, setting_value):
+        self.settings.setValue(setting_key, setting_value)
+
+    def get_setting(self, setting_key):
+        return self.settings.value(setting_key)
+
+    def save_window_settings():
+        pass
 
     def update_zone(self, zone_text):
         # Unset saved loc, as it's no longer valid.
@@ -661,9 +684,12 @@ class MainWindow(QMainWindow):
         self.setWindowOpacity(self.opacity)
 
     def quit_app(self):
-        """Stop any started threads before quitting the app window."""
+        """Stop any started threads and save window settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
+
+        self.save_window_settings()
+
         app.quit()
 
 
