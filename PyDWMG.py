@@ -257,52 +257,53 @@ class MainWindow(QMainWindow):
         data_layout = QVBoxLayout()
         button_layout = QVBoxLayout()
 
-        # WINDOW VARIABLES, could be used for persistance between sessions
+        # READ SETTINGS FROM FILE
         self.settings = QSettings("settings.ini", QSettings.IniFormat)
         if QFile(self.settings.fileName()).exists():
-            print("Settings file exists")
-            print(self.settings.fileName())
-        else:
-            self.settings.setValue("window/on_top", False)
-            self.settings.setValue("window/opacity", 1)
-
-        # self.settings.setFallbacksEnabled(False)  # Forces file over registry save
-
-        self.on_top = self.get_setting("window/on_top")
-        self.opacity = self.get_setting("window/opacity")
-        print(self.get_setting("window/on_top"))
+            print(f"Using settings file: {self.settings.fileName()}")
+        # Set values based on saved settings, or use defaults.
+        try:
+            self.on_top = int(self.get_setting("window/on_top"))
+        except:
+            self.on_top = 0
+            self.set_setting("window/on_top", 0)
+        try:
+            self.opacity = float(self.get_setting("window/opacity"))
+        except:
+            self.opacity = 1.0
+            self.set_setting("window/opacity", 1.0)
 
         # TOOL BAR
+        # LOG FOLDER BUTTON
         self.button_log_folder = QPushButton()
         self.button_log_folder.setIcon(
             QApplication.style().standardIcon(QStyle.SP_DialogOpenButton)
         )
         self.button_log_folder.setToolTip("Select EQ or log folder")
         self.button_log_folder.pressed.connect(self.select_eqlog_dir)
-        self.button_on_top = QPushButton()
-        self.button_on_top.setIcon(
-            QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
-        )
-        self.button_on_top.setToolTip("Always on top")
-        self.button_on_top.pressed.connect(self.always_on_top)
 
-        if self.on_top is True:
-            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
+        # ALWAYS ON TOP BUTTON
+        self.button_on_top = QPushButton()
+        if self.on_top:
             self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "AlwaysOnTop.png"))
+            )
         else:
             self.button_on_top.setIcon(
                 QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
             )
-            self.setWindowFlags(self.windowFlags() & ~Qt.WindowStaysOnTopHint)
+        self.button_on_top.setToolTip("Always on top")
+        self.button_on_top.pressed.connect(self.toggle_on_top)
         self.show()
 
-        # SET WINDOW OPACITY AND SETUP SLIDER
+        # WINDOW OPACITY SLIDER
         self.setWindowOpacity(float(self.opacity))
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setMinimum(20)
         self.opacity_slider.setMaximum(100)
         self.opacity_slider.setTickInterval(1)
-        self.opacity_slider.setValue(float(self.opacity) * 100)
+        self.opacity_slider.setValue(int(self.opacity * 100))
         self.opacity_slider.setToolTip("Window transparency")
         self.opacity_slider.valueChanged.connect(self.opacity_changed)
 
@@ -369,12 +370,17 @@ class MainWindow(QMainWindow):
             )
 
     def set_setting(self, setting_key, setting_value):
+        """Set a setting to maintain persistence."""
+        # Convert value to string first, as it will be written to file.
+        setting_value = str(setting_value)
         self.settings.setValue(setting_key, setting_value)
 
     def get_setting(self, setting_key):
+        """Return the value of a setting."""
         return self.settings.value(setting_key)
 
     def save_settings(self):
+        """Save all settings to persistent settings file."""
         self.set_setting("window/on_top", self.on_top)
         self.set_setting("window/opacity", self.opacity)
         self.settings.sync()
@@ -691,23 +697,24 @@ class MainWindow(QMainWindow):
         self.terminate_logscanner()
         self.start_logscanner(self.eqlog_dir)
 
-    def always_on_top(self):
+    def toggle_on_top(self):
         """Toggle always on top window setting."""
+        # Flip the always on top bit and on_top value using XOR
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
-        if self.on_top is True:
-            self.on_top = False
-            self.button_on_top.setIcon(
-                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
-            )
-        else:
-            self.on_top = True
+        self.on_top = self.on_top ^ True
+        if self.on_top:
             self.button_on_top.setIcon(
                 QIcon(os.path.join("icons", "AlwaysOnTop.png"))
+            )
+        else:
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
             )
         self.show()
         self.set_setting("window/on_top", self.on_top)
 
     def opacity_changed(self):
+        """Set opacity when slider changes."""
         self.opacity = self.opacity_slider.value() / 100
         self.setWindowOpacity(self.opacity)
         self.set_setting("window/opacity", self.opacity)
@@ -716,9 +723,7 @@ class MainWindow(QMainWindow):
         """Stop any started threads and save window settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
-
         self.save_settings()
-
         app.quit()
 
 
