@@ -21,7 +21,9 @@ from PyQt5.QtWidgets import (
 
 from PyQt5.QtCore import (
     Qt,
+    QFile,
     QObject,
+    QSettings,
     QRunnable,
     QThreadPool,
     pyqtSlot,
@@ -148,7 +150,10 @@ class EQLogScanner(QRunnable):
             last_modified = max(
                 eqlog_files, default=None, key=lambda f: f.stat().st_mtime
             )
-            if last_modified != self.current_logfile and last_modified is not None:
+            if (
+                last_modified != self.current_logfile
+                and last_modified is not None
+            ):
                 # Store resolved path as current logfile and emit
                 self.current_logfile = last_modified.resolve()
                 self.signals.logfile.emit(self.current_logfile)
@@ -157,8 +162,7 @@ class EQLogScanner(QRunnable):
 
 
 class EQLogParser(QRunnable):
-    """
-    Worker thread, inherits from QRunnable to handler worker thread setup,
+    """Worker thread, inherit from QRunnable to handler worker thread setup,
     signals and wrap-up.
     """
 
@@ -172,7 +176,7 @@ class EQLogParser(QRunnable):
         self.parent_signals = parent_signals
         self.parent_signals.terminate.connect(self.stop)
         self.log_file = log_file
-        # Can use a timer in the worker thread for periodic checks, or something
+        # Can use a timer in the worker thread for periodic checks or something
         # self.show_status = QTimer()
         # self.show_status.timeout.connect(self.parser_status)
         # self.show_status.start(2000)
@@ -185,14 +189,16 @@ class EQLogParser(QRunnable):
 
     @pyqtSlot()
     def run(self):
-
         """Parse log file for updated zone and loc data."""
-        print(f"Parser thread started for file: {self.log_file}...")
         logfile_path = self.log_file
+        print(f"Parser thread started for file: {logfile_path}...")
         # Define regex patterns to use for log line matching
-        zone_pattern = re.compile(r"^\[.*\] You have entered ([\w\s']+)\.$")
+        zone_pattern = re.compile(
+            r"^\[.*\] You have entered " + r"([\w\s']+)\.$"
+        )
         loc_pattern = re.compile(
-            r"^\[.*\] Your Location is (\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
+            r"^\[.*\] Your Location is "
+            + r"(\-?\d+\.\d+), (\-?\d+\.\d+), (\-?\d+\.\d+)$"
         )
 
         # Get starting zone before beginning log read loop
@@ -251,29 +257,53 @@ class MainWindow(QMainWindow):
         data_layout = QVBoxLayout()
         button_layout = QVBoxLayout()
 
-        # WINDOW VARIABLES, could be used for persistance between sessions
-        self.on_top = False
-        self.opacity = 1
+        # READ SETTINGS FROM FILE
+        self.settings = QSettings("settings.ini", QSettings.IniFormat)
+        if QFile(self.settings.fileName()).exists():
+            print(f"Using settings file: {self.settings.fileName()}")
+        # Set values based on saved settings, or use defaults.
+        try:
+            self.on_top = int(self.get_setting("window/on_top"))
+        except:
+            self.on_top = 0
+            self.set_setting("window/on_top", 0)
+        try:
+            self.opacity = float(self.get_setting("window/opacity"))
+        except:
+            self.opacity = 1.0
+            self.set_setting("window/opacity", 1.0)
 
         # TOOL BAR
+        # LOG FOLDER BUTTON
         self.button_log_folder = QPushButton()
         self.button_log_folder.setIcon(
             QApplication.style().standardIcon(QStyle.SP_DialogOpenButton)
         )
         self.button_log_folder.setToolTip("Select EQ or log folder")
         self.button_log_folder.pressed.connect(self.select_eqlog_dir)
-        self.button_on_top = QPushButton()
-        self.button_on_top.setIcon(QIcon(os.path.join("icons", "NotAlwaysOnTop.png")))
-        self.button_on_top.setToolTip("Always on top")
-        self.button_on_top.pressed.connect(self.always_on_top)
 
-        # SET WINDOW OPACITY AND SETUP SLIDER
-        self.setWindowOpacity(self.opacity)
+        # ALWAYS ON TOP BUTTON
+        self.button_on_top = QPushButton()
+        if self.on_top:
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "AlwaysOnTop.png"))
+            )
+        else:
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
+            )
+        self.button_on_top.setToolTip("Always on top")
+        self.button_on_top.pressed.connect(self.toggle_on_top)
+        self.show()
+
+        # WINDOW OPACITY SLIDER
+        self.setWindowOpacity(float(self.opacity))
         self.opacity_slider = QSlider(Qt.Horizontal)
         self.opacity_slider.setMinimum(20)
         self.opacity_slider.setMaximum(100)
         self.opacity_slider.setTickInterval(1)
-        self.opacity_slider.setValue(self.opacity * 100)
+        self.opacity_slider.setValue(int(self.opacity * 100))
         self.opacity_slider.setToolTip("Window transparency")
         self.opacity_slider.valueChanged.connect(self.opacity_changed)
 
@@ -327,14 +357,33 @@ class MainWindow(QMainWindow):
 
         self.threadpool = QThreadPool()
         print(
-            "Multithreading with maximum %d threads" % self.threadpool.maxThreadCount()
+            "Multithreading with maximum %d threads"
+            % self.threadpool.maxThreadCount()
         )
 
         self.get_eqlog_dir()
         try:
             self.start_logscanner(self.eqlog_dir)
         except AttributeError:
-            print("Error: No eq log dir defined, unable to start log scanner thread")
+            print(
+                "Error: No eq log dir defined, can't start log scanner thread."
+            )
+
+    def set_setting(self, setting_key, setting_value):
+        """Set a setting to maintain persistence."""
+        # Convert value to string first, as it will be written to file.
+        setting_value = str(setting_value)
+        self.settings.setValue(setting_key, setting_value)
+
+    def get_setting(self, setting_key):
+        """Return the value of a setting."""
+        return self.settings.value(setting_key)
+
+    def save_settings(self):
+        """Save all settings to persistent settings file."""
+        self.set_setting("window/on_top", self.on_top)
+        self.set_setting("window/opacity", self.opacity)
+        self.settings.sync()
 
     def get_zone(self, zone_text):
         for zone in self.zones:
@@ -567,7 +616,9 @@ class MainWindow(QMainWindow):
     def start_logscanner(self, eqlog_dir):
         """Start a thread to scan log dir for updated log files."""
         self.logscanner_control = ParentSignals()
-        self.worker_logscanner = EQLogScanner(self.logscanner_control, eqlog_dir)
+        self.worker_logscanner = EQLogScanner(
+            self.logscanner_control, eqlog_dir
+        )
         self.worker_logscanner.signals.logfile.connect(self.change_log_file)
         self.threadpool.start(self.worker_logscanner)
 
@@ -583,7 +634,9 @@ class MainWindow(QMainWindow):
             # Read log file path from local config file:
             with open("eq_logfile.txt", "rt") as f:
                 eq_logfile_path = f.readline().strip()
-            print(f"Found eq_logfile.txt, using eq log directory:\n {eq_logfile_path}")
+            print(
+                f"Using log directory from eq_logfile.txt:\n {eq_logfile_path}"
+            )
         except Exception:
             print(
                 "Unable to read log file location from eq_logfile.txt, "
@@ -611,7 +664,8 @@ class MainWindow(QMainWindow):
             # Present dialog box to select logs folder
             selected_folder = QFileDialog.getExistingDirectory(
                 caption="Select EQ Folder or Logs Folder",
-                options=QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
+                options=QFileDialog.ShowDirsOnly
+                | QFileDialog.DontResolveSymlinks,
             )
             if selected_folder == "":
                 # User pressed Cancel, close dialog
@@ -643,27 +697,33 @@ class MainWindow(QMainWindow):
         self.terminate_logscanner()
         self.start_logscanner(self.eqlog_dir)
 
-    def always_on_top(self):
+    def toggle_on_top(self):
         """Toggle always on top window setting."""
+        # Flip the always on top bit and on_top value using XOR
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowStaysOnTopHint)
-        if self.on_top is True:
-            self.on_top = False
+        self.on_top = self.on_top ^ True
+        if self.on_top:
+            self.button_on_top.setIcon(
+                QIcon(os.path.join("icons", "AlwaysOnTop.png"))
+            )
+        else:
             self.button_on_top.setIcon(
                 QIcon(os.path.join("icons", "NotAlwaysOnTop.png"))
             )
-        else:
-            self.on_top = True
-            self.button_on_top.setIcon(QIcon(os.path.join("icons", "AlwaysOnTop.png")))
         self.show()
+        self.set_setting("window/on_top", self.on_top)
 
     def opacity_changed(self):
+        """Set opacity when slider changes."""
         self.opacity = self.opacity_slider.value() / 100
         self.setWindowOpacity(self.opacity)
+        self.set_setting("window/opacity", self.opacity)
 
     def quit_app(self):
-        """Stop any started threads before quitting the app window."""
+        """Stop threads and save settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
+        self.save_settings()
         app.quit()
 
 
