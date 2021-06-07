@@ -720,7 +720,7 @@ class MainWindow(QMainWindow):
         self.set_setting("window/opacity", self.opacity)
 
     def quit_app(self):
-        """Stop any started threads and save window settings before quitting the app window."""
+        """Stop threads and save settings before quitting the app window."""
         self.terminate_logparser()
         self.terminate_logscanner()
         self.save_settings()
